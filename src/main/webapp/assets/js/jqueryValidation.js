@@ -26,7 +26,7 @@ $(document).ready(function() {
             $("#surnameErr").hide();
             $("#emailErr").hide();
             $("#passwordErr").hide();
-            $("#passwprdRepeatErr").hide();
+            $("#passwordRepeatErr").hide();
             if(!REGEX_NAME.test(name)){
                 $("#nameErr").show();
                 result = false;

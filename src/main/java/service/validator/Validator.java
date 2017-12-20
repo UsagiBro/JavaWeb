@@ -1,4 +1,4 @@
-package validator;
+package service.validator;
 
 import exception.ValidationException;
 
