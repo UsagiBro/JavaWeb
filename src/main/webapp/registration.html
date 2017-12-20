@@ -9,7 +9,7 @@
     <script src="assets/js/skel.min.js"></script>
     <script src="assets/js/skel-layers.min.js"></script>
     <script src="assets/js/init.js"></script>
-    <script src="assets/js/validation.js"></script>
+    <!--<script src="assets/js/validation.js"></script>-->
     <script src="assets/js/jqueryValidation.js"></script>
     <link rel="stylesheet" href="assets/css/skel.css"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
@@ -28,12 +28,19 @@
     </nav>
 </header>
 <div class="container col-md-4">
-    <form id="registrationForm" action="index.html">
+    <form id="registrationForm" >
         <div class="form-group">
-            <label for="login">Login</label>
-            <input  class="form-control" id="login" placeholder="Login" required>
-            <p id="loginErr" class="validation-message">
-                <strong>User login must contain only letters and be longer than 3 symbols</strong>
+            <label for="name">Login</label>
+            <input  class="form-control" id="name" placeholder="Enter your name" required>
+            <p id="nameErr" class="validation-message">
+                <strong>Name can contain only letters and be longer than 1 symbol</strong>
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="surname">Login</label>
+            <input  class="form-control" id="surname" placeholder="Enter your surname" required>
+            <p id="surnameErr" class="validation-message">
+                <strong>Surname can contain only letters and be longer than 1 symbol</strong>
             </p>
         </div>
         <div class="form-group">
@@ -46,9 +53,16 @@
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" required>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
             <p id="passwordErr" class="validation-message">
                 <strong>Password can consist of letters and numbers and must be longer than 4 symbols</strong>
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="password">Repeat password</label>
+            <input type="password" class="form-control" id="passwordRepeat" placeholder="Repeat password" required>
+            <p id="passwordRepeatErr" class="validation-message">
+                <strong>Passwords don't match</strong>
             </p>
         </div>
         <div class="row submit-row">
