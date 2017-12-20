@@ -1,12 +1,18 @@
-
 function validate() {
 
-      var login = document.getElementById('login').value;
+      var name = document.getElementById('name').value;
+      var surname = document.getElementById('surname').value;
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
+      var passwordRepeat = document.getElementById('passwordRepeat').value;
 
-      if (!checkLogin(login)) {
-        document.getElementById("loginErr").innerHTML="user login must contain only letters and be longer than 3 symbols";
+      if (!checkName(name)) {
+        document.getElementById("nameErr").innerHTML="Name can contain only letters and be longer than 1 symbol";
+        return false;
+      }
+
+      if (!checkName(surname)) {
+        document.getElementById("surnameErr").innerHTML="Surname can contain only letters and be longer than 1 symbol";
         return false;
       }
 
@@ -21,11 +27,16 @@ function validate() {
         return false;
       }
 
+      if(!(password === passwordRepeat)) {
+        document.getElementById("passwordRepeatErr").innerHTML="Passwords don't match";
+        result = false;
+      }
+
 }
 
-function checkLogin(login) {
-    var regex = new RegExp("(\\w){3,16}");
-    return regex.test(login);
+function checkName(name) {
+    var regex = new RegExp("([a-zA-Zа-яА-Яё]){2,64}");
+    return regex.test(name);
 }
 
 function checkEmail(email) {
@@ -37,3 +48,4 @@ function checkPassword(password) {
     var regex = new RegExp("(\\w|\\d){5,16}");
     return regex.test(password);
 }
+

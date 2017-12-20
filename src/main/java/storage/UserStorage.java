@@ -16,4 +16,8 @@ public class UserStorage {
     public Map<Integer, User> getUsers() {
         return users;
     }
+
+    public void createUser(Integer id, User user) {
+        users.put(id, user);
+    }
 }

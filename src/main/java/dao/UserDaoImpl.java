@@ -12,6 +12,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     public void createUser(Integer id, User user) {
-        userStorage.getUsers().put(id, user);
+        userStorage.createUser(id, user);
     }
 }
