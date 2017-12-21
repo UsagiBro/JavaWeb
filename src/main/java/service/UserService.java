@@ -1,9 +1,12 @@
 package service;
 
-import exception.ValidationException;
 import storage.entity.User;
+
+import java.util.Map;
 
 public interface UserService {
 
-    void createUser(Integer id, User user) throws ValidationException;
+    boolean createUser(User user);
+
+    Map<String, String> getErrors();
 }

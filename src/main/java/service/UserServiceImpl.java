@@ -1,32 +1,37 @@
 package service;
 
 import dao.UserDao;
-import dao.UserDaoImpl;
-import exception.IncorrectIdException;
-import exception.ValidationException;
-import service.validator.user_validator.UserValidator;
+import service.validator.UserValidator;
+import service.validator.ValidationConstants;
 import storage.entity.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserServiceImpl implements UserService {
-
+    private Map<String, String> errors = new HashMap<String, String>();
     private UserDao userDao;
-    UserValidator userValidator;
+    private UserValidator userValidator;
 
-    public UserServiceImpl(UserDaoImpl userDaoImpl) {
-        userDao = userDaoImpl;
-        userValidator = new UserValidator();
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+        userValidator = new UserValidator(errors);
     }
 
     @Override
-    public void createUser(Integer id, User user) throws ValidationException {
+    public boolean createUser(User user) {
         userValidator.validate(user);
-
-        userDao.createUser(id, user);
-    }
-
-    private void validateId(int id) throws IncorrectIdException {
-        if (id < 0) {
-            throw new IncorrectIdException("Incorrect id!");
+        if (errors.isEmpty()) {
+            if (!userDao.createUser(user)) {
+                errors.put("email", ValidationConstants.USER_EXISTS);
+                return true;
+            }
         }
+        return false;
     }
+
+    public Map<String, String> getErrors() {
+        return errors;
+    }
+
 }

@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao {
         this.userStorage = userStorage;
     }
 
-    public void createUser(Integer id, User user) {
-        userStorage.createUser(id, user);
+    public boolean createUser(User user) {
+        return userStorage.createUser(user);
     }
 }

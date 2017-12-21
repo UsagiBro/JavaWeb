@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,7 @@
     <script src="assets/js/skel.min.js"></script>
     <script src="assets/js/skel-layers.min.js"></script>
     <script src="assets/js/init.js"></script>
-    <!--<script src="assets/js/validation.js"></script>-->
-    <script src="assets/js/jqueryValidation.js"></script>
+   <!-- <script src="assets/js/jqueryValidation.js"></script> -->
     <link rel="stylesheet" href="assets/css/skel.css"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/style-xlarge.css"/>
@@ -30,32 +29,44 @@
 <div class="container col-md-4">
     <form id="registrationForm" action="registration" method="post">
         <div class="form-group">
-            <label for="name">Login</label>
-            <input  class="form-control" id="name" placeholder="Enter your name" required>
+            <label for="name">Name</label>
+            <input  class="form-control" id="name" name="name" placeholder="Enter your name" required>
             <p id="nameErr" class="validation-message">
                 <strong>Name can contain only letters and be longer than 1 symbol</strong>
             </p>
+			<p>
+                <strong>${requestScope.errors.name}</strong>
+            </p>
         </div>
         <div class="form-group">
-            <label for="surname">Login</label>
-            <input  class="form-control" id="surname" placeholder="Enter your surname" required>
+            <label for="surname">Surname</label>
+            <input  class="form-control" id="surname" name="surname" placeholder="Enter your surname" required>
             <p id="surnameErr" class="validation-message">
                 <strong>Surname can contain only letters and be longer than 1 symbol</strong>
+            </p>
+			<p>
+                <strong>${requestScope.errors.name}</strong>
             </p>
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input  class="form-control" id="email" aria-describedby="emailHelp"
+            <input  class="form-control" id="email" name="email" aria-describedby="emailHelp"
                     placeholder="Enter email" required>
             <p id="emailErr" class="validation-message">
                 <strong>Type valid email</strong>
             </p>
+			<p>
+                <strong>${requestScope.errors.email}</strong>
+            </p>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
             <p id="passwordErr" class="validation-message">
                 <strong>Password can consist of letters and numbers and must be longer than 4 symbols</strong>
+            </p>
+			<p>
+                <strong>${requestScope.errors.password}</strong>
             </p>
         </div>
         <div class="form-group">
@@ -63,6 +74,9 @@
             <input type="password" class="form-control" id="passwordRepeat" placeholder="Repeat password" required>
             <p id="passwordRepeatErr" class="validation-message">
                 <strong>Passwords don't match</strong>
+            </p>
+			<p>
+                <strong>${requestScope.errors.passwordRepeat}</strong>
             </p>
         </div>
         <div class="row submit-row">

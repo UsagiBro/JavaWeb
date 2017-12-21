@@ -17,7 +17,12 @@ public class UserStorage {
         return users;
     }
 
-    public void createUser(Integer id, User user) {
-        users.put(id, user);
+    public boolean createUser(User user) {
+        if (!users.containsValue(user)) {
+            users.put(users.size(), user);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
