@@ -1,4 +1,4 @@
-package service;
+package service.user;
 
 import storage.entity.User;
 

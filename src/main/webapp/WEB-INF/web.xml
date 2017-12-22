@@ -3,5 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-
+        <context-param>
+            <param-name>captcha-method</param-name>
+            <param-value>hidden</param-value>
+        </context-param>
 </web-app>

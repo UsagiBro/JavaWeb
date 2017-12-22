@@ -1,7 +1,7 @@
 package web.servlet;
 
 import constants.Constants;
-import service.UserService;
+import service.user.UserService;
 import storage.entity.User;
 import web.Paths;
 import web.WebUtil;
@@ -19,6 +19,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         req.getRequestDispatcher(Paths.REGISTRATION_JSP).forward(req, resp);
     }
 

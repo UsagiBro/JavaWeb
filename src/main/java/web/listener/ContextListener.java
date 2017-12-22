@@ -2,10 +2,12 @@ package web.listener;
 
 import dao.UserDao;
 import dao.UserDaoImpl;
-import service.UserService;
-import service.UserServiceImpl;
+import service.user.UserService;
+import service.user.UserServiceImpl;
 import storage.UserStorage;
 import storage.entity.User;
+import captcha.CaptchaGenerator;
+import captcha.CaptchaStrategyGenerator;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -16,6 +18,12 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
+
+        CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
+        CaptchaGenerator captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
+        servletContextEvent.getServletContext().setAttribute("captchaGenerator", captchaGenerator);
+
         UserStorage userStorage = insertDefaultUsers();
         UserDao userDao = new UserDaoImpl(userStorage);
         UserService userService = new UserServiceImpl(userDao);
