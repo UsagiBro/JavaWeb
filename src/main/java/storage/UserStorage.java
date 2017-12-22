@@ -10,7 +10,7 @@ public class UserStorage {
     private Map<Integer, User> users;
 
     public UserStorage() {
-        users = new HashMap<Integer, User>();
+        users = new HashMap<>();
     }
 
     public Map<Integer, User> getUsers() {

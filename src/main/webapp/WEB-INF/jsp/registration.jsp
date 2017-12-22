@@ -28,55 +28,62 @@
 </header>
 <div class="container col-md-4">
     <form id="registrationForm" action="registration" method="post">
+        <h3 class="validation-user-exists">
+             <strong>${sessionScope.errors.user_exists}</strong>
+        </h3>
         <div class="form-group">
             <label for="name">Name</label>
-            <input  class="form-control" id="name" name="name" placeholder="Enter your name" required>
+            <input  class="form-control" id="name" name="name" value="${sessionScope.name}"
+             placeholder="Enter your name" required>
             <p id="nameErr" class="validation-message">
                 <strong>Name can contain only letters and be longer than 1 symbol</strong>
             </p>
-			<p>
-                <strong>${requestScope.errors.name}</strong>
+			<p class="validation-message-s">
+                <strong>${sessionScope.errors.name}</strong>
             </p>
         </div>
         <div class="form-group">
             <label for="surname">Surname</label>
-            <input  class="form-control" id="surname" name="surname" placeholder="Enter your surname" required>
+            <input  class="form-control" id="surname" name="surname" value="${sessionScope.surname}"
+            placeholder="Enter your surname" required>
             <p id="surnameErr" class="validation-message">
                 <strong>Surname can contain only letters and be longer than 1 symbol</strong>
             </p>
-			<p>
-                <strong>${requestScope.errors.name}</strong>
+			<p class="validation-message-s">
+                <strong>${sessionScope.errors.name}</strong>
             </p>
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input  class="form-control" id="email" name="email" aria-describedby="emailHelp"
+            <input  class="form-control" id="email" name="email" value="${sessionScope.email}"
+             aria-describedby="emailHelp"
                     placeholder="Enter email" required>
             <p id="emailErr" class="validation-message">
                 <strong>Type valid email</strong>
             </p>
-			<p>
-                <strong>${requestScope.errors.email}</strong>
+			<p class="validation-message-s">
+                <strong>${sessionScope.errors.email}</strong>
             </p>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+            <input type="password" class="form-control" id="password" name="password"
+             placeholder="Enter password" required>
             <p id="passwordErr" class="validation-message">
                 <strong>Password can consist of letters and numbers and must be longer than 4 symbols</strong>
             </p>
-			<p>
-                <strong>${requestScope.errors.password}</strong>
+			<p class="validation-message-s">
+                <strong>${sessionScope.errors.password}</strong>
             </p>
         </div>
         <div class="form-group">
             <label for="password">Repeat password</label>
             <input type="password" class="form-control" id="passwordRepeat" placeholder="Repeat password" required>
             <p id="passwordRepeatErr" class="validation-message">
-                <strong>Passwords don't match</strong>
+                <strong>Passwords dont match</strong>
             </p>
 			<p>
-                <strong>${requestScope.errors.passwordRepeat}</strong>
+                <strong>${sessionScope.errors.passwordRepeat}</strong>
             </p>
         </div>
         <div class="row submit-row">
@@ -84,7 +91,6 @@
                 Submit
             </button>
         </div>
-
     </form>
 </div>
 </body>

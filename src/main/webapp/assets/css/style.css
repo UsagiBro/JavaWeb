@@ -1231,6 +1231,19 @@
 
  }
 
+.validation-user-exists {
+    padding: 15px;
+    color: #d73814;
+}
+
+ .validation-user-exists>strong {
+     color: #d73814;
+ }
+
  .validation-message>strong {
+     color: #d73814;
+ }
+
+ .validation-message-s>strong {
      color: #d73814;
  }

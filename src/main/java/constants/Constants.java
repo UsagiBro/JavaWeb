@@ -1,17 +1,20 @@
-package service.validator;
+package constants;
 
-public final class ValidationConstants {
+public final class Constants {
 
-    private ValidationConstants() {
+    private Constants() {
         throw new IllegalStateException("Can't create an instance");
     }
 
     public static final String EMAIL = "email";
     public static final String NAME = "name";
+    public static final String SURNAME = "surname";
     public static final String PASSWORD = "password";
+    public static final String ERRORS = "errors";
+    public static final String USER_EXISTS_KEY = "user_exists";
 
     public static final String REGEX_FOR_NAME = "([a-zA-Zа-яА-Яё]){2,64}";
-    public static final String REGEX_FOR_EMAIL = "(\\w|\\d){5,16}";
+    public static final String REGEX_FOR_EMAIL = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
     public static final String REGEX_FOR_PASSWORD = "(\\w|\\d){5,16}";
 
     public static final String NAME_VALIDATION_EXCEPTION = "Name can contain only letters and be longer than 1 symbol";
