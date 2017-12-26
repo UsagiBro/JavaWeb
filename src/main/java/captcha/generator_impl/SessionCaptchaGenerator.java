@@ -6,6 +6,6 @@ public class SessionCaptchaGenerator implements CaptchaGenerator {
 
     @Override
     public void generateCaptcha() {
-        
+
     }
 }

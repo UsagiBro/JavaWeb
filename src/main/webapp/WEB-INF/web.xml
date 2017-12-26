@@ -7,4 +7,8 @@
             <param-name>captcha-method</param-name>
             <param-value>hidden</param-value>
         </context-param>
+        <context-param>
+            <param-name>databaseType</param-name>
+            <param-value>mySql</param-value>
+        </context-param>
 </web-app>
