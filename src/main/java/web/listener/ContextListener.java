@@ -1,7 +1,12 @@
 package web.listener;
 
-import captcha.CaptchaGenerator;
 import captcha.CaptchaStrategyGenerator;
+import captcha.generator_impl.CaptchaProvider;
+import constants.Constants;
+import dao.UserDao;
+import dao.local_storage.UserDaoImpl;
+import service.user.UserService;
+import service.user.UserServiceImpl;
 import storage.UserStorage;
 import storage.entity.User;
 
@@ -14,11 +19,11 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-
         setCaptchaStrategy(servletContextEvent);
-
-
-
+        UserStorage userStorage = insertDefaultUsers();
+        UserDao userDao = new UserDaoImpl(userStorage);
+        UserService userService = new UserServiceImpl(userDao);
+        servletContextEvent.getServletContext().setAttribute(Constants.USER_SERVICE, userService);
     }
 
 
@@ -37,8 +42,9 @@ public class ContextListener implements ServletContextListener {
     private void setCaptchaStrategy(ServletContextEvent servletContextEvent) {
         String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
         CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
-        CaptchaGenerator captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
-        servletContextEvent.getServletContext().setAttribute("captchaGenerator", captchaGenerator);
+        CaptchaProvider captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
+
+        servletContextEvent.getServletContext().setAttribute(Constants.CAPTCHA_PROVIDER, captchaGenerator);
     }
 
 

@@ -1,7 +1,12 @@
 package web.servlet;
 
+import captcha.Captcha;
+import captcha.generator_impl.CaptchaProvider;
 import constants.Constants;
+import service.captcha.CaptchaService;
+import service.captcha.CaptchaServiceImpl;
 import service.user.UserService;
+import service.validator.CaptchaValidator;
 import storage.entity.User;
 import web.Paths;
 import web.WebUtil;
@@ -17,6 +22,17 @@ import java.io.IOException;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
+    private CaptchaProvider captchaProvider;
+    private UserService userService;
+    private CaptchaService captchaService;
+
+    @Override
+    public void init() throws ServletException {
+        captchaProvider = (CaptchaProvider) getServletContext().getAttribute(Constants.CAPTCHA_PROVIDER);
+        userService = (UserService) getServletContext().getAttribute(Constants.USER_SERVICE);
+        captchaService = new CaptchaServiceImpl();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -30,22 +46,28 @@ public class RegistrationServlet extends HttpServlet {
         User user = WebUtil.getUserParameters(req);
         WebUtil.setEnteredValuesToSession(user, session);
 
-        if (createUser(user, req)) {
-            req.getSession().removeAttribute(Constants.ERRORS);
-            resp.sendRedirect(Paths.AUTHORIZATION_HTML);
-        } else {
-            req.getSession().removeAttribute(Constants.ERRORS);
-            resp.sendRedirect(Paths.REGISTRATION_SERVLET);
+        if (checkCaptcha(req.getParameter(Constants.CAPTCHA_VALUE), req)) {
+            if (createUser(user, req)) {
+                req.getSession().removeAttribute(Constants.ERRORS);
+                resp.sendRedirect(Paths.AUTHORIZATION_HTML);
+            }
         }
+        resp.sendRedirect(Paths.REGISTRATION_SERVLET);
     }
-
-
 
     private boolean createUser(User user, HttpServletRequest req) {
         boolean result;
-        UserService userService = (UserService) getServletContext().getAttribute("userService");
         result = userService.createUser(user);
         req.getSession().setAttribute(Constants.ERRORS, userService.getErrors());
         return result;
     }
+
+    private boolean checkCaptcha(String captchaValue, HttpServletRequest req) {
+        boolean result;
+        Captcha captcha = captchaProvider.getCaptcha(req);
+        result = captchaService.checkCaptcha(captcha, captchaValue);
+        req.getSession().setAttribute(Constants.ERRORS, captchaService.getErrors());
+        return result;
+    }
+
 }

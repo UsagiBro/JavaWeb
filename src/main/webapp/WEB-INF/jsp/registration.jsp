@@ -86,6 +86,17 @@
                 <strong>${sessionScope.errors.passwordRepeat}</strong>
             </p>
         </div>
+		<div class="form-group">
+            <img src="/captchaServlet">
+            <input type="hidden" name="captchaId" value="${sessionScope.captchaId}">
+        </div>
+		<div class="form-group">
+            <input type="text" class="form-control" name="captchaVal"
+            id="captchaVal" placeholder="Enter captcha here" required>
+			<p class="validation-message-s">
+                <strong>${sessionScope.errors.captcha}</strong>
+            </p>
+        </div>
         <div class="row submit-row">
             <button type="submit" class="btn btn-block">
                 Submit
