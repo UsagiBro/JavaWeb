@@ -1,7 +1,7 @@
 package web.listener;
 
 import dao.UserDao;
-import dao.UserDaoImpl;
+import dao.local_storage.UserDaoImpl;
 import service.user.UserService;
 import service.user.UserServiceImpl;
 import storage.UserStorage;
@@ -18,16 +18,11 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
 
-        CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
-        CaptchaGenerator captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
-        servletContextEvent.getServletContext().setAttribute("captchaGenerator", captchaGenerator);
+        setCaptchaStrategy(servletContextEvent);
+        setDatabaseStrategy(servletContextEvent);
 
-        UserStorage userStorage = insertDefaultUsers();
-        UserDao userDao = new UserDaoImpl(userStorage);
-        UserService userService = new UserServiceImpl(userDao);
-        servletContextEvent.getServletContext().setAttribute("userService", userService);
+
 
     }
 
@@ -43,4 +38,22 @@ public class ContextListener implements ServletContextListener {
         userStorage.createUser(new User("Albert", "Albeert", "albeert", "a@lbert.com"));
         return userStorage;
     }
+
+    private void setCaptchaStrategy(ServletContextEvent servletContextEvent) {
+        String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
+        CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
+        CaptchaGenerator captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
+        servletContextEvent.getServletContext().setAttribute("captchaGenerator", captchaGenerator);
+    }
+
+    private void setDatabaseStrategy(ServletContextEvent servletContextEvent) {
+        String databaseStrategy = servletContextEvent.getServletContext().getInitParameter("databaseType");
+
+
+        UserStorage userStorage = insertDefaultUsers();
+        UserDao userDao = new UserDaoImpl(userStorage);
+        UserService userService = new UserServiceImpl(userDao);
+        servletContextEvent.getServletContext().setAttribute("userService", userService);
+    }
+
 }

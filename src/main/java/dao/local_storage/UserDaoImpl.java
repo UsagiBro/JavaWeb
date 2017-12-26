@@ -1,5 +1,6 @@
-package dao;
+package dao.local_storage;
 
+import dao.UserDao;
 import storage.entity.User;
 import storage.UserStorage;
 
