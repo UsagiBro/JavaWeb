@@ -1,13 +1,9 @@
 package web.listener;
 
-import dao.UserDao;
-import dao.local_storage.UserDaoImpl;
-import service.user.UserService;
-import service.user.UserServiceImpl;
-import storage.UserStorage;
-import storage.entity.User;
 import captcha.CaptchaGenerator;
 import captcha.CaptchaStrategyGenerator;
+import storage.UserStorage;
+import storage.entity.User;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -20,7 +16,6 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
         setCaptchaStrategy(servletContextEvent);
-        setDatabaseStrategy(servletContextEvent);
 
 
 
@@ -46,14 +41,5 @@ public class ContextListener implements ServletContextListener {
         servletContextEvent.getServletContext().setAttribute("captchaGenerator", captchaGenerator);
     }
 
-    private void setDatabaseStrategy(ServletContextEvent servletContextEvent) {
-        String databaseStrategy = servletContextEvent.getServletContext().getInitParameter("databaseType");
-
-
-        UserStorage userStorage = insertDefaultUsers();
-        UserDao userDao = new UserDaoImpl(userStorage);
-        UserService userService = new UserServiceImpl(userDao);
-        servletContextEvent.getServletContext().setAttribute("userService", userService);
-    }
 
 }
