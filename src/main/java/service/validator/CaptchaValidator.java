@@ -1,15 +1,18 @@
 package service.validator;
 
-import captcha.Captcha;
+import constants.Constants;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class CaptchaValidator {
 
-    public boolean validate(Captcha captcha, String captchaValue) {
-        if (Objects.equals(captcha.getValue(), captchaValue)) {
-            return true;
+    public Map<String, String> validate(String captchaValue, String enteredValue) {
+        Map<String, String> resultMap = new HashMap<>();
+        if (!Objects.equals(captchaValue, enteredValue)) {
+            resultMap.put(Constants.CAPTCHA, Constants.INVALID_CAPTCHA_EXCEPTION);
         }
-        return false;
+        return resultMap;
     }
 }

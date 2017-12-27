@@ -29,10 +29,8 @@ public class CaptchaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Captcha captcha = new Captcha();
-        captchaProvider.setCaptcha(req, resp, captcha);
         BufferedImage bufferedImage = CaptchaDrawer.createCaptchaImage(captcha);
         captchaProvider.setCaptcha(req, resp, captcha);
-        req.getSession().setAttribute(Constants.CAPTCHA_ID, captcha.getId());
         resp.setContentType("image/png");
         try (OutputStream os = resp.getOutputStream()) {
             ImageIO.write(bufferedImage, "png", os);

@@ -1,7 +1,7 @@
 package dao.local_storage;
 
 import dao.UserDao;
-import storage.entity.User;
+import entity.User;
 import storage.UserStorage;
 
 public class UserDaoImpl implements UserDao {
@@ -12,7 +12,12 @@ public class UserDaoImpl implements UserDao {
         this.userStorage = userStorage;
     }
 
-    public boolean createUser(User user) {
+    public User createUser(User user) {
         return userStorage.createUser(user);
+    }
+
+    @Override
+    public boolean userExists(User user) {
+        return userStorage.contains(user);
     }
 }

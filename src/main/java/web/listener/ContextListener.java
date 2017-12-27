@@ -8,7 +8,7 @@ import dao.local_storage.UserDaoImpl;
 import service.user.UserService;
 import service.user.UserServiceImpl;
 import storage.UserStorage;
-import storage.entity.User;
+import entity.User;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -33,9 +33,12 @@ public class ContextListener implements ServletContextListener {
 
     private UserStorage insertDefaultUsers() {
         UserStorage userStorage = new UserStorage();
-        userStorage.createUser(new User("Ivan", "Gladush", "ivann", "i@gladush.com"));
-        userStorage.createUser(new User("Roman", "Piccolo", "romann", "r@piccolo.com"));
-        userStorage.createUser(new User("Albert", "Albeert", "albeert", "a@lbert.com"));
+        userStorage.createUser(new User("Ivan", "Gladush", "ivann", "i@gladush.com",
+                false, false));
+        userStorage.createUser(new User("Roman", "Piccolo", "romann", "r@piccolo.com",
+                false, false));
+        userStorage.createUser(new User("Albert", "Albeert", "albeert", "a@lbert.com",
+                false, false));
         return userStorage;
     }
 

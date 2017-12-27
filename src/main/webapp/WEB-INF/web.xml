@@ -5,6 +5,6 @@
          version="2.4">
         <context-param>
             <param-name>captcha-method</param-name>
-            <param-value>session</param-value>
+            <param-value>hidden</param-value>
         </context-param>
 </web-app>

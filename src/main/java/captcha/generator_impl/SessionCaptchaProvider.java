@@ -2,6 +2,7 @@ package captcha.generator_impl;
 
 import captcha.Captcha;
 import constants.Constants;
+import exception.CaptchaNotValidException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,8 +12,10 @@ import java.util.Map;
 public class SessionCaptchaProvider implements CaptchaProvider {
 
     @Override
-    public Captcha getCaptcha(HttpServletRequest request) {
-        return (Captcha) request.getSession().getAttribute(Constants.CAPTCHA);
+    public String getCaptcha(HttpServletRequest request) throws CaptchaNotValidException {
+        Captcha captcha = (Captcha) request.getSession().getAttribute(Constants.CAPTCHA);
+        checkCaptchaValidity(captcha);
+        return captcha.getValue();
     }
 
     @Override

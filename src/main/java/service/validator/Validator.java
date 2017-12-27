@@ -1,7 +1,9 @@
 package service.validator;
 
+import java.util.Map;
+
 public interface Validator<T> {
 
-    void validate(T object);
+    Map<String, String> validate(T object);
 
 }

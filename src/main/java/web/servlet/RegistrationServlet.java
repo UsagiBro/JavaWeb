@@ -1,12 +1,14 @@
 package web.servlet;
 
-import captcha.Captcha;
 import captcha.generator_impl.CaptchaProvider;
 import constants.Constants;
-import service.captcha.CaptchaService;
-import service.captcha.CaptchaServiceImpl;
+import entity.UserBean;
+import exception.CaptchaNotValidException;
+import exception.SuchUserExistsException;
 import service.user.UserService;
-import storage.entity.User;
+import entity.User;
+import service.validator.CaptchaValidator;
+import service.validator.UserValidator;
 import web.Paths;
 import web.WebUtil;
 
@@ -17,19 +19,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
     private CaptchaProvider captchaProvider;
     private UserService userService;
-    private CaptchaService captchaService;
+    private CaptchaValidator captchaValidator;
+    private UserValidator userValidator;
 
     @Override
     public void init() throws ServletException {
         captchaProvider = (CaptchaProvider) getServletContext().getAttribute(Constants.CAPTCHA_PROVIDER);
         userService = (UserService) getServletContext().getAttribute(Constants.USER_SERVICE);
-        captchaService = new CaptchaServiceImpl();
+        captchaValidator = new CaptchaValidator();
+        userValidator = new UserValidator();
     }
 
     @Override
@@ -41,34 +47,42 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        User user = WebUtil.getUserParameters(req);
-        WebUtil.setEnteredValuesToSession(user, session);
+        UserBean userBean = WebUtil.getUserBeanFromRequest(req);
+        WebUtil.setEnteredValuesToSession(userBean, session);
 
-        if (checkCaptcha(req.getParameter(Constants.CAPTCHA_VALUE), req)) {
-            if (createUser(user, req)) {
+        Map<String, String> checkMap =
+                checkCaptcha(req, req.getParameter(Constants.CAPTCHA_VALUE));
+
+
+        checkMap.putAll(checkUserBean(userBean));
+
+        if (checkMap.isEmpty()) {
+            try {
+                userService.createUser(WebUtil.getUserFromUserBeanParameters(userBean));
                 WebUtil.removeEnteredValuesFromSession(session);
                 resp.sendRedirect(Paths.AUTHORIZATION_HTML);
-            } else {
+            } catch (SuchUserExistsException e) {
+                req.getSession().setAttribute(Constants.USER_EXISTS_KEY, e.getMessage());
                 resp.sendRedirect(Paths.REGISTRATION_SERVLET);
             }
         } else {
+            req.getSession().setAttribute(Constants.ERRORS, checkMap);
             resp.sendRedirect(Paths.REGISTRATION_SERVLET);
         }
     }
 
-    private boolean createUser(User user, HttpServletRequest req) {
-        boolean result;
-        result = userService.createUser(user);
-        req.getSession().setAttribute(Constants.ERRORS, userService.getErrors());
-        return result;
+    private Map<String, String> checkCaptcha(HttpServletRequest req, String enteredValue) {
+        Map<String, String> res = new HashMap<>();
+        try {
+            res = captchaValidator.validate(captchaProvider.getCaptcha(req), enteredValue);
+        } catch (CaptchaNotValidException e) {
+            res.put(Constants.CAPTCHA, e.getMessage());
+        }
+        return res;
     }
 
-    private boolean checkCaptcha(String captchaValue, HttpServletRequest req) {
-        boolean result;
-        Captcha captcha = captchaProvider.getCaptcha(req);
-        result = captchaService.checkCaptcha(captcha, captchaValue);
-        req.getSession().setAttribute(Constants.ERRORS, captchaService.getErrors());
-        return result;
+    private Map<String, String> checkUserBean(UserBean userBean) {
+        return userValidator.validate(userBean);
     }
 
 }

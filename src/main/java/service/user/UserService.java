@@ -1,12 +1,9 @@
 package service.user;
 
-import storage.entity.User;
-
-import java.util.Map;
+import entity.User;
+import exception.SuchUserExistsException;
 
 public interface UserService {
 
-    boolean createUser(User user);
-
-    Map<String, String> getErrors();
+    User createUser(User user) throws SuchUserExistsException;
 }

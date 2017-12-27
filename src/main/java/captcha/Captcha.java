@@ -1,36 +1,35 @@
 package captcha;
 
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
 public class Captcha {
 
     private String id;
-    private String code;
+    private String value;
+    private long date;
 
     /**
-     * Generates captcha code
+     * Generates captcha value
      * and captcha id
      */
     public Captcha() {
-        code = generateCaptchaCode();
+        value = generateCaptchaCode();
         id = generateCaptchaID();
+        date = System.currentTimeMillis();
+    }
+
+    public long getDate() {
+        return date;
     }
 
     public String getValue() {
-        return code;
-    }
-
-    public void setValue(String code) {
-        this.code = code;
+        return value;
     }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     private String generateCaptchaID() {

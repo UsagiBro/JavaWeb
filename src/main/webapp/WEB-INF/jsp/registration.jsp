@@ -29,7 +29,7 @@
 <div class="container col-md-4">
     <form id="registrationForm" action="registration" method="post">
         <h3 class="validation-user-exists">
-             <strong>${sessionScope.errors.user_exists}</strong>
+             <strong>${sessionScope.user_exists}</strong>
         </h3>
         <div class="form-group">
             <label for="name">Name</label>
@@ -78,12 +78,26 @@
         </div>
         <div class="form-group">
             <label for="password">Repeat password</label>
-            <input type="password" class="form-control" id="passwordRepeat" placeholder="Repeat password" required>
+            <input type="password" class="form-control" name="passwordRepeat"
+             id="passwordRepeat" placeholder="Repeat password" required>
             <p id="passwordRepeatErr" class="validation-message">
                 <strong>Passwords dont match</strong>
             </p>
+            <p class="validation-message-s">
+                <strong>${sessionScope.errors.passwordRepeat}</strong>
+            </p>
         </div>
+        <div class="6u 12u$(3)">
+            <input type="checkbox" id="news" name="news">
+            <label for="news">Send me site news</label>
+        </div>
+        <div class="6u$ 12u$(3)">
+            <input type="checkbox" id="newProducts" name="newProducts">
+            <label for="newProducts">Get info about new products</label>
+        </div>
+
         <cpt:captcha/>
+
         <div class="row submit-row">
             <button type="submit" class="btn btn-block">
                 Submit
@@ -92,4 +106,3 @@
     </form>
 </div>
 </body>
-</html>
