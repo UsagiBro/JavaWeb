@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean createUser(User user) {
+        errors.clear();
         userValidator.validate(user);
         errors.putAll(userValidator.getErrors());
         if (errors.isEmpty()) {

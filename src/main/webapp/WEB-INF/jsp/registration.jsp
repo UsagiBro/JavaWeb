@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<%@include file="/WEB-INF/jspf/taglib.jspf" %>
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
@@ -9,7 +9,7 @@
     <script src="assets/js/skel.min.js"></script>
     <script src="assets/js/skel-layers.min.js"></script>
     <script src="assets/js/init.js"></script>
-   <!-- <script src="assets/js/jqueryValidation.js"></script> -->
+<!--    <script src="assets/js/jqueryValidation.js"></script> -->
     <link rel="stylesheet" href="assets/css/skel.css"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/style-xlarge.css"/>
@@ -82,21 +82,8 @@
             <p id="passwordRepeatErr" class="validation-message">
                 <strong>Passwords dont match</strong>
             </p>
-			<p>
-                <strong>${sessionScope.errors.passwordRepeat}</strong>
-            </p>
         </div>
-		<div class="form-group">
-            <img src="/captchaServlet">
-            <input type="hidden" name="captchaId" value="${sessionScope.captchaId}">
-        </div>
-		<div class="form-group">
-            <input type="text" class="form-control" name="captchaVal"
-            id="captchaVal" placeholder="Enter captcha here" required>
-			<p class="validation-message-s">
-                <strong>${sessionScope.errors.captcha}</strong>
-            </p>
-        </div>
+        <cpt:captcha/>
         <div class="row submit-row">
             <button type="submit" class="btn btn-block">
                 Submit

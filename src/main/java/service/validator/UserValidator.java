@@ -23,6 +23,7 @@ public class UserValidator implements Validator<User> {
     }
 
     public void validate(User user) {
+        errors.clear();
         if (user.getEmail() == null || !ValidatorUtil.matchPattern(PATTERN_FOR_EMAIL, user.getEmail())) {
             errors.put(Constants.EMAIL, Constants.EMAIL_VALIDATION_EXCEPTION);
         }

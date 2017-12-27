@@ -39,7 +39,7 @@ public class Captcha {
 
     private String generateCaptchaCode() {
         Random random = new Random();
-        int result = 100000 + random.nextInt(900000);
+        int result = 1000 + random.nextInt(9000);
         return String.valueOf(result);
     }
 }

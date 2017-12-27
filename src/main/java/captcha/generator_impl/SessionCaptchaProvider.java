@@ -10,20 +10,13 @@ import java.util.Map;
 
 public class SessionCaptchaProvider implements CaptchaProvider {
 
-    private Map<String, Captcha> captchaContainer;
-
-    public SessionCaptchaProvider() {
-        captchaContainer = new HashMap<>();
-    }
-
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
-        String id = (String) request.getSession().getAttribute(Constants.CAPTCHA_ID);
-        return captchaContainer.get(id);
+        return (Captcha) request.getSession().getAttribute(Constants.CAPTCHA);
     }
 
     @Override
     public void setCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
-        request.getSession().setAttribute(Constants.CAPTCHA_ID, captcha.getId());
+        request.getSession().setAttribute(Constants.CAPTCHA, captcha);
     }
 }

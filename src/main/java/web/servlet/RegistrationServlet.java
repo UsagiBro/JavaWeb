@@ -6,7 +6,6 @@ import constants.Constants;
 import service.captcha.CaptchaService;
 import service.captcha.CaptchaServiceImpl;
 import service.user.UserService;
-import service.validator.CaptchaValidator;
 import storage.entity.User;
 import web.Paths;
 import web.WebUtil;
@@ -35,7 +34,6 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         req.getRequestDispatcher(Paths.REGISTRATION_JSP).forward(req, resp);
     }
 
@@ -48,11 +46,14 @@ public class RegistrationServlet extends HttpServlet {
 
         if (checkCaptcha(req.getParameter(Constants.CAPTCHA_VALUE), req)) {
             if (createUser(user, req)) {
-                req.getSession().removeAttribute(Constants.ERRORS);
+                WebUtil.removeEnteredValuesFromSession(session);
                 resp.sendRedirect(Paths.AUTHORIZATION_HTML);
+            } else {
+                resp.sendRedirect(Paths.REGISTRATION_SERVLET);
             }
+        } else {
+            resp.sendRedirect(Paths.REGISTRATION_SERVLET);
         }
-        resp.sendRedirect(Paths.REGISTRATION_SERVLET);
     }
 
     private boolean createUser(User user, HttpServletRequest req) {

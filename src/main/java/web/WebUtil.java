@@ -26,4 +26,11 @@ public final class WebUtil {
         session.setAttribute(Constants.SURNAME, user.getSurname());
         session.setAttribute(Constants.EMAIL, user.getEmail());
     }
+
+    public static void removeEnteredValuesFromSession(HttpSession session) {
+        session.removeAttribute(Constants.NAME);
+        session.removeAttribute(Constants.SURNAME);
+        session.removeAttribute(Constants.EMAIL);
+        session.removeAttribute(Constants.ERRORS);
+    }
 }
