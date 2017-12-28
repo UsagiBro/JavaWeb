@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/jspf/taglib.jspf" %>
 <div class="form-group">
             <img src="/captchaServlet">
-                <input type="hidden" name="captchaId" value="${captchaId}">
+                <input type="hidden" name="captchaId" value="${sessionScope.captchaId}">
         </div>
 		<div class="form-group">
             <input type="text" class="form-control" name="captchaVal"

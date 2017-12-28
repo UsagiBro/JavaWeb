@@ -3,6 +3,7 @@ package captcha.generator_impl;
 
 import captcha.Captcha;
 import constants.Constants;
+import exception.CaptchaNotValidException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,27 +13,29 @@ import java.util.Map;
 
 public class CookiesCaptchaProvider implements CaptchaProvider {
 
-    private Map<String, String> captchaContainer;
+    private Map<String, Captcha> captchaContainer;
 
     public CookiesCaptchaProvider() {
         captchaContainer = new HashMap<>();
     }
 
     @Override
-    public String getCaptcha(HttpServletRequest request) {
+    public String getCaptcha(HttpServletRequest request) throws CaptchaNotValidException {
         Cookie[] cookies = request.getCookies();
-        String captchaValue = getCaptchaFromCookies(cookies);
-        return captchaValue;
+        Captcha captcha = getCaptchaFromCookies(cookies);
+        checkCaptchaValidity(captcha);
+        checkIfInvalidatedCaptchas();
+        return captcha.getValue();
     }
 
     @Override
     public void setCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
         Cookie captcha_id = new Cookie(Constants.CAPTCHA_ID, captcha.getId());
         response.addCookie(captcha_id);
-        captchaContainer.put(captcha.getId(), captcha.getValue());
+        captchaContainer.put(captcha.getId(), captcha);
     }
 
-    private String getCaptchaFromCookies(Cookie[] cookies) {
+    private Captcha getCaptchaFromCookies(Cookie[] cookies) {
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
                 if (cookies[i].getName().equals(Constants.CAPTCHA_ID)) {

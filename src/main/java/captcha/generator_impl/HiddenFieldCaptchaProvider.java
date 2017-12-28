@@ -3,6 +3,7 @@ package captcha.generator_impl;
 
 import captcha.Captcha;
 import constants.Constants;
+import exception.CaptchaNotValidException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,27 +12,28 @@ import java.util.Map;
 
 public class HiddenFieldCaptchaProvider implements CaptchaProvider {
 
-    private Map<String, String> captchas;
+    private Map<String, Captcha> captchas;
 
     public HiddenFieldCaptchaProvider() {
         captchas = new HashMap<>();
     }
 
     @Override
-    public String getCaptcha(HttpServletRequest request) {
-        String captchaId = request.getParameter(Constants.CAPTCHA_ID);
-        String captchaValue = captchas.get(captchaId);
+    public String getCaptcha(HttpServletRequest request) throws CaptchaNotValidException {
+        String captchaId = (String) request.getSession().getAttribute(Constants.CAPTCHA_ID);
+        Captcha captcha = captchas.get(captchaId);
+        checkCaptchaValidity(captcha);
         checkIfInvalidatedCaptchas(captchas);
-        return captchaValue;
+        return captcha.getValue();
     }
 
     @Override
     public void setCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
-        captchas.put(captcha.getId(), captcha.getValue());
-        request.setAttribute(Constants.CAPTCHA_ID, captcha.getId());
+        captchas.put(captcha.getId(), captcha);
+        request.getSession().setAttribute(Constants.CAPTCHA_ID, captcha.getId());
     }
 
-    private void checkIfInvalidatedCaptchas(Map<String, String> captchaContainer) {
+    private void checkIfInvalidatedCaptchas(Map<String, Captcha> captchaContainer) {
         captchaContainer.forEach((key, value) -> {
             if (value.equals("")) {
                 captchaContainer.remove(key);
