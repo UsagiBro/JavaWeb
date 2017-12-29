@@ -1,8 +1,9 @@
 package captcha;
 
-import captcha.generator_impl.CookiesCaptchaGenerator;
-import captcha.generator_impl.HiddenFieldCaptchaGenerator;
-import captcha.generator_impl.SessionCaptchaGenerator;
+import captcha.generator_impl.CaptchaProvider;
+import captcha.generator_impl.CookiesCaptchaProvider;
+import captcha.generator_impl.HiddenFieldCaptchaProvider;
+import captcha.generator_impl.SessionCaptchaProvider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.function.Supplier;
 
 public class CaptchaStrategyGenerator {
 
-    private Map<String, Supplier<CaptchaGenerator>> captchaStrategies;
+    private Map<String, Supplier<CaptchaProvider>> captchaStrategies;
 
     public CaptchaStrategyGenerator() {
         captchaStrategies = new HashMap<>();
@@ -19,19 +20,19 @@ public class CaptchaStrategyGenerator {
         captchaStrategies.put("cookies", this::generateCookiesCaptchaGenerator);
     }
 
-    public CaptchaGenerator getGeneratorFromStrategy(String strategy) {
+    public CaptchaProvider getGeneratorFromStrategy(String strategy) {
         return captchaStrategies.get(strategy).get();
     }
 
-    private CaptchaGenerator generateHiddenFieldCaptchaGenerator() {
-        return new HiddenFieldCaptchaGenerator();
+    private CaptchaProvider generateHiddenFieldCaptchaGenerator() {
+        return new HiddenFieldCaptchaProvider();
     }
 
-    private CaptchaGenerator generateSessionCaptchaGenerator() {
-        return new SessionCaptchaGenerator();
+    private CaptchaProvider generateSessionCaptchaGenerator() {
+        return new SessionCaptchaProvider();
     }
 
-    private CaptchaGenerator generateCookiesCaptchaGenerator() {
-        return new CookiesCaptchaGenerator();
+    private CaptchaProvider generateCookiesCaptchaGenerator() {
+        return new CookiesCaptchaProvider();
     }
 }

@@ -1,8 +1,12 @@
 package dao;
 
-import storage.entity.User;
+import entity.User;
 
 public interface UserDao {
 
-    boolean createUser(User user);
+    User createUser(User user);
+
+    boolean userExists(User user);
+
+    User readUserByLoginAndPassword(String login, String password);
 }

@@ -1,4 +1,4 @@
-package storage.entity;
+package entity;
 
 import java.util.Objects;
 
@@ -12,14 +12,20 @@ public class User {
 
     private String email;
 
+    private boolean news;
+
+    private boolean newProducts;
+
     public User() {
     }
 
-    public User(String name, String surname, String password, String email) {
+    public User(String name, String surname, String password, String email, boolean news, boolean newProducts) {
         this.name = name;
         this.surname = surname;
         this.password = password;
         this.email = email;
+        this.newProducts = newProducts;
+        this.news = news;
     }
 
     public String getName() {
@@ -52,6 +58,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isNews() {
+        return news;
+    }
+
+    public void setNews(boolean news) {
+        this.news = news;
+    }
+
+    public boolean isNewProducts() {
+        return newProducts;
+    }
+
+    public void setNewProducts(boolean newProducts) {
+        this.newProducts = newProducts;
     }
 
     @Override

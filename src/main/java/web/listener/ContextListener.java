@@ -1,13 +1,12 @@
 package web.listener;
 
+import captcha.CaptchaStrategyGenerator;
+import captcha.generator_impl.CaptchaProvider;
+import constants.WebConstants;
 import dao.UserDao;
-import dao.local_storage.UserDaoImpl;
 import service.user.UserService;
 import service.user.UserServiceImpl;
-import storage.UserStorage;
-import storage.entity.User;
-import captcha.CaptchaGenerator;
-import captcha.CaptchaStrategyGenerator;
+import util.ContextUtil;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -18,42 +17,29 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-
         setCaptchaStrategy(servletContextEvent);
-        setDatabaseStrategy(servletContextEvent);
-
-
+        setDatabaseForContext(servletContextEvent);
 
     }
-
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
     }
 
-    private UserStorage insertDefaultUsers() {
-        UserStorage userStorage = new UserStorage();
-        userStorage.createUser(new User("Ivan", "Gladush", "ivann", "i@gladush.com"));
-        userStorage.createUser(new User("Roman", "Piccolo", "romann", "r@piccolo.com"));
-        userStorage.createUser(new User("Albert", "Albeert", "albeert", "a@lbert.com"));
-        return userStorage;
-    }
-
     private void setCaptchaStrategy(ServletContextEvent servletContextEvent) {
         String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
         CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
-        CaptchaGenerator captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
-        servletContextEvent.getServletContext().setAttribute("captchaGenerator", captchaGenerator);
+        CaptchaProvider captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
+
+        servletContextEvent.getServletContext().setAttribute(WebConstants.CAPTCHA_PROVIDER, captchaGenerator);
     }
 
-    private void setDatabaseStrategy(ServletContextEvent servletContextEvent) {
-        String databaseStrategy = servletContextEvent.getServletContext().getInitParameter("databaseType");
-
-
-        UserStorage userStorage = insertDefaultUsers();
-        UserDao userDao = new UserDaoImpl(userStorage);
+    private void setDatabaseForContext(ServletContextEvent servletContextEvent) {
+        String databaseStrategy = servletContextEvent.getServletContext().getInitParameter("database-type");
+        UserDao userDao = ContextUtil.getUserServiceForContext(databaseStrategy);
         UserService userService = new UserServiceImpl(userDao);
         servletContextEvent.getServletContext().setAttribute("userService", userService);
     }
+
 
 }

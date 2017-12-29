@@ -1,8 +1,8 @@
 package web;
 
-import constants.Constants;
-import storage.entity.User;
-
+import constants.WebConstants;
+import entity.User;
+import entity.UserBean;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,32 +26,32 @@ public final class WebUtil {
     }
 
     public static UserBean getUserBeanFromRequest(HttpServletRequest req) {
-        String name = req.getParameter(Constants.NAME);
-        String surname = req.getParameter(Constants.SURNAME);
-        String password = req.getParameter(Constants.PASSWORD);
-        String email = req.getParameter(Constants.EMAIL);
-        String passwordRepeat = req.getParameter(Constants.PASSWORD_REPEAT);
-        boolean news = req.getParameter(Constants.NEWS) != null;
-        boolean newProducts = req.getParameter(Constants.NEW_PRODUCTS) != null;
+        String name = req.getParameter(WebConstants.NAME);
+        String surname = req.getParameter(WebConstants.SURNAME);
+        String password = req.getParameter(WebConstants.PASSWORD);
+        String email = req.getParameter(WebConstants.EMAIL);
+        String passwordRepeat = req.getParameter(WebConstants.PASSWORD_REPEAT);
+        boolean news = req.getParameter(WebConstants.NEWS) != null;
+        boolean newProducts = req.getParameter(WebConstants.NEW_PRODUCTS) != null;
 
         return new UserBean(name, surname, password, email, passwordRepeat, news, newProducts);
     }
 
     public static void setEnteredValuesToSession(UserBean userBean, HttpSession session) {
-        session.setAttribute(Constants.NAME, userBean.getName());
-        session.setAttribute(Constants.SURNAME, userBean.getSurname());
-        session.setAttribute(Constants.EMAIL, userBean.getEmail());
-        session.setAttribute(Constants.NEWS, userBean.getNews());
-        session.setAttribute(Constants.NEW_PRODUCTS, userBean.getNewProducts());
+        session.setAttribute(WebConstants.NAME, userBean.getName());
+        session.setAttribute(WebConstants.SURNAME, userBean.getSurname());
+        session.setAttribute(WebConstants.EMAIL, userBean.getEmail());
+        session.setAttribute(WebConstants.NEWS, userBean.getNews());
+        session.setAttribute(WebConstants.NEW_PRODUCTS, userBean.getNewProducts());
     }
 
     public static void removeEnteredValuesFromSession(HttpSession session) {
-        session.removeAttribute(Constants.NAME);
-        session.removeAttribute(Constants.SURNAME);
-        session.removeAttribute(Constants.EMAIL);
-        session.removeAttribute(Constants.NEWS);
-        session.removeAttribute(Constants.NEW_PRODUCTS);
-        session.removeAttribute(Constants.ERRORS);
-        session.removeAttribute(Constants.CAPTCHA_VALUE);
+        session.removeAttribute(WebConstants.NAME);
+        session.removeAttribute(WebConstants.SURNAME);
+        session.removeAttribute(WebConstants.EMAIL);
+        session.removeAttribute(WebConstants.NEWS);
+        session.removeAttribute(WebConstants.NEW_PRODUCTS);
+        session.removeAttribute(WebConstants.ERRORS);
+        session.removeAttribute(WebConstants.CAPTCHA_VALUE);
     }
 }
