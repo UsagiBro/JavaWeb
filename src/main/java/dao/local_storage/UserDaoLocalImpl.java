@@ -2,7 +2,7 @@ package dao.local_storage;
 
 import dao.UserDao;
 import entity.User;
-import storage.UserStorage;
+import dao.local_storage.storage.UserStorage;
 
 public class UserDaoLocalImpl implements UserDao {
 

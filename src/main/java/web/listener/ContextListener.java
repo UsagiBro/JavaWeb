@@ -1,7 +1,7 @@
 package web.listener;
 
-import captcha.CaptchaStrategyGenerator;
-import captcha.generator_impl.CaptchaProvider;
+import web.captcha.CaptchaStrategyGenerator;
+import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
 import dao.UserDao;
 import service.user.UserService;
@@ -27,7 +27,7 @@ public class ContextListener implements ServletContextListener {
     }
 
     private void setCaptchaStrategy(ServletContextEvent servletContextEvent) {
-        String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
+        String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("web.captcha-method");
         CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
         CaptchaProvider captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
 

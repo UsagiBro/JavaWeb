@@ -1,9 +1,9 @@
-package captcha;
+package web.captcha;
 
-import captcha.generator_impl.CaptchaProvider;
-import captcha.generator_impl.CookiesCaptchaProvider;
-import captcha.generator_impl.HiddenFieldCaptchaProvider;
-import captcha.generator_impl.SessionCaptchaProvider;
+import web.captcha.generator_impl.CaptchaProvider;
+import web.captcha.generator_impl.CookiesCaptchaProvider;
+import web.captcha.generator_impl.HiddenFieldCaptchaProvider;
+import web.captcha.generator_impl.SessionCaptchaProvider;
 
 import java.util.HashMap;
 import java.util.Map;

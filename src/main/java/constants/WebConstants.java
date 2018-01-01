@@ -16,7 +16,7 @@ public final class WebConstants {
     public static final String USER_EXISTS_KEY = "user_exists";
     public static final String CAPTCHA_ID = "captchaId";
     public static final String CAPTCHA_VALUE = "captchaVal";
-    public static final String CAPTCHA = "captcha";
+    public static final String CAPTCHA = "web/captcha";
     public static final String ERRORS = "errors";
 
     public static final String CAPTCHA_PROVIDER = "captchaProvider";
@@ -32,5 +32,5 @@ public final class WebConstants {
     public static final String EMAIL_VALIDATION_EXCEPTION = "Type valid email";
     public static final String PASSWORD_REPEAT_EXCEPTION = "Passwords don't match";
     public static final String USER_EXISTS = "User with such email already exists!";
-    public static final String INVALID_CAPTCHA_EXCEPTION = "Invalid captcha, please try again!";
+    public static final String INVALID_CAPTCHA_EXCEPTION = "Invalid web.captcha, please try again!";
 }

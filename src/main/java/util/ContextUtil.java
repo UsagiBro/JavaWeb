@@ -4,7 +4,7 @@ import dao.UserDao;
 import dao.local_storage.UserDaoLocalImpl;
 import dao.myslq.UserDaoMysql;
 import entity.User;
-import storage.UserStorage;
+import dao.local_storage.storage.UserStorage;
 
 public final class ContextUtil {
 

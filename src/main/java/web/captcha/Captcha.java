@@ -1,6 +1,5 @@
-package captcha;
+package web.captcha;
 
-import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -11,8 +10,8 @@ public class Captcha {
     private long date;
 
     /**
-     * Generates captcha value
-     * and captcha id
+     * Generates web.captcha value
+     * and web.captcha id
      */
     public Captcha() {
         value = generateCaptchaCode();

@@ -1,4 +1,4 @@
-package storage;
+package dao.local_storage.storage;
 
 import entity.User;
 
@@ -19,12 +19,7 @@ public class UserStorage {
     }
 
     public User createUser(User user) {
-//        if (!users.containsValue(user)) {
            return users.put(UUID.randomUUID().toString(), user);
-//            return true;
-//        } else {
-//            return false;
-//        }
     }
 
     public boolean contains(User user) {

@@ -1,12 +1,10 @@
-package captcha.generator_impl;
+package web.captcha.generator_impl;
 
-import captcha.Captcha;
+import web.captcha.Captcha;
 import exception.CaptchaNotValidException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.Map;
 
 public interface CaptchaProvider {
 

@@ -1,8 +1,8 @@
 package web.servlet;
 
-import captcha.Captcha;
-import captcha.CaptchaDrawer;
-import captcha.generator_impl.CaptchaProvider;
+import web.captcha.Captcha;
+import web.captcha.CaptchaDrawer;
+import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
 
 import javax.imageio.ImageIO;

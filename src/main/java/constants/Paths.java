@@ -1,4 +1,4 @@
-package web;
+package constants;
 
 public final class Paths {
     private Paths() {

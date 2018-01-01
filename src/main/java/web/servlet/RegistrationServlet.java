@@ -1,6 +1,6 @@
 package web.servlet;
 
-import captcha.generator_impl.CaptchaProvider;
+import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
 import entity.UserBean;
 import exception.CaptchaNotValidException;
@@ -8,8 +8,8 @@ import exception.SuchUserExistsException;
 import service.user.UserService;
 import service.validator.CaptchaValidator;
 import service.validator.UserValidator;
-import web.Paths;
-import web.WebUtil;
+import constants.Paths;
+import util.WebUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

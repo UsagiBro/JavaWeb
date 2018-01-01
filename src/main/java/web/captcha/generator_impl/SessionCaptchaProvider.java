@@ -1,6 +1,6 @@
-package captcha.generator_impl;
+package web.captcha.generator_impl;
 
-import captcha.Captcha;
+import web.captcha.Captcha;
 import constants.WebConstants;
 import exception.CaptchaNotValidException;
 

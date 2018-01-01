@@ -6,7 +6,7 @@
         </div>
 		<div class="form-group">
             <input type="text" class="form-control" name="captchaVal"
-            id="captchaVal" placeholder="Enter captcha here" required>
+            id="captchaVal" placeholder="Enter web.captcha here" required>
 			<p class="validation-message-s">
                 <strong>${sessionScope.errors.captcha}</strong>
             </p>
