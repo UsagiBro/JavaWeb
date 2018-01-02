@@ -87,6 +87,9 @@
                 <strong>${sessionScope.errors.passwordRepeat}</strong>
             </p>
         </div>
+        <div class="form-group">
+            <input class="btn btn-success" type="file" name="avatar" accept="image/*" />
+        </div>
         <div class="6u 12u$(3)">
             <input type="checkbox" id="news" name="news">
             <label for="news">Send me site news</label>

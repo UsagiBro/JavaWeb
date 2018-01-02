@@ -2,6 +2,7 @@ package constants;
 
 public final class WebConstants {
 
+
     private WebConstants() {
         throw new IllegalStateException("Can't create an instance");
     }
@@ -13,6 +14,7 @@ public final class WebConstants {
     public static final String PASSWORD = "password";
     public static final String PASSWORD_REPEAT = "passwordRepeat";
     public static final String NEWS = "news";
+    public static final String AVATAR = "avatar";
     public static final String NEW_PRODUCTS = "newProducts";
     public static final String USER_EXISTS_KEY = "user_exists";
     public static final String CAPTCHA_ID = "captchaId";
@@ -34,4 +36,7 @@ public final class WebConstants {
     public static final String PASSWORD_REPEAT_EXCEPTION = "Passwords don't match";
     public static final String USER_EXISTS = "User with such email already exists!";
     public static final String INVALID_CAPTCHA_EXCEPTION = "Invalid web.captcha, please try again!";
+    public static final String FILE_IS_INVALID = "File isn't valid!";
+    public static final String FILE_IS_NOT_UPLOADED = "File isn't uploaded";
+
 }

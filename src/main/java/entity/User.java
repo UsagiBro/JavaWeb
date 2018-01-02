@@ -60,7 +60,7 @@ public class User {
         this.email = email;
     }
 
-    public boolean isNews() {
+    public boolean getNews() {
         return news;
     }
 
@@ -68,7 +68,7 @@ public class User {
         this.news = news;
     }
 
-    public boolean isNewProducts() {
+    public boolean getNewProducts() {
         return newProducts;
     }
 

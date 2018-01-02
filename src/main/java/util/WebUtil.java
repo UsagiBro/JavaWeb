@@ -4,8 +4,14 @@ import constants.WebConstants;
 import entity.User;
 import entity.UserBean;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Map;
 
 public final class WebUtil {
 
@@ -33,8 +39,36 @@ public final class WebUtil {
         String passwordRepeat = req.getParameter(WebConstants.PASSWORD_REPEAT);
         boolean news = req.getParameter(WebConstants.NEWS) != null;
         boolean newProducts = req.getParameter(WebConstants.NEW_PRODUCTS) != null;
-
+        req.getParameter(WebConstants.AVATAR);
         return new UserBean(name, surname, password, email, passwordRepeat, news, newProducts);
+    }
+
+    public static void loadAvatarFromRequest(HttpServletRequest req, Map<String, String> errors) {
+        String filename = req.getParameter(WebConstants.EMAIL);
+        String filePath = "src/main/resources";
+//        if (isAvatarUploaded(req, errors)) {
+            try (OutputStream out = new FileOutputStream(filePath)) {
+                InputStream fileContent = req.getPart(WebConstants.AVATAR).getInputStream();
+                int read;
+                byte[] bytes = new byte[1024];
+                while ((read = fileContent.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+            } catch (IOException | ServletException e) {
+                errors.put(WebConstants.AVATAR, WebConstants.FILE_IS_INVALID);
+            }
+//        }
+    }
+
+    private static boolean isAvatarUploaded(HttpServletRequest req, Map<String, String> errors) {
+        try {
+            if (req.getPart(WebConstants.AVATAR).getSize() == 0) {
+                return false;
+            }
+        } catch (IOException | ServletException e) {
+            errors.put(WebConstants.AVATAR, WebConstants.FILE_IS_NOT_UPLOADED);
+        }
+        return true;
     }
 
     public static void setEnteredValuesToSession(UserBean userBean, HttpSession session) {

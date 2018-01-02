@@ -26,8 +26,7 @@ public class UserServiceMySql implements UserService {
         if (users.contains(user)) {
             throw new SuchUserExistsException(WebConstants.USER_EXISTS);
         }
-        transactionManager.processTransaction(() -> userDao.createUser(user));
-        return userDao.createUser(user);
+        return transactionManager.processTransaction(() -> userDao.createUser(user));
     }
 
     @Override

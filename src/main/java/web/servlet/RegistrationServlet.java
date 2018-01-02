@@ -54,6 +54,7 @@ public class RegistrationServlet extends HttpServlet {
 
 
         checkMap.putAll(checkUserBean(userBean));
+        WebUtil.loadAvatarFromRequest(req, checkMap);
 
         if (checkMap.isEmpty()) {
             try {

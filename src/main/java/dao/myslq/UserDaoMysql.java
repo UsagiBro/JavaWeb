@@ -13,7 +13,9 @@ import java.util.List;
 
 public class UserDaoMysql implements UserDao {
 
-    private static final String SQL_INSERT_USER = "INSERT INTO users VALUES (?,?, ?, ?, DEFAULT, DEFAULT)";
+    private static final String SQL_INSERT_USER =
+            "INSERT INTO " +
+                    "users (first_name, surname, password, email, news, new_products) VALUES (?,?,?,?,?,?)";
     private static final String SQL_GET_USER_BY_LOGIN_AND_PASSWORD =
             "SELECT * FROM users WHERE email = ? AND password = ?";
     private static final String SQL_SELECT_ALL_USERS = "SELECT * FROM users";
@@ -24,10 +26,11 @@ public class UserDaoMysql implements UserDao {
         Connection connection = ConnectionHolder.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USER)) {
             DBUtil.fillPreparedStatement(preparedStatement, user.getName(),
-                    user.getSurname(), user.getPassword(), user.getEmail());
+                    user.getSurname(), user.getPassword(), user.getEmail(),
+                    user.getNews(), user.getNewProducts());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
-            return false;
+            throw new DBException("Can't create user!");
         }
     }
 
@@ -41,7 +44,7 @@ public class UserDaoMysql implements UserDao {
                 users.add(DBUtil.getUserFromResultSet(resultSet));
             }
         } catch (SQLException ex) {
-
+            throw new DBException("Can't read users from database!");
         }
         return users;
     }
