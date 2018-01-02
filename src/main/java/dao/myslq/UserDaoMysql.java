@@ -18,6 +18,8 @@ public class UserDaoMysql implements UserDao {
 
     @Override
     public boolean userExists(User user) {
+        boolean result;
+
         return false;
     }
 

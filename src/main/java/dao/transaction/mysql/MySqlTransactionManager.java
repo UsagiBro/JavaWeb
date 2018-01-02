@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class MySqlTransactionManager implements TransactionManager {
 
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public MySqlTransactionManager() {
         init();
@@ -24,7 +24,7 @@ public class MySqlTransactionManager implements TransactionManager {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
-            DataSource dataSource = (DataSource) envContext.lookup("jdbc/KKK");
+            dataSource = (DataSource) envContext.lookup("jdbc/KKK");
         } catch (NamingException e) {
             System.err.println("Can't get datasource");
         }

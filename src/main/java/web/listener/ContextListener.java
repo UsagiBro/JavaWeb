@@ -27,7 +27,7 @@ public class ContextListener implements ServletContextListener {
     }
 
     private void setCaptchaStrategy(ServletContextEvent servletContextEvent) {
-        String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("web.captcha-method");
+        String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
         CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
         CaptchaProvider captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
 
@@ -36,9 +36,8 @@ public class ContextListener implements ServletContextListener {
 
     private void setDatabaseForContext(ServletContextEvent servletContextEvent) {
         String databaseStrategy = servletContextEvent.getServletContext().getInitParameter("database-type");
-        UserDao userDao = ContextUtil.getUserServiceForContext(databaseStrategy);
-        UserService userService = new UserServiceImpl(userDao);
-        servletContextEvent.getServletContext().setAttribute("userService", userService);
+        UserService userService = ContextUtil.getUserServiceForContext(databaseStrategy);
+        servletContextEvent.getServletContext().setAttribute(WebConstants.USER_SERVICE, userService);
     }
 
 

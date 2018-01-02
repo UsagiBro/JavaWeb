@@ -3,8 +3,12 @@ package util;
 import dao.UserDao;
 import dao.local_storage.UserDaoLocalImpl;
 import dao.myslq.UserDaoMysql;
+import dao.transaction.mysql.MySqlTransactionManager;
 import entity.User;
 import dao.local_storage.storage.UserStorage;
+import service.user.UserService;
+import service.user.UserServiceImpl;
+import service.user.UserServiceMySql;
 
 public final class ContextUtil {
 
@@ -19,15 +23,17 @@ public final class ContextUtil {
         return userStorage;
     }
 
-    public static UserDao getUserServiceForContext(String databaseStrategy) {
-        UserDao userDao;
+    public static UserService getUserServiceForContext(String databaseStrategy) {
+        UserService userService;
         if (databaseStrategy.equals("mysql")) {
-            userDao = new UserDaoMysql();
+            UserDao userDao = new UserDaoMysql();
+            userService = new UserServiceMySql(new MySqlTransactionManager(), userDao);
         }
         else {
             UserStorage userStorage = ContextUtil.insertDefaultUsersLocaleStorage();
-            userDao = new UserDaoLocalImpl(userStorage);
+            UserDao userDao = new UserDaoLocalImpl(userStorage);
+            userService = new UserServiceImpl(userDao);
         }
-        return userDao;
+        return userService;
     }
 }
