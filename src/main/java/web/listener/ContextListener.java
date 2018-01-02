@@ -32,8 +32,11 @@ public class ContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
     }
 
-
-
+    /**
+     * Receives entity of captcha generator related on which key is entered in web.xml
+     * @param servletContextEvent event class for notifications about changes to the servlet context of
+     *                            a web application
+     */
     private void setCaptchaStrategy(ServletContextEvent servletContextEvent) {
         String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
         CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();

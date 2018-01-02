@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ * Used data transfer object
+ */
 public class UserBean {
 
     private String name;

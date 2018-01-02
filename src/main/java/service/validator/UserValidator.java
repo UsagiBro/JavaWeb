@@ -18,6 +18,11 @@ public class UserValidator implements Validator<UserBean> {
     private static final Pattern PATTERN_FOR_NAME = Pattern.compile(REGEX_FOR_NAME);
     private static final Pattern PATTERN_FOR_PASSWORD = Pattern.compile(REGEX_FOR_PASSWORD);
 
+    /**
+     * Check if entered user values are valid
+     * @param userBean data transfer object of entered user fields to be checked
+     * @return map of errors (empty if errors don't exist)
+     */
     public Map<String, String> validate(UserBean userBean) {
         Map<String, String> errors = new HashMap<>();
         if (userBean.getEmail() == null || !ValidatorUtil.matchPattern(PATTERN_FOR_EMAIL, userBean.getEmail())) {
