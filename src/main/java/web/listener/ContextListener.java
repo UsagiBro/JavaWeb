@@ -9,6 +9,7 @@ import service.user.UserService;
 import service.user.UserServiceImpl;
 import storage.UserStorage;
 import entity.User;
+import util.ContextUtil;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -20,7 +21,7 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         setCaptchaStrategy(servletContextEvent);
-        UserStorage userStorage = insertDefaultUsers();
+        UserStorage userStorage = ContextUtil.insertDefaultUsers();
         UserDao userDao = new UserDaoImpl(userStorage);
         UserService userService = new UserServiceImpl(userDao);
         servletContextEvent.getServletContext().setAttribute(Constants.USER_SERVICE, userService);
@@ -31,16 +32,7 @@ public class ContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
     }
 
-    private UserStorage insertDefaultUsers() {
-        UserStorage userStorage = new UserStorage();
-        userStorage.createUser(new User("Ivan", "Gladush", "ivann", "i@gladush.com",
-                false, false));
-        userStorage.createUser(new User("Roman", "Piccolo", "romann", "r@piccolo.com",
-                false, false));
-        userStorage.createUser(new User("Albert", "Albeert", "albeert", "a@lbert.com",
-                false, false));
-        return userStorage;
-    }
+
 
     private void setCaptchaStrategy(ServletContextEvent servletContextEvent) {
         String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");

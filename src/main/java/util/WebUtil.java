@@ -1,4 +1,4 @@
-package web;
+package util;
 
 import constants.Constants;
 import entity.User;

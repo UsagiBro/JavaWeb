@@ -6,11 +6,10 @@ import entity.UserBean;
 import exception.CaptchaNotValidException;
 import exception.SuchUserExistsException;
 import service.user.UserService;
-import entity.User;
 import service.validator.CaptchaValidator;
 import service.validator.UserValidator;
 import web.Paths;
-import web.WebUtil;
+import util.WebUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
