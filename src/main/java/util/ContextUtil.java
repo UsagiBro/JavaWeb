@@ -12,6 +12,10 @@ import service.user.UserServiceMySql;
 
 public final class ContextUtil {
 
+    private ContextUtil() {
+        throw new IllegalStateException("Can't create an instance of this class");
+    }
+
     public static UserStorage insertDefaultUsersLocaleStorage() {
         UserStorage userStorage = new UserStorage();
         userStorage.createUser(new User("Ivan", "Gladush", "ivann", "i@gladush.com",

@@ -2,11 +2,14 @@ package dao;
 
 import entity.User;
 
+import java.sql.SQLException;
+import java.util.List;
+
 public interface UserDao {
 
-    User createUser(User user);
+    boolean createUser(User user);
 
-    boolean userExists(User user);
+    List<User> readAllUsers();
 
-    User readUserByLoginAndPassword(String login, String password);
+    User readUserByEmailAndPassword(String email, String password);
 }

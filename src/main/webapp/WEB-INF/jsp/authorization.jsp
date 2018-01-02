@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/WEB-INF/jspf/taglib.jspf" %>
 <head>
     <meta charset="UTF-8">
     <title>Authentication</title>
@@ -26,26 +26,27 @@
     </nav>
 </header>
 <div class="container col-md-4">
-    <form>
+    <form action="authorization" method="post">
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
                    placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <small id="emailHelp" class="form-text text-muted">We will never share your email with anyone else.</small>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
         <div class="row">
             <div class="col">
-                <a href="registration" class="btn btn-block btn-primary">Registration</a>
+            <button type="submit" class="btn btn-block btn-success">
+                Submit
+            </button>
             </div>
             <div class="col">
-                <a href="index.html" class="btn btn-block btn-success">Submit</a>
+                <a href="registration" class="btn btn-block btn-primary">Registration</a>
             </div>
         </div>
     </form>
 </div>
 </body>
-</html>

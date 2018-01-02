@@ -2,9 +2,7 @@ package dao.local_storage.storage;
 
 import entity.User;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class UserStorage {
 
@@ -14,12 +12,15 @@ public class UserStorage {
         users = new HashMap<>();
     }
 
-    public Map<String, User> getUsers() {
-        return users;
+    public List<User> getUsers() {
+        return new ArrayList<>(users.values());
     }
 
-    public User createUser(User user) {
-           return users.put(UUID.randomUUID().toString(), user);
+    public boolean createUser(User user) {
+        if (Objects.isNull(users.put(UUID.randomUUID().toString(), user))) {
+            return true;
+        }
+        return false;
     }
 
     public boolean contains(User user) {

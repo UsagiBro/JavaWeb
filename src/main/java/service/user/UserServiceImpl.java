@@ -5,6 +5,8 @@ import exception.SuchUserExistsException;
 import constants.WebConstants;
 import entity.User;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
@@ -14,11 +16,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) throws SuchUserExistsException {
-        if (userDao.userExists(user)) {
+    public boolean createUser(User user) throws SuchUserExistsException {
+        List<User> users = userDao.readAllUsers();
+        if (users.contains(user)) {
             throw new SuchUserExistsException(WebConstants.USER_EXISTS);
         }
         return userDao.createUser(user);
+    }
+
+    @Override
+    public User getUserByEmailAndPassword(String login, String password) {
+        return null;
     }
 
 }

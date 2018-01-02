@@ -59,7 +59,7 @@ public class RegistrationServlet extends HttpServlet {
             try {
                 userService.createUser(WebUtil.getUserFromUserBeanParameters(userBean));
                 WebUtil.removeEnteredValuesFromSession(session);
-                resp.sendRedirect(Paths.AUTHORIZATION_HTML);
+                resp.sendRedirect(Paths.AUTHORIZATION_SERVLET);
             } catch (SuchUserExistsException e) {
                 req.getSession().setAttribute(WebConstants.USER_EXISTS_KEY, e.getMessage());
                 resp.sendRedirect(Paths.REGISTRATION_SERVLET);

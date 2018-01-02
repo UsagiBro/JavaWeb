@@ -74,6 +74,7 @@
                 <configuration>
                     <port>8080</port>
                     <path>/</path>
+                    <contextFile>src/main/resources/context.xml</contextFile>
                 </configuration>
             </plugin>
             <plugin>
