@@ -48,4 +48,3 @@ function checkPassword(password) {
     var regex = new RegExp("(\\w|\\d){5,16}");
     return regex.test(password);
 }
-

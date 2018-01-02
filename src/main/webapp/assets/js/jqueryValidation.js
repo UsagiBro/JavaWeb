@@ -1,9 +1,9 @@
-//const REGEX_NAME = new RegExp("([a-zA-Zа-яА-Яё]){2,64}");
-//const REGEX_EMAIL = new RegExp("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$");
-//const REGEX_PASSWORD = new RegExp("(\\w|\\d){5,16}");
-//const NAME_SELECTOR = '#name';
-//const SURNAME_SELECTOR = '#surname';
-//const EMAIL_SELECTOR = '#email';
+const REGEX_NAME = new RegExp("([a-zA-Zа-яА-Яё]){2,64}");
+const REGEX_EMAIL = new RegExp("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$");
+const REGEX_PASSWORD = new RegExp("(\\w|\\d){5,16}");
+const NAME_SELECTOR = '#name';
+const SURNAME_SELECTOR = '#surname';
+const EMAIL_SELECTOR = '#email';
 const PASSWORD_SELECTOR = '#password';
 const PASSWORD_REPEAT_SELECTOR = "#passwordRepeat";
 
@@ -50,4 +50,3 @@ $(document).ready(function() {
             return result;
     });
 });
-
