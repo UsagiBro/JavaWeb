@@ -27,7 +27,7 @@
     </nav>
 </header>
 <div class="container col-md-4">
-    <form id="registrationForm" action="registration" method="post">
+    <form id="registrationForm" action="registration" enctype="multipart/form-data" method="post">
         <h3 class="validation-user-exists">
              <strong>${sessionScope.user_exists}</strong>
         </h3>
@@ -89,6 +89,9 @@
         </div>
         <div class="form-group">
             <input class="btn btn-success" type="file" name="avatar" accept="image/*" />
+            <p class="validation-message-s">
+                <strong>${sessionScope.errors.avatar}</strong>
+            </p>
         </div>
         <div class="6u 12u$(3)">
             <input type="checkbox" id="news" name="news">

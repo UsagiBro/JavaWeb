@@ -7,10 +7,8 @@ import entity.UserBean;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.servlet.http.Part;
+import java.io.*;
 import java.util.Map;
 
 public final class WebUtil {
@@ -45,19 +43,35 @@ public final class WebUtil {
 
     public static void loadAvatarFromRequest(HttpServletRequest req, Map<String, String> errors) {
         String filename = req.getParameter(WebConstants.EMAIL);
-        String filePath = "src/main/resources";
-//        if (isAvatarUploaded(req, errors)) {
-            try (OutputStream out = new FileOutputStream(filePath)) {
-                InputStream fileContent = req.getPart(WebConstants.AVATAR).getInputStream();
-                int read;
-                byte[] bytes = new byte[1024];
-                while ((read = fileContent.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
-                }
+        final String SAVE_DIR = "src";
+        String appPath = req.getServletContext().getRealPath("");
+        String savePath = appPath + File.separator + SAVE_DIR;
+
+        if (isAvatarUploaded(req, errors)) {
+
+            File fileSaveDir = new File(savePath);
+            if (!fileSaveDir.exists()) {
+                fileSaveDir.mkdir();
+            }
+
+            try {
+
+                Part part = req.getPart("avatar");
+                filename = new File(filename).getName() + ".png";
+                part.write(savePath + File.separator + filename);
+
             } catch (IOException | ServletException e) {
                 errors.put(WebConstants.AVATAR, WebConstants.FILE_IS_INVALID);
             }
-//        }
+//            try (OutputStream out = new FileOutputStream(savePath)) {
+//                InputStream fileContent = req.getPart(WebConstants.AVATAR).getInputStream();
+//                int read;
+//                byte[] bytes = new byte[1024];
+//                while ((read = fileContent.read(bytes)) != -1) {
+//                    out.write(bytes, 0, read);
+//                }
+//            }
+        }
     }
 
     private static boolean isAvatarUploaded(HttpServletRequest req, Map<String, String> errors) {
