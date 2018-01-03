@@ -26,5 +26,4 @@ public class UserServiceImpl implements UserService {
         }
         return userDao.createUser(user);
     }
-
 }

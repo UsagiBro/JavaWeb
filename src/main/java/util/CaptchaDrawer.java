@@ -1,9 +1,15 @@
-package captcha;
+package util;
+
+import captcha.Captcha;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class CaptchaDrawer {
+public final class CaptchaDrawer {
+
+    public CaptchaDrawer() {
+        throw new IllegalStateException("Can't create instance of a class!");
+    }
 
     public static BufferedImage createCaptchaImage(Captcha captcha) {
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);

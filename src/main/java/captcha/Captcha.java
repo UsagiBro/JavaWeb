@@ -1,6 +1,5 @@
 package captcha;
 
-import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 

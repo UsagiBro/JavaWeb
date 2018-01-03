@@ -3,7 +3,6 @@ package captcha.generator_impl;
 
 import captcha.Captcha;
 import constants.Constants;
-import exception.CaptchaNotValidException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -20,12 +19,11 @@ public class CookiesCaptchaProvider implements CaptchaProvider {
     }
 
     @Override
-    public String getCaptcha(HttpServletRequest request) throws CaptchaNotValidException {
+    public Captcha getCaptcha(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         Captcha captcha = getCaptchaFromCookies(cookies);
-        checkCaptchaValidity(captcha);
         checkIfInvalidatedCaptchas();
-        return captcha.getValue();
+        return captcha;
     }
 
     @Override

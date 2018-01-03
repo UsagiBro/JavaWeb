@@ -18,6 +18,7 @@ public final class Constants {
     public static final String CAPTCHA_VALUE = "captchaVal";
     public static final String CAPTCHA = "captcha";
     public static final String ERRORS = "errors";
+    public static final String CAPTCHA_TIME = "captchaTime";
 
     public static final String CAPTCHA_PROVIDER = "captchaProvider";
     public static final String USER_SERVICE = "userService";
@@ -33,4 +34,5 @@ public final class Constants {
     public static final String PASSWORD_REPEAT_EXCEPTION = "Passwords don't match";
     public static final String USER_EXISTS = "User with such email already exists!";
     public static final String INVALID_CAPTCHA_EXCEPTION = "Invalid captcha, please try again!";
+    public static final String CAPTCHA_TIME_OUT_EXCEPTION = "Capcha has timed out!";
 }

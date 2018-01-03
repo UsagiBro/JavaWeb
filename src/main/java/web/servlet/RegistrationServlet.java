@@ -3,13 +3,12 @@ package web.servlet;
 import captcha.generator_impl.CaptchaProvider;
 import constants.Constants;
 import entity.UserBean;
-import exception.CaptchaNotValidException;
 import exception.SuchUserExistsException;
 import service.user.UserService;
 import service.validator.CaptchaValidator;
 import service.validator.UserValidator;
-import web.Paths;
 import util.WebUtil;
+import web.Paths;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/registration")
@@ -28,6 +26,7 @@ public class RegistrationServlet extends HttpServlet {
     private UserService userService;
     private CaptchaValidator captchaValidator;
     private UserValidator userValidator;
+    private String captchaTimeOut;
 
     @Override
     public void init() throws ServletException {
@@ -35,6 +34,7 @@ public class RegistrationServlet extends HttpServlet {
         userService = (UserService) getServletContext().getAttribute(Constants.USER_SERVICE);
         captchaValidator = new CaptchaValidator();
         userValidator = new UserValidator();
+        captchaTimeOut = (String) getServletContext().getAttribute(Constants.CAPTCHA_TIME);
     }
 
     @Override
@@ -71,13 +71,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     private Map<String, String> checkCaptcha(HttpServletRequest req, String enteredValue) {
-        Map<String, String> res = new HashMap<>();
-        try {
-            res = captchaValidator.validate(captchaProvider.getCaptcha(req), enteredValue);
-        } catch (CaptchaNotValidException e) {
-            res.put(Constants.CAPTCHA, e.getMessage());
-        }
-        return res;
+        return captchaValidator.validate(captchaProvider.getCaptcha(req), enteredValue, Long.parseLong(captchaTimeOut));
     }
 
     private Map<String, String> checkUserBean(UserBean userBean) {

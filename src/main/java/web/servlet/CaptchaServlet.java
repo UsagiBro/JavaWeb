@@ -1,10 +1,9 @@
 package web.servlet;
 
 import captcha.Captcha;
-import captcha.CaptchaDrawer;
+import util.CaptchaDrawer;
 import captcha.generator_impl.CaptchaProvider;
 import constants.Constants;
-import web.Paths;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
