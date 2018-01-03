@@ -1,0 +1,17 @@
+
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration</title>
+        <link href="assets/bootstrap/bootstrap.css" rel="stylesheet">
+        <script src="assets/js/html5shiv.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/skel-layers.min.js"></script>
+        <script src="assets/js/init.js"></script>
+    <!--    <script src="assets/js/jqueryValidation.js"></script> -->
+        <link rel="stylesheet" href="assets/css/skel.css"/>
+        <link rel="stylesheet" href="assets/css/style.css"/>
+        <link rel="stylesheet" href="assets/css/style-xlarge.css"/>
+    </head>
+</head>

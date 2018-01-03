@@ -7,6 +7,8 @@ public final class WebConstants {
         throw new IllegalStateException("Can't create an instance");
     }
 
+
+
     public static final String USER = "user";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
@@ -19,8 +21,9 @@ public final class WebConstants {
     public static final String USER_EXISTS_KEY = "user_exists";
     public static final String CAPTCHA_ID = "captchaId";
     public static final String CAPTCHA_VALUE = "captchaVal";
-    public static final String CAPTCHA = "web/captcha";
+    public static final String CAPTCHA = "captcha";
     public static final String ERRORS = "errors";
+    public static final String CAPTCHA_TIME = "captcha-time";
 
     public static final String CAPTCHA_PROVIDER = "captchaProvider";
     public static final String USER_SERVICE = "userService";
@@ -36,6 +39,7 @@ public final class WebConstants {
     public static final String PASSWORD_REPEAT_EXCEPTION = "Passwords don't match";
     public static final String USER_EXISTS = "User with such email already exists!";
     public static final String INVALID_CAPTCHA_EXCEPTION = "Invalid web.captcha, please try again!";
+    public static final String CAPTCHA_TIME_OUT_EXCEPTION = "Captcha has timed out!";
     public static final String FILE_IS_INVALID = "File isn't valid!";
     public static final String FILE_IS_NOT_UPLOADED = "File isn't uploaded";
 

@@ -16,16 +16,6 @@ public final class ContextUtil {
         throw new IllegalStateException("Can't create an instance of this class");
     }
 
-    public static UserStorage insertDefaultUsersLocaleStorage() {
-        UserStorage userStorage = new UserStorage();
-        userStorage.createUser(new User("Ivan", "Gladush", "ivann", "i@gladush.com",
-                false, false));
-        userStorage.createUser(new User("Roman", "Piccolo", "romann", "r@piccolo.com",
-                false, false));
-        userStorage.createUser(new User("Albert", "Albeert", "albeert", "a@lbert.com",
-                false, false));
-        return userStorage;
-    }
 
     public static UserService getUserServiceForContext(String databaseStrategy) {
         UserService userService;
@@ -34,9 +24,15 @@ public final class ContextUtil {
             userService = new UserServiceMySql(new MySqlTransactionManager(), userDao);
         }
         else {
-            UserStorage userStorage = ContextUtil.insertDefaultUsersLocaleStorage();
+            UserStorage userStorage = new UserStorage();
             UserDao userDao = new UserDaoLocalImpl(userStorage);
             userService = new UserServiceImpl(userDao);
+            userService.createUser(new User("Ivan", "Gladush", "ivann", "i@gladush.com",
+                    false, false));
+            userService.createUser(new User("Roman", "Piccolo", "romann", "r@piccolo.com",
+                    false, false));
+            userService.createUser(new User("Albert", "Albeert", "albeert", "a@lbert.com",
+                    false, false));
         }
         return userService;
     }

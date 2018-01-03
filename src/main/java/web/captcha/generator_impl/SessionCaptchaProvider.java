@@ -2,7 +2,6 @@ package web.captcha.generator_impl;
 
 import web.captcha.Captcha;
 import constants.WebConstants;
-import exception.CaptchaNotValidException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionCaptchaProvider implements CaptchaProvider {
 
     @Override
-    public String getCaptcha(HttpServletRequest request) throws CaptchaNotValidException {
+    public Captcha getCaptcha(HttpServletRequest request) {
         Captcha captcha = (Captcha) request.getSession().getAttribute(WebConstants.CAPTCHA);
-        checkCaptchaValidity(captcha);
-        return captcha.getValue();
+        return captcha;
     }
 
     @Override

@@ -9,6 +9,7 @@ import exception.SuchUserExistsException;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 public class UserServiceMySql implements UserService {
 
@@ -22,8 +23,9 @@ public class UserServiceMySql implements UserService {
 
     @Override
     public boolean createUser(User user) throws SuchUserExistsException {
-        List<User> users = transactionManager.processTransaction(() -> userDao.readAllUsers());
-        if (users.contains(user)) {
+        User userForCheck = transactionManager.processTransaction(() ->
+                userDao.readUserByEmailAndPassword(user.getEmail(), user.getPassword()));
+        if (Objects.nonNull(user)) {
             throw new SuchUserExistsException(WebConstants.USER_EXISTS);
         }
         return transactionManager.processTransaction(() -> userDao.createUser(user));

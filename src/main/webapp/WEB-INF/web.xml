@@ -3,16 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-        <context-param>
-            <param-name>captcha-method</param-name>
-            <param-value>cookies</param-value>
-        </context-param>
+    <context-param>
+        <param-name>captcha-method</param-name>
+        <param-value>cookies</param-value>
+    </context-param>
     <context-param>
         <param-name>database-type</param-name>
         <param-value>mysql</param-value>
     </context-param>
+    <context-param>
+        <param-name>captcha-timeout</param-name>
+        <param-value>1200000</param-value>
+    </context-param>
+
     <error-page>
-        <!-- Uncaught exception -->
         <error-code>500</error-code>
         <location>/WEB-INF/jsp/error-pages/general-error.jsp</location>
     </error-page>

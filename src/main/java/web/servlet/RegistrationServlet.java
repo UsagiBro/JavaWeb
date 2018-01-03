@@ -3,7 +3,6 @@ package web.servlet;
 import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
 import entity.UserBean;
-import exception.CaptchaNotValidException;
 import exception.SuchUserExistsException;
 import service.user.UserService;
 import service.validator.CaptchaValidator;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/registration")
@@ -30,6 +28,7 @@ public class RegistrationServlet extends HttpServlet {
     private UserService userService;
     private CaptchaValidator captchaValidator;
     private UserValidator userValidator;
+    private String captchaTimeOut;
 
     @Override
     public void init() throws ServletException {
@@ -37,6 +36,7 @@ public class RegistrationServlet extends HttpServlet {
         userService = (UserService) getServletContext().getAttribute(WebConstants.USER_SERVICE);
         captchaValidator = new CaptchaValidator();
         userValidator = new UserValidator();
+        captchaTimeOut = (String) getServletContext().getAttribute(WebConstants.CAPTCHA_TIME);
     }
 
     @Override
@@ -74,13 +74,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     private Map<String, String> checkCaptcha(HttpServletRequest req, String enteredValue) {
-        Map<String, String> res = new HashMap<>();
-        try {
-            res = captchaValidator.validate(captchaProvider.getCaptcha(req), enteredValue);
-        } catch (CaptchaNotValidException e) {
-            res.put(WebConstants.CAPTCHA, e.getMessage());
-        }
-        return res;
+        return captchaValidator.validate(captchaProvider.getCaptcha(req), enteredValue, Long.parseLong(captchaTimeOut));
     }
 
     private Map<String, String> checkUserBean(UserBean userBean) {

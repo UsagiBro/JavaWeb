@@ -1,5 +1,6 @@
 package web.listener;
 
+import org.apache.log4j.PropertyConfigurator;
 import web.captcha.CaptchaStrategyGenerator;
 import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
@@ -17,9 +18,9 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        initLog4j(servletContextEvent);
         setCaptchaStrategy(servletContextEvent);
         setDatabaseForContext(servletContextEvent);
-
     }
 
     @Override
@@ -31,6 +32,8 @@ public class ContextListener implements ServletContextListener {
         CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
         CaptchaProvider captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
 
+        String captchaTimeOut = servletContextEvent.getServletContext().getInitParameter("captcha-timeout");
+        servletContextEvent.getServletContext().setAttribute(WebConstants.CAPTCHA_TIME, captchaTimeOut);
         servletContextEvent.getServletContext().setAttribute(WebConstants.CAPTCHA_PROVIDER, captchaGenerator);
     }
 
@@ -40,5 +43,9 @@ public class ContextListener implements ServletContextListener {
         servletContextEvent.getServletContext().setAttribute(WebConstants.USER_SERVICE, userService);
     }
 
+    private void initLog4j(ServletContextEvent servletContextEvent) {
+        PropertyConfigurator.configure(
+                servletContextEvent.getServletContext().getRealPath("WEB-INF/resources/log4j.properties"));
+    }
 
 }

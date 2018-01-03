@@ -35,6 +35,6 @@ public class AuthorizationServlet extends HttpServlet {
         User user = userService.getUserByEmailAndPassword(email, password);
         HttpSession session = req.getSession();
         session.setAttribute(WebConstants.USER, user);
-        resp.sendRedirect(Paths.INDEX_HTML);
+        resp.sendRedirect(Paths.CABINET_SERVLET);
     }
 }

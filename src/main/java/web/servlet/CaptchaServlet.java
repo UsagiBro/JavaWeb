@@ -1,7 +1,7 @@
 package web.servlet;
 
+import util.CaptchaDrawer;
 import web.captcha.Captcha;
-import web.captcha.CaptchaDrawer;
 import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
 

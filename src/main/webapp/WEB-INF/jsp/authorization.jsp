@@ -1,30 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/jspf/taglib.jspf" %>
-<head>
-    <meta charset="UTF-8">
-    <title>Authentication</title>
-    <link href="assets/bootstrap/bootstrap.css" rel="stylesheet">
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="assets/js/skel-layers.min.js"></script>
-    <script src="assets/js/init.js"></script>
-    <link rel="stylesheet" href="assets/css/skel.css"/>
-    <link rel="stylesheet" href="assets/css/style.css"/>
-    <link rel="stylesheet" href="assets/css/style-xlarge.css"/>
-</head>
+<%@include file="/WEB-INF/jspf/head.jspf" %>
 <body>
-<header id="header">
-    <h1><a href="index.html">Guitarzzz</a></h1>
-    <nav id="nav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="generic.html">Generic</a></li>
-            <li><a href="elements.html">Elements</a></li>
-            <li><a href="authorization.html" class="button special">Sign Up</a></li>
-        </ul>
-    </nav>
-</header>
+<%@include file="navbar.jsp" %>
 <div class="container col-md-4">
     <form action="authorization" method="post">
         <div class="form-group">

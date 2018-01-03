@@ -3,6 +3,7 @@ package dao.transaction.mysql;
 import dao.ConnectionHolder;
 import dao.transaction.TransactionManager;
 import dao.transaction.TransactionOperation;
+import org.apache.log4j.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 public class MySqlTransactionManager implements TransactionManager {
 
     private DataSource dataSource;
+    private static final Logger LOG = Logger.getLogger(MySqlTransactionManager.class);
 
     public MySqlTransactionManager() {
         init();
@@ -26,6 +28,7 @@ public class MySqlTransactionManager implements TransactionManager {
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             dataSource = (DataSource) envContext.lookup("jdbc/KKK");
         } catch (NamingException e) {
+            LOG.error(e.getMessage());
             System.err.println("Can't get datasource");
         }
     }
@@ -45,6 +48,7 @@ public class MySqlTransactionManager implements TransactionManager {
 
             con.commit();
         } catch (SQLException e) {
+            LOG.error(e.getMessage());
             rollback(con);
         } finally {
             closeConnection(con);
@@ -59,6 +63,7 @@ public class MySqlTransactionManager implements TransactionManager {
                 con.close();
             }
         } catch (SQLException e) {
+            LOG.error(e.getMessage());
             System.err.println("Can't close connection!");
         }
     }
@@ -69,6 +74,7 @@ public class MySqlTransactionManager implements TransactionManager {
             try {
                 con.rollback();
             } catch (SQLException e) {
+                LOG.error(e.getMessage());
                 System.err.println("Can't rollback transaction!");
             }
         }

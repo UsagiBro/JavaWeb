@@ -3,7 +3,6 @@ package web.captcha.generator_impl;
 
 import web.captcha.Captcha;
 import constants.WebConstants;
-import exception.CaptchaNotValidException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,12 +18,11 @@ public class HiddenFieldCaptchaProvider implements CaptchaProvider {
     }
 
     @Override
-    public String getCaptcha(HttpServletRequest request) throws CaptchaNotValidException {
+    public Captcha getCaptcha(HttpServletRequest request) {
         String captchaId = (String) request.getSession().getAttribute(WebConstants.CAPTCHA_ID);
         Captcha captcha = captchas.get(captchaId);
-        checkCaptchaValidity(captcha);
         checkIfInvalidatedCaptchas(captchas);
-        return captcha.getValue();
+        return captcha;
     }
 
     @Override

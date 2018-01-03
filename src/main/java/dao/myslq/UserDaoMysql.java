@@ -4,6 +4,8 @@ import dao.ConnectionHolder;
 import dao.UserDao;
 import entity.User;
 import exception.DBException;
+import org.apache.log4j.Logger;
+import service.user.UserServiceMySql;
 import util.DBUtil;
 
 import java.sql.*;
@@ -13,6 +15,7 @@ import java.util.List;
 
 public class UserDaoMysql implements UserDao {
 
+    private static final Logger LOG = Logger.getLogger(UserServiceMySql.class);
     private static final String SQL_INSERT_USER =
             "INSERT INTO " +
                     "users (first_name, surname, password, email, news, new_products) VALUES (?,?,?,?,?,?)";
@@ -30,6 +33,7 @@ public class UserDaoMysql implements UserDao {
                     user.getNews(), user.getNewProducts());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
+            LOG.error(ex.getMessage());
             throw new DBException("Can't create user!");
         }
     }
@@ -44,6 +48,7 @@ public class UserDaoMysql implements UserDao {
                 users.add(DBUtil.getUserFromResultSet(resultSet));
             }
         } catch (SQLException ex) {
+            LOG.error(ex.getMessage());
             throw new DBException("Can't read users from database!");
         }
         return users;
@@ -59,7 +64,8 @@ public class UserDaoMysql implements UserDao {
                     return DBUtil.getUserFromResultSet(resultSet);
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            LOG.error(ex.getMessage());
             throw new DBException("Can't get user by login and password!");
         }
         return null;

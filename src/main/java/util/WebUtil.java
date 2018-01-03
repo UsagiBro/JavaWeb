@@ -63,14 +63,6 @@ public final class WebUtil {
             } catch (IOException | ServletException e) {
                 errors.put(WebConstants.AVATAR, WebConstants.FILE_IS_INVALID);
             }
-//            try (OutputStream out = new FileOutputStream(savePath)) {
-//                InputStream fileContent = req.getPart(WebConstants.AVATAR).getInputStream();
-//                int read;
-//                byte[] bytes = new byte[1024];
-//                while ((read = fileContent.read(bytes)) != -1) {
-//                    out.write(bytes, 0, read);
-//                }
-//            }
         }
     }
 
