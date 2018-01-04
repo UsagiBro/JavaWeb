@@ -22,4 +22,9 @@ public class UserDaoLocalImpl implements UserDao {
     public User readUserByEmailAndPassword(String login, String password) {
         return null;
     }
+
+    @Override
+    public boolean userExists(User user) {
+        return userStorage.contains(user);
+    }
 }
