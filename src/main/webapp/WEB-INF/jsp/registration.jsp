@@ -5,7 +5,7 @@
 <%@include file="navbar.jsp" %>
 <div class="container col-md-4">
     <form id="registrationForm" action="registration" enctype="multipart/form-data" method="post">
-        <h3 class="validation-user-exists">
+        <h3 class="validation-above">
              <strong>${sessionScope.user_exists}</strong>
         </h3>
         <div class="form-group">
@@ -79,7 +79,7 @@
             <label for="newProducts">Get info about new products</label>
         </div>
 
-        <cpt:captcha/>
+        <custom:captcha/>
 
         <div class="row submit-row">
             <button type="submit" class="btn btn-block">

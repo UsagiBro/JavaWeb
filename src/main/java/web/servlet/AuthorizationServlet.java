@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet("/authorization")
 public class AuthorizationServlet extends HttpServlet {
@@ -33,8 +34,14 @@ public class AuthorizationServlet extends HttpServlet {
         String email = req.getParameter(WebConstants.EMAIL);
         String password = req.getParameter(WebConstants.PASSWORD);
         User user = userService.getUserByEmailAndPassword(email, password);
-        HttpSession session = req.getSession();
-        session.setAttribute(WebConstants.USER, user);
-        resp.sendRedirect(Paths.CABINET_SERVLET);
+        if (Objects.nonNull(user)) {
+            HttpSession session = req.getSession();
+            session.setAttribute(WebConstants.USER, user);
+            session.removeAttribute(WebConstants.WRONG_AUTHORIZATION);
+            resp.sendRedirect(Paths.CABINET_SERVLET);
+        } else {
+            req.getSession().setAttribute(WebConstants.WRONG_AUTHORIZATION, WebConstants.AUTHORIZATION_ERROR);
+            resp.sendRedirect(Paths.AUTHORIZATION_SERVLET);
+        }
     }
 }

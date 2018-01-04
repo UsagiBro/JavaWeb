@@ -25,7 +25,7 @@ public class UserServiceMySql implements UserService {
     public boolean createUser(User user) throws SuchUserExistsException {
         User userForCheck = transactionManager.processTransaction(() ->
                 userDao.readUserByEmailAndPassword(user.getEmail(), user.getPassword()));
-        if (Objects.nonNull(user)) {
+        if (Objects.nonNull(userForCheck)) {
             throw new SuchUserExistsException(WebConstants.USER_EXISTS);
         }
         return transactionManager.processTransaction(() -> userDao.createUser(user));

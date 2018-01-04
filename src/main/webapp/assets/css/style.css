@@ -1231,12 +1231,12 @@
 
  }
 
-.validation-user-exists {
+.validation-above {
     padding: 15px;
     color: #d73814;
 }
 
- .validation-user-exists>strong {
+ .validation-above>strong {
      color: #d73814;
  }
 
@@ -1247,3 +1247,11 @@
  .validation-message-s>strong {
      color: #d73814;
  }
+
+.image-circle {
+    border-radius: 50%;
+    width: 175px;
+    height: 175px;
+    border: 4px solid #FFF;
+    margin: 10px;
+}

@@ -3,6 +3,7 @@ package web.servlet;
 import constants.Paths;
 import constants.WebConstants;
 import entity.User;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 import javax.imageio.ImageIO;
@@ -37,14 +38,13 @@ public class AvatarServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute(WebConstants.USER);
         try {
         for (File file : Objects.requireNonNull(new File(Paths.IMAGES_PATH).listFiles())) {
-            if (user.getEmail().equals(file.getName())) {
+            if (user.getEmail().equals(FilenameUtils.removeExtension(file.getName()))) {
                     image = ImageIO.read(file);
                     return image;
 
             }
         }
         image = ImageIO.read(new File(Paths.DEFAULT_IMAGE_PATH));
-
         } catch (IOException e) {
             LOG.error(e.getMessage());
         }
