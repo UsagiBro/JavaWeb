@@ -19,6 +19,7 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         initLog4j(servletContextEvent);
+        setConstants(servletContextEvent);
         setCaptchaStrategy(servletContextEvent);
         setDatabaseForContext(servletContextEvent);
     }
@@ -27,13 +28,19 @@ public class ContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
     }
 
+    private void setConstants(ServletContextEvent servletContextEvent) {
+        String captchaTimeOut = servletContextEvent.getServletContext().getInitParameter("captcha-timeout");
+        servletContextEvent.getServletContext().setAttribute(WebConstants.CAPTCHA_TIME, captchaTimeOut);
+
+        String avatarSize = servletContextEvent.getServletContext().getInitParameter("avatar-byte-size");
+        servletContextEvent.getServletContext().setAttribute(WebConstants.AVATAR_SIZE, avatarSize);
+    }
+
     private void setCaptchaStrategy(ServletContextEvent servletContextEvent) {
         String captchaStrategy = servletContextEvent.getServletContext().getInitParameter("captcha-method");
         CaptchaStrategyGenerator captchaStrategyGenerator = new CaptchaStrategyGenerator();
         CaptchaProvider captchaGenerator = captchaStrategyGenerator.getGeneratorFromStrategy(captchaStrategy);
 
-        String captchaTimeOut = servletContextEvent.getServletContext().getInitParameter("captcha-timeout");
-        servletContextEvent.getServletContext().setAttribute(WebConstants.CAPTCHA_TIME, captchaTimeOut);
         servletContextEvent.getServletContext().setAttribute(WebConstants.CAPTCHA_PROVIDER, captchaGenerator);
     }
 

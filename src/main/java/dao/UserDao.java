@@ -9,7 +9,5 @@ public interface UserDao {
 
     boolean createUser(User user);
 
-    List<User> readAllUsers();
-
     User readUserByEmailAndPassword(String email, String password);
 }

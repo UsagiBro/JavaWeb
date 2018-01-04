@@ -1,1 +1,7 @@
-2018-01-03 18:46 [ERROR]          UserServiceMySql:    36 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:30 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:31 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:33 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:34 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:35 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:36 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 18:59 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'

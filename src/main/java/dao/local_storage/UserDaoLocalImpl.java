@@ -19,11 +19,6 @@ public class UserDaoLocalImpl implements UserDao {
     }
 
     @Override
-    public List<User> readAllUsers() {
-        return userStorage.getUsers();
-    }
-
-    @Override
     public User readUserByEmailAndPassword(String login, String password) {
         return null;
     }

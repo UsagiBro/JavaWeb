@@ -1,7 +1,8 @@
-package service.validator;
+package validator;
 
 import constants.WebConstants;
 import entity.UserBean;
+import util.ValidatorUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +12,7 @@ import static constants.WebConstants.REGEX_FOR_EMAIL;
 import static constants.WebConstants.REGEX_FOR_NAME;
 import static constants.WebConstants.REGEX_FOR_PASSWORD;
 
-public class UserValidator implements Validator<UserBean> {
+public class UserValidator {
 
 
     private static final Pattern PATTERN_FOR_EMAIL = Pattern.compile(REGEX_FOR_EMAIL);

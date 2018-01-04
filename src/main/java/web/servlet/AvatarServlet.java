@@ -29,7 +29,7 @@ public class AvatarServlet extends HttpServlet {
         try (OutputStream os = resp.getOutputStream()) {
             ImageIO.write(findAvatar(req), "png", os);
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+           LOG.error(e.getMessage());
         }
     }
 

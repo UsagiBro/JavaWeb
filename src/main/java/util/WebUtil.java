@@ -3,13 +3,18 @@ package util;
 import constants.WebConstants;
 import entity.User;
 import entity.UserBean;
+import org.apache.commons.io.FilenameUtils;
+import validator.ImageValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.xml.validation.Validator;
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public final class WebUtil {
 
@@ -24,8 +29,6 @@ public final class WebUtil {
         String email = userBean.getEmail();
         boolean news = userBean.getNews();
         boolean newProducts = userBean.getNewProducts();
-
-
         return new User(name, surname, password, email, news, newProducts);
     }
 
@@ -39,42 +42,6 @@ public final class WebUtil {
         boolean newProducts = req.getParameter(WebConstants.NEW_PRODUCTS) != null;
         req.getParameter(WebConstants.AVATAR);
         return new UserBean(name, surname, password, email, passwordRepeat, news, newProducts);
-    }
-
-    public static void loadAvatarFromRequest(HttpServletRequest req, Map<String, String> errors) {
-        String filename = req.getParameter(WebConstants.EMAIL);
-        final String SAVE_DIR = "src";
-        String appPath = req.getServletContext().getRealPath("");
-        String savePath = appPath + File.separator + SAVE_DIR;
-
-        if (isAvatarUploaded(req, errors)) {
-
-            File fileSaveDir = new File(savePath);
-            if (!fileSaveDir.exists()) {
-                fileSaveDir.mkdir();
-            }
-
-            try {
-
-                Part part = req.getPart("avatar");
-                filename = new File(filename).getName() + ".png";
-                part.write(savePath + File.separator + filename);
-
-            } catch (IOException | ServletException e) {
-                errors.put(WebConstants.AVATAR, WebConstants.FILE_IS_INVALID);
-            }
-        }
-    }
-
-    private static boolean isAvatarUploaded(HttpServletRequest req, Map<String, String> errors) {
-        try {
-            if (req.getPart(WebConstants.AVATAR).getSize() == 0) {
-                return false;
-            }
-        } catch (IOException | ServletException e) {
-            errors.put(WebConstants.AVATAR, WebConstants.FILE_IS_NOT_UPLOADED);
-        }
-        return true;
     }
 
     public static void setEnteredValuesToSession(UserBean userBean, HttpSession session) {

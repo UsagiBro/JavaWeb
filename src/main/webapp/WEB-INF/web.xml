@@ -15,9 +15,12 @@
         <param-name>captcha-timeout</param-name>
         <param-value>1200000</param-value>
     </context-param>
-
+    <context-param>
+        <param-name>avatar-byte-size</param-name>
+        <param-value>2097152</param-value>
+    </context-param>
     <error-page>
-        <error-code>500</error-code>
-        <location>/WEB-INF/jsp/error-pages/general-error.jsp</location>
+        <exception-type>exception.DBException</exception-type>
+        <location>/WEB-INF/jsp/error-pages/database-exception.jsp</location>
     </error-page>
 </web-app>

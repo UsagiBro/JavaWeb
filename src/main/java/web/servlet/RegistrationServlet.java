@@ -1,12 +1,13 @@
 package web.servlet;
 
+import web.avatar.AvatarLoader;
 import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
 import entity.UserBean;
 import exception.SuchUserExistsException;
 import service.user.UserService;
-import service.validator.CaptchaValidator;
-import service.validator.UserValidator;
+import validator.CaptchaValidator;
+import validator.UserValidator;
 import constants.Paths;
 import util.WebUtil;
 
@@ -29,6 +30,7 @@ public class RegistrationServlet extends HttpServlet {
     private CaptchaValidator captchaValidator;
     private UserValidator userValidator;
     private String captchaTimeOut;
+    private AvatarLoader avatarLoader;
 
     @Override
     public void init() throws ServletException {
@@ -37,6 +39,8 @@ public class RegistrationServlet extends HttpServlet {
         captchaValidator = new CaptchaValidator();
         userValidator = new UserValidator();
         captchaTimeOut = (String) getServletContext().getAttribute(WebConstants.CAPTCHA_TIME);
+        String avatarSizeParameter = (String) getServletContext().getAttribute(WebConstants.AVATAR_SIZE);
+        avatarLoader = new AvatarLoader(Long.parseLong(avatarSizeParameter));
     }
 
     @Override
@@ -56,7 +60,7 @@ public class RegistrationServlet extends HttpServlet {
 
 
         checkMap.putAll(checkUserBean(userBean));
-        WebUtil.loadAvatarFromRequest(req, checkMap);
+        checkMap.putAll(avatarLoader.loadAvatarFromRequest(req));
 
         if (checkMap.isEmpty()) {
             try {

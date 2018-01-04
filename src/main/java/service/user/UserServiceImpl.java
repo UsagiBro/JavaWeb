@@ -17,10 +17,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean createUser(User user) throws SuchUserExistsException {
-        List<User> users = userDao.readAllUsers();
-        if (users.contains(user)) {
-            throw new SuchUserExistsException(WebConstants.USER_EXISTS);
-        }
         return userDao.createUser(user);
     }
 

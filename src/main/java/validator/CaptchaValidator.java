@@ -1,4 +1,4 @@
-package service.validator;
+package validator;
 
 import constants.WebConstants;
 import web.captcha.Captcha;

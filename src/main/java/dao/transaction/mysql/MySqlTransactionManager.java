@@ -3,6 +3,7 @@ package dao.transaction.mysql;
 import dao.ConnectionHolder;
 import dao.transaction.TransactionManager;
 import dao.transaction.TransactionOperation;
+import exception.DBException;
 import org.apache.log4j.Logger;
 
 import javax.naming.Context;
@@ -27,9 +28,9 @@ public class MySqlTransactionManager implements TransactionManager {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             dataSource = (DataSource) envContext.lookup("jdbc/KKK");
-        } catch (NamingException e) {
-            LOG.error(e.getMessage());
-            System.err.println("Can't get datasource");
+        } catch (NamingException ex) {
+            LOG.error(ex.getMessage());
+            throw new DBException(this.getClass().getSimpleName() + "#init() -> Can't get datasource " + ex);
         }
     }
 
@@ -47,8 +48,8 @@ public class MySqlTransactionManager implements TransactionManager {
             res = operation.performOperation();
 
             con.commit();
-        } catch (SQLException e) {
-            LOG.error(e.getMessage());
+        } catch (SQLException ex) {
+            LOG.error(ex.getMessage());
             rollback(con);
         } finally {
             closeConnection(con);
@@ -62,9 +63,9 @@ public class MySqlTransactionManager implements TransactionManager {
             if (con != null) {
                 con.close();
             }
-        } catch (SQLException e) {
-            LOG.error(e.getMessage());
-            System.err.println("Can't close connection!");
+        } catch (SQLException ex) {
+            LOG.error(ex.getMessage());
+            throw new DBException(this.getClass().getSimpleName() + "#closeConnection() -> DBException#" + ex);
         }
     }
 
@@ -73,9 +74,9 @@ public class MySqlTransactionManager implements TransactionManager {
         if (con != null) {
             try {
                 con.rollback();
-            } catch (SQLException e) {
-                LOG.error(e.getMessage());
-                System.err.println("Can't rollback transaction!");
+            } catch (SQLException ex) {
+                LOG.error(ex.getMessage());
+                throw new DBException(this.getClass().getSimpleName() + "#rollback() -> DBException#" + ex);
             }
         }
     }
