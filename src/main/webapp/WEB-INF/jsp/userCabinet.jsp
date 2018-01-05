@@ -10,11 +10,13 @@
             <h1>Hi ${sessionScope.user.getName()}</h1>
             <h1>${sessionScope.user.getEmail()}</h1>
 	    </div>
-        <div class="col-md-12 col-xs-12 login_control">
-                <div align="center">
-                     <button class="btn btn-orange">BUY</button>
-                </div>
-        </div>
+	    <form action="store">
+            <div class="col-md-12 col-xs-12 login_control">
+                    <div align="center">
+                         <button class="btn btn-orange">BUY</button>
+                    </div>
+            </div>
+        </form>
     </div>
 </div>
 </body>

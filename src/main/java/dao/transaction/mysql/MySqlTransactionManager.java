@@ -1,6 +1,5 @@
 package dao.transaction.mysql;
 
-import dao.ConnectionHolder;
 import dao.transaction.TransactionManager;
 import dao.transaction.TransactionOperation;
 import exception.DBException;

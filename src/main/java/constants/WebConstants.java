@@ -7,11 +7,6 @@ public final class WebConstants {
         throw new IllegalStateException("Can't create an instance");
     }
 
-
-
-
-
-
     public static final String USER = "user";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
@@ -31,6 +26,8 @@ public final class WebConstants {
     public static final String AVATAR_SIZE = "avatar_size";
     public static final String CAPTCHA_PROVIDER = "captchaProvider";
     public static final String USER_SERVICE = "userService";
+    public static final String INSTRUMENT_SERVICE = "instrumentService";
+    public static final String INSTRUMENT_BEAN = "instrumentBean";
 
     public static final String REGEX_FOR_NAME = "([a-zA-Zа-яА-Яё]){2,64}";
     public static final String REGEX_FOR_EMAIL = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";

@@ -1,6 +1,11 @@
 package web.listener;
 
+import dao.InstrumentDao;
+import dao.myslq.MysqlInstrumentDao;
+import dao.transaction.mysql.MySqlTransactionManager;
 import org.apache.log4j.PropertyConfigurator;
+import service.instruments.InstrumentService;
+import service.instruments.MySqlInstrumentService;
 import web.captcha.CaptchaStrategyGenerator;
 import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
@@ -46,8 +51,14 @@ public class ContextListener implements ServletContextListener {
 
     private void setDatabaseForContext(ServletContextEvent servletContextEvent) {
         String databaseStrategy = servletContextEvent.getServletContext().getInitParameter("database-type");
-        UserService userService = ContextUtil.getUserServiceForContext(databaseStrategy);
+        MySqlTransactionManager mySqlTransactionManager = new MySqlTransactionManager();
+
+        UserService userService = ContextUtil.getUserServiceForContext(databaseStrategy, mySqlTransactionManager);
         servletContextEvent.getServletContext().setAttribute(WebConstants.USER_SERVICE, userService);
+
+        InstrumentDao instrumentDao = new MysqlInstrumentDao();
+        InstrumentService instrumentService = new MySqlInstrumentService(instrumentDao, mySqlTransactionManager);
+        servletContextEvent.getServletContext().setAttribute(WebConstants.INSTRUMENT_SERVICE, instrumentService);
     }
 
     private void initLog4j(ServletContextEvent servletContextEvent) {

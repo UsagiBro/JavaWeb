@@ -1,11 +1,11 @@
 package dao.myslq;
 
-import dao.ConnectionHolder;
+import dao.transaction.mysql.ConnectionHolder;
 import dao.UserDao;
 import entity.User;
 import exception.DBException;
 import org.apache.log4j.Logger;
-import service.user.UserServiceMySql;
+import service.user.MySqlUserService;
 import util.DBUtil;
 
 import java.sql.Connection;
@@ -14,9 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class UserDaoMysql implements UserDao {
+public class MysqlUserDao implements UserDao {
 
-    private static final Logger LOG = Logger.getLogger(UserServiceMySql.class);
+    private static final Logger LOG = Logger.getLogger(MySqlUserService.class);
     private static final String SQL_INSERT_USER =
             "INSERT INTO " +
                     "users (first_name, surname, password, email, news, new_products) VALUES (?,?,?,?,?,?)";

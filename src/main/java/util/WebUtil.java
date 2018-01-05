@@ -1,5 +1,6 @@
 package util;
 
+import com.sun.deploy.net.HttpRequest;
 import constants.WebConstants;
 import entity.User;
 import entity.UserBean;
@@ -60,5 +61,9 @@ public final class WebUtil {
         session.removeAttribute(WebConstants.NEW_PRODUCTS);
         session.removeAttribute(WebConstants.ERRORS);
         session.removeAttribute(WebConstants.CAPTCHA_VALUE);
+    }
+
+    public static void getFilterParametersFromRequest(HttpRequest request) {
+
     }
 }

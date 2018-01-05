@@ -11,12 +11,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-public class UserServiceMySql implements UserService {
+public class MySqlUserService implements UserService {
 
     private TransactionManager transactionManager;
     private UserDao userDao;
 
-    public UserServiceMySql(TransactionManager transactionManager, UserDao userDao) {
+    public MySqlUserService(TransactionManager transactionManager, UserDao userDao) {
         this.transactionManager = transactionManager;
         this.userDao = userDao;
     }

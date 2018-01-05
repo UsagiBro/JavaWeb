@@ -2,13 +2,14 @@ package util;
 
 import dao.UserDao;
 import dao.local_storage.UserDaoLocalImpl;
-import dao.myslq.UserDaoMysql;
+import dao.myslq.MysqlUserDao;
 import dao.transaction.mysql.MySqlTransactionManager;
 import entity.User;
 import dao.local_storage.storage.UserStorage;
+import service.instruments.InstrumentService;
 import service.user.UserService;
 import service.user.UserServiceImpl;
-import service.user.UserServiceMySql;
+import service.user.MySqlUserService;
 
 public final class ContextUtil {
 
@@ -17,11 +18,12 @@ public final class ContextUtil {
     }
 
 
-    public static UserService getUserServiceForContext(String databaseStrategy) {
+    public static UserService getUserServiceForContext(String databaseStrategy,
+                                                       MySqlTransactionManager mySqlTransactionManager) {
         UserService userService;
         if (databaseStrategy.equals("mysql")) {
-            UserDao userDao = new UserDaoMysql();
-            userService = new UserServiceMySql(new MySqlTransactionManager(), userDao);
+            UserDao userDao = new MysqlUserDao();
+            userService = new MySqlUserService(mySqlTransactionManager, userDao);
         }
         else {
             UserStorage userStorage = new UserStorage();

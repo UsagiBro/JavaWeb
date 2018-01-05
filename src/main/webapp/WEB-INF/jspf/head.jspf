@@ -13,5 +13,6 @@
         <link rel="stylesheet" href="assets/css/skel.css"/>
         <link rel="stylesheet" href="assets/css/style.css"/>
         <link rel="stylesheet" href="assets/css/style-xlarge.css"/>
+        <link rel="stylesheet" href="assets/css/custom-style.css"/>
     </head>
 </head>

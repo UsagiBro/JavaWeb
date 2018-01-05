@@ -1,5 +1,6 @@
 package util;
 
+import entity.Instrument;
 import entity.User;
 
 import java.sql.PreparedStatement;
@@ -28,5 +29,14 @@ public final class DBUtil {
         for (Object arg : args) {
             preparedStatement.setObject(counter++, arg);
         }
+    }
+
+    public static Instrument getInstrumentFromResultSet(ResultSet resultSet) throws SQLException {
+        Instrument instrument = new Instrument();
+        instrument.setName(resultSet.getString("ins_name"));
+        instrument.setPrice(resultSet.getBigDecimal("price"));
+        instrument.setCategory(resultSet.getString("label"));
+        instrument.setManufacturer(resultSet.getString("title"));
+        return instrument;
     }
 }
