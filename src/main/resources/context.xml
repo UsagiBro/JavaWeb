@@ -6,6 +6,6 @@
               password="root"
               driverClassName="com.mysql.jdbc.Driver"
               defaultAutoCommit="false"
-              url="jdbc:mysql://localhost:3306/GuitarStore"
+              url="jdbc:mysql://localhost:3306/GuitarStore?serverTimezone=UTC"
               maxActive="100" maxIdle="30" maxWait="10000"/>
 </Context>

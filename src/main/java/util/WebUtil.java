@@ -1,21 +1,11 @@
 package util;
 
-import com.sun.deploy.net.HttpRequest;
 import constants.WebConstants;
 import entity.User;
 import entity.UserBean;
-import org.apache.commons.io.FilenameUtils;
-import validator.ImageValidator;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import javax.xml.validation.Validator;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 public final class WebUtil {
 
@@ -61,9 +51,5 @@ public final class WebUtil {
         session.removeAttribute(WebConstants.NEW_PRODUCTS);
         session.removeAttribute(WebConstants.ERRORS);
         session.removeAttribute(WebConstants.CAPTCHA_VALUE);
-    }
-
-    public static void getFilterParametersFromRequest(HttpRequest request) {
-
     }
 }
