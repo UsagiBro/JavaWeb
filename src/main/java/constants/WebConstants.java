@@ -2,7 +2,6 @@ package constants;
 
 public final class WebConstants {
 
-
     private WebConstants() {
         throw new IllegalStateException("Can't create an instance");
     }
@@ -16,7 +15,17 @@ public final class WebConstants {
     public static final String NEWS = "news";
     public static final String AVATAR = "avatar";
     public static final String NEW_PRODUCTS = "newProducts";
-    public static final String USER_EXISTS_KEY = "user_exists";
+    public static final String INSTRUMENTS_COUNT = "instrumentsCount";
+    public static final String FILTER_CATEGORY = "filterCategory";
+    public static final String FILTER_MANUFACTURER = "filterManufacturer";
+    public static final String SORT_VALUE = "sortValue";
+    public static final String SORT_DIRECTION = "sortDirection";
+    public static final String SORT_BACKWARD = "sortBackward";
+    public static final String MANUFACTURER_LIST = "manufacturerList";
+    public static final String CATEGORIES_LIST = "categoriesList";
+    public static final String CATEGORY_SERVICE = "categoryService";
+    public static final String MANUFACTURER_SERVICE = "manufacturerService";
+
     public static final String CAPTCHA_ID = "captchaId";
     public static final String CAPTCHA_VALUE = "captchaVal";
     public static final String CAPTCHA = "captcha";
@@ -33,18 +42,6 @@ public final class WebConstants {
     public static final String REGEX_FOR_EMAIL = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
     public static final String REGEX_FOR_PASSWORD = "(\\w|\\d){5,16}";
 
-    public static final String WRONG_AUTHORIZATION = "wrong_authorization";
-    public static final String AUTHORIZATION_ERROR = "Wrong email or password!";
-    public static final String NAME_VALIDATION_EXCEPTION = "Name can contain only letters and be longer than 1 symbol";
-    public static final String PASSWORD_VALIDATION_EXCEPTION =
-            "Password can consist of letters and numbers and must be longer than 4 symbols";
-    public static final String EMAIL_VALIDATION_EXCEPTION = "Type valid email";
-    public static final String PASSWORD_REPEAT_EXCEPTION = "Passwords don't match";
-    public static final String USER_EXISTS = "User with such email already exists!";
-    public static final String INVALID_CAPTCHA_EXCEPTION = "Invalid web.captcha, please try again!";
-    public static final String CAPTCHA_TIME_OUT_EXCEPTION = "Captcha has timed out!";
-    public static final String FILE_IS_INVALID = "File isn't valid!";
-    public static final String AVATAR_OVERLOAD = "Too big picture for avatar!";
-    public static final String WRONG_AVATAR_FORMAT = "Attached file must be jpeg or png";
+
 
 }

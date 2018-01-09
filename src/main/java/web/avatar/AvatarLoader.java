@@ -1,5 +1,6 @@
 package web.avatar;
 
+import constants.ErrorMessages;
 import constants.WebConstants;
 import validator.ImageValidator;
 
@@ -10,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class AvatarLoader {
 
@@ -40,7 +40,7 @@ public class AvatarLoader {
                 part.write(savePath + File.separator + filename);
             }
         } catch (IOException | ServletException e) {
-            errors.put(WebConstants.AVATAR, WebConstants.FILE_IS_INVALID);
+            errors.put(WebConstants.AVATAR, ErrorMessages.FILE_IS_INVALID);
         }
         return errors;
     }

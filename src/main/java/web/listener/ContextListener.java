@@ -1,11 +1,19 @@
 package web.listener;
 
+import dao.CategoryDao;
 import dao.InstrumentDao;
+import dao.ManufacturerDao;
+import dao.myslq.MysqlCategoryDao;
 import dao.myslq.MysqlInstrumentDao;
+import dao.myslq.MysqlManufacturerDao;
 import dao.transaction.mysql.MySqlTransactionManager;
 import org.apache.log4j.PropertyConfigurator;
+import service.category.CategoryService;
+import service.category.MysqlCategoryService;
 import service.instruments.InstrumentService;
 import service.instruments.MySqlInstrumentService;
+import service.manufacturer.ManufacturerService;
+import service.manufacturer.MysqlManufacturerService;
 import web.captcha.CaptchaStrategyGenerator;
 import web.captcha.generator_impl.CaptchaProvider;
 import constants.WebConstants;
@@ -59,6 +67,14 @@ public class ContextListener implements ServletContextListener {
         InstrumentDao instrumentDao = new MysqlInstrumentDao();
         InstrumentService instrumentService = new MySqlInstrumentService(instrumentDao, mySqlTransactionManager);
         servletContextEvent.getServletContext().setAttribute(WebConstants.INSTRUMENT_SERVICE, instrumentService);
+
+        CategoryDao categoryDao = new MysqlCategoryDao();
+        CategoryService categoryService = new MysqlCategoryService(categoryDao, mySqlTransactionManager);
+        servletContextEvent.getServletContext().setAttribute(WebConstants.CATEGORY_SERVICE, categoryService);
+
+        ManufacturerDao manufacturerDao = new MysqlManufacturerDao();
+        ManufacturerService manufacturerService = new MysqlManufacturerService(manufacturerDao, mySqlTransactionManager);
+        servletContextEvent.getServletContext().setAttribute(WebConstants.MANUFACTURER_SERVICE, manufacturerService);
     }
 
     private void initLog4j(ServletContextEvent servletContextEvent) {

@@ -1,7 +1,7 @@
 DROP TABLE users;
+DROP TABLE instruments;
 DROP TABLE categories;
 DROP TABLE manufacturers;
-DROP TABLE instruments;
 
 CREATE TABLE users(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -51,3 +51,6 @@ INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES (
 INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Epiphone", 300, 2, 2);
 INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("RhytmMate", 380, 3, 3);
 
+
+
+SELECT i.ins_name, i.price, c.label, m.title FROM instruments i JOIN categories c ON i.category_id=c.id JOIN manufacturers m ON i.manufacturer_id=m.id;

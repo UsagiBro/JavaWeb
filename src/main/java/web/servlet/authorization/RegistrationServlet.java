@@ -1,15 +1,16 @@
-package web.servlet;
+package web.servlet.authorization;
 
-import web.avatar.AvatarLoader;
-import web.captcha.generator_impl.CaptchaProvider;
+import constants.ErrorMessages;
+import constants.Paths;
 import constants.WebConstants;
-import entity.UserBean;
+import entity.dto.UserBean;
 import exception.SuchUserExistsException;
 import service.user.UserService;
+import util.WebUtil;
 import validator.CaptchaValidator;
 import validator.UserValidator;
-import constants.Paths;
-import util.WebUtil;
+import web.avatar.AvatarLoader;
+import web.captcha.generator_impl.CaptchaProvider;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -68,7 +69,7 @@ public class RegistrationServlet extends HttpServlet {
                 WebUtil.removeEnteredValuesFromSession(session);
                 resp.sendRedirect(Paths.AUTHORIZATION_SERVLET);
             } catch (SuchUserExistsException e) {
-                req.getSession().setAttribute(WebConstants.USER_EXISTS_KEY, e.getMessage());
+                req.getSession().setAttribute(ErrorMessages.USER_EXISTS_KEY, e.getMessage());
                 resp.sendRedirect(Paths.REGISTRATION_SERVLET);
             }
         } else {

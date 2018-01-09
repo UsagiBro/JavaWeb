@@ -1,4 +1,4 @@
-package web.servlet;
+package web.servlet.authorization;
 
 import constants.Paths;
 

@@ -3,65 +3,68 @@
 <%@include file="/WEB-INF/jspf/head.jspf" %>
 <body>
 <%@include file="navbar.jsp" %>
-    <c:if test="${not empty sessionScope.user}">
         <div class="mail-box">
             <aside class="sm-side">
                 <div class="user-head">
+                    <c:if test="${not empty sessionScope.user}">
                     <h3>Hello, ${sessionScope.user.name} ${sessionScope.user.surname}</h3>
+                    </c:if>
+                    <c:if test="${empty sessionScope.user}">
+                        <h1>GO AND REGISTER!</h1>
+                    </c:if>
                 </div>
                 <div class="inbox-body">
-                    <form action="">
+                    <form action="filterInstruments">
                         <h5>Instruments on page</h5>
-                        <select id="selectbasic" name="selectbasic" class="form-control col-md-3">
+                        <select id="selectbasic" name="instrumentsCount" class="form-control col-md-3">
                             <option value="4">4</option>
                             <option value="6">6</option>
                         <select>
-                    </form>
-                    <form action="filter">
-                        <input type="hidden" name="instrumentsBean" value="${requestScope.instrumentsBean}">
-						<div class="row col-md-12">
+						<div class="row">
 							<div class="col-md-6">
 								<h5>Filter by category</h5>
-								<select id="selectbasic" name="category" class="form-control">
+								<select name="filterCategory" class="form-control">
 									<option value="">All</option>
-									<option value="Guitar">Guitar</option>
-									<option value="Bass">Bass</option>
-									<option value="Drums">Drums</option>
-								<select>
+									<c:forEach items="${requestScope.categoriesList}" var="category">
+									<option value="${category.getId()}">${category.getLabel()}</option>
+									</c:forEach>
+								</select>
 							</div>
 							<div class="col-md-6">
 								<h5>Filter by manufacturer</h5>
-								<select id="selectbasic" name="manufacturer" class="form-control">
+								<select name="filterManufacturer" class="form-control">
 									<option value="">All</option>
-									<option value="Fender">Fender</option>
-									<option value="Gibson">Gibson</option>
-									<option value="Tama">Tama</option>
-								<select>
+									<c:forEach items="${requestScope.manufacturerList}" var="manufacturer">
+                                    <option value="${manufacturer.getId()}">${manufacturer.getTitle()}</option>
+                                    </c:forEach>
+								</select>
 							</div>
 						</div> 
 						<br>
-                        <div>
-							<button class="btn btn-compose-info" type="submit">
-								Filter items
-							</button>
+						<div class="row">
+							<h4 class="col-md-offset-2 col-md-3">Sort by: </h4>
+							<select name="sortValue" class="col-md-7 form-control">
+							    <option value="">None</option>
+								<option value="price">Price</option>
+								<option value="ins_name">Name</option>
+							</select>						
+						</div>						
+						<br>
+						<div class="row">
+							<h4 class="col-md-offset-2 col-md-3">Sort direction: </h4>
+							<select name="sortDirection" class="col-md-7 form-control">
+								<option value="">Forward</option>
+								<option value="sortBackward">Backward</option>
+							</select>
 						</div>
-                    </form>
+						<button type="submit" class="btn btn-compose-info">
+                            Show instruments
+                        </button>						
+                    </form>				
                     <form action="">
-                        <input type="hidden" name="command" value="sortPByDateUp">
-                        <button class="btn btn-compose-info">
-                            Add new instrument to storage
-                        </button>
-                    </form>
-                    <form action="">
-                        <input type="hidden" name="command" value="sortPByDateDown">
-                        <button data-toggle="modal" title="Compose" class="btn btn-compose-info">
-                            
-                        </button>
-                    </form>
-                    <form action="">
-                        <input type="hidden" name="command" value="toDeleteUnsentPayments">
+                        <input type="hidden">
                         <button data-toggle="modal" title="Compose" class="btn btn-compose">
-                            
+                            Add new instrument to storage
                         </button>
                     </form>
                 </div>
@@ -102,30 +105,35 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <c:forEach items="${requestScope.instrumentBean.getInstruments()}" var="instrument">
-                                            <div class="row margin-0">
-                                                <div class="col-md-3">
-                                                    <div class="cell">
-                                                        <code>${instrument.getName()}</code>
+                                    <c:if test="${not empty requestScope.instrumentBean.getInstruments()}">
+                                        <c:forEach items="${requestScope.instrumentBean.getInstruments()}" var="instrument">
+                                                <div class="row margin-0">
+                                                    <div class="col-md-3">
+                                                        <div class="cell">
+                                                            <code>${instrument.getName()}</code>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="cell">
+                                                            ${instrument.getPrice()}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="cell">
+                                                            ${instrument.getCategory()}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="cell">
+                                                            ${instrument.getManufacturer()}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <div class="cell">
-                                                        ${instrument.getPrice()}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="cell">
-                                                        ${instrument.getCategory()}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="cell">
-                                                        ${instrument.getManufacturer()}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </c:forEach>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${empty requestScope.instrumentBean.getInstruments()}">
+                                        <h4>Instruments not found</h4>
+                                    </c:if>
                                 </div>
                                 </tbody>
                             </table>
@@ -135,8 +143,4 @@
                 </div>
             </aside>
         </div>
-    </c:if>
-    <c:if test="${empty sessionScope.user}">
-        <h1>GO AND REGISTER!</h1>
-    </c:if>
 </body>

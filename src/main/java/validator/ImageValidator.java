@@ -1,5 +1,6 @@
 package validator;
 
+import constants.ErrorMessages;
 import constants.WebConstants;
 
 import javax.servlet.http.Part;
@@ -19,10 +20,10 @@ public class ImageValidator {
         Map<String, String> errors = new HashMap<>();
         String contentType = part.getContentType();
         if (part.getSize() > avatarSize) {
-            errors.put(WebConstants.AVATAR, WebConstants.AVATAR_OVERLOAD);
+            errors.put(WebConstants.AVATAR, ErrorMessages.AVATAR_OVERLOAD);
         }
         if (!imageFormats.contains(contentType.split("/")[1]) || !contentType.startsWith("image")) {
-            errors.put(WebConstants.AVATAR, WebConstants.WRONG_AVATAR_FORMAT);
+            errors.put(WebConstants.AVATAR, ErrorMessages.WRONG_AVATAR_FORMAT);
         }
         return errors;
     }

@@ -1,4 +1,4 @@
-package web.servlet;
+package web.servlet.draw;
 
 import constants.Paths;
 import constants.WebConstants;

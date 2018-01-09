@@ -65,7 +65,8 @@
             </p>
         </div>
         <div class="form-group">
-            <input class="btn btn-success" type="file" name="avatar" accept="image/*" />
+        <label for="avatar">Load avatar</label>
+            <input class="btn btn-success" type="file" id="avatar" name="avatar" accept="image/*" />
             <p class="validation-message-s">
                 <strong>${sessionScope.errors.avatar}</strong>
             </p>

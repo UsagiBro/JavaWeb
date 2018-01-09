@@ -1,4 +1,6 @@
-package entity;
+package entity.dto;
+
+import entity.Instrument;
 
 import java.util.List;
 
@@ -14,8 +16,4 @@ public class InstrumentsBean {
         return instruments;
     }
 
-
-    public void filter(Object... filters) {
-
-    }
 }

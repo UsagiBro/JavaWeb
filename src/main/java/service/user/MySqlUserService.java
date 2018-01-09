@@ -1,15 +1,11 @@
 package service.user;
 
-import constants.WebConstants;
+import constants.ErrorMessages;
 import dao.UserDao;
 import dao.transaction.TransactionManager;
 import entity.User;
 import exception.DBException;
 import exception.SuchUserExistsException;
-
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
 
 public class MySqlUserService implements UserService {
 
@@ -24,7 +20,7 @@ public class MySqlUserService implements UserService {
     @Override
     public boolean createUser(User user) throws SuchUserExistsException {
         if (transactionManager.processTransaction(() -> userDao.userExists(user))) {
-            throw new SuchUserExistsException(WebConstants.USER_EXISTS);
+            throw new SuchUserExistsException(ErrorMessages.USER_EXISTS);
         }
         return transactionManager.processTransaction(() -> userDao.createUser(user));
     }

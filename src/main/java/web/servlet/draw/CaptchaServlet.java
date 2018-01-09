@@ -1,4 +1,4 @@
-package web.servlet;
+package web.servlet.draw;
 
 import util.CaptchaDrawer;
 import web.captcha.Captcha;

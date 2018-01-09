@@ -13,7 +13,7 @@
         <div class="testimonial-desc">
             <img src="assets/images/error_symbol.png">
             <div class="testimonial-writer">
-                <div class="testimonial-writer-name">Database error, please try again later(</div>
+                <div class="testimonial-writer-name">Internal server error, please try again later(</div>
             </div>
         </div>
     </div>

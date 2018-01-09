@@ -3,9 +3,11 @@ package dao.myslq;
 import dao.InstrumentDao;
 import dao.transaction.mysql.ConnectionHolder;
 import entity.Instrument;
+import entity.dto.FilterBean;
 import exception.DBException;
 import org.apache.log4j.Logger;
 import util.DBUtil;
+import util.MySqlBuilder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,6 +37,26 @@ public class MysqlInstrumentDao implements InstrumentDao {
         } catch (SQLException ex) {
             LOG.error(ex.getMessage());
             throw new DBException(this.getClass().getSimpleName() + "#getAllInstruments() -> DBException#" + ex);
+        }
+        return instruments;
+    }
+
+    @Override
+    public List<Instrument> getInstrumentsByFilter(FilterBean filterBean) {
+        List<Instrument> instruments = new ArrayList<>();
+        MySqlBuilder mySqlBuilder = new MySqlBuilder();
+        Connection connection = ConnectionHolder.getConnection();
+        String query = mySqlBuilder.buildQuery(filterBean);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    instruments.add(DBUtil.getInstrumentFromResultSet(resultSet));
+                }
+            }
+        } catch (SQLException ex) {
+            LOG.error(ex.getMessage());
+            throw new DBException(this.getClass().getSimpleName() + "#getAllInstrumentsByFilter() -> DBException#" + ex);
         }
         return instruments;
     }

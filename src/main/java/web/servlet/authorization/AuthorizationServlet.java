@@ -1,5 +1,6 @@
-package web.servlet;
+package web.servlet.authorization;
 
+import constants.ErrorMessages;
 import constants.Paths;
 import constants.WebConstants;
 import entity.User;
@@ -37,10 +38,10 @@ public class AuthorizationServlet extends HttpServlet {
         if (Objects.nonNull(user)) {
             HttpSession session = req.getSession();
             session.setAttribute(WebConstants.USER, user);
-            session.removeAttribute(WebConstants.WRONG_AUTHORIZATION);
+            session.removeAttribute(ErrorMessages.WRONG_AUTHORIZATION);
             resp.sendRedirect(Paths.CABINET_SERVLET);
         } else {
-            req.getSession().setAttribute(WebConstants.WRONG_AUTHORIZATION, WebConstants.AUTHORIZATION_ERROR);
+            req.getSession().setAttribute(ErrorMessages.WRONG_AUTHORIZATION, ErrorMessages.AUTHORIZATION_ERROR);
             resp.sendRedirect(Paths.AUTHORIZATION_SERVLET);
         }
     }

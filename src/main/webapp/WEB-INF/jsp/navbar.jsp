@@ -4,7 +4,7 @@
     <nav id="nav">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="generic.html">Generic</a></li>
+            <li><a href="store">Store</a></li>
             <li><a href="elements.html">Elements</a></li>
             <li>
                 <c:if test="${not empty sessionScope.user}">

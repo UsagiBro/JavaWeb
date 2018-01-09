@@ -1,21 +1,12 @@
 package util;
 
-import com.sun.deploy.net.HttpRequest;
 import constants.WebConstants;
 import entity.User;
-import entity.UserBean;
-import org.apache.commons.io.FilenameUtils;
-import validator.ImageValidator;
+import entity.dto.FilterBean;
+import entity.dto.UserBean;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import javax.xml.validation.Validator;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 public final class WebUtil {
 
@@ -63,7 +54,13 @@ public final class WebUtil {
         session.removeAttribute(WebConstants.CAPTCHA_VALUE);
     }
 
-    public static void getFilterParametersFromRequest(HttpRequest request) {
-
+    public static FilterBean getFilterBeanFromRequest(HttpServletRequest request) {
+        FilterBean filterBean = new FilterBean();
+        filterBean.setCount(request.getParameter(WebConstants.INSTRUMENTS_COUNT));
+        filterBean.setCategoryFilter(request.getParameter(WebConstants.FILTER_CATEGORY));
+        filterBean.setManufacturerFilter(request.getParameter(WebConstants.FILTER_MANUFACTURER));
+        filterBean.setSort(request.getParameter(WebConstants.SORT_VALUE));
+        filterBean.setSortDirection(request.getParameter(WebConstants.SORT_DIRECTION));
+        return filterBean;
     }
 }
