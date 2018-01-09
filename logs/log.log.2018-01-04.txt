@@ -1,0 +1,10 @@
+2018-01-04 17:30 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:31 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:33 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:34 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:35 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 17:36 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 18:59 [ERROR]          UserServiceMySql:    33 - Unknown column 'irst_name' in 'field list'
+2018-01-04 19:27 [ERROR]          UserServiceMySql:    67 - Parameter index out of range (2 > number of parameters, which is 1).
+2018-01-04 19:38 [ERROR]          UserServiceMySql:    66 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXISTS(SELECT * FROM users WHERE email = 'i@gladush.com')' at line 1
+2018-01-04 19:40 [ERROR]          UserServiceMySql:    68 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXISTS(SELECT 1 FROM users WHERE email = 'i@gladush.com')' at line 1
