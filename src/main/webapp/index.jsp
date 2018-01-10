@@ -1,47 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Transit by TEMPLATED</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    <!--[if lte IE 8]>
-    <script src="assets/js/html5shiv.js"></script><![endif]-->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="assets/js/skel-layers.min.js"></script>
-    <script src="assets/js/init.js"></script>
-    <link rel="stylesheet" href="assets/css/style.css"/>
-</head>
-<body class="landing">
-
-<!-- Header -->
-<header id="header">
-    <h1><a href="index.html">Guitarzzz</a></h1>
-    <nav id="nav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="generic.html">Generic</a></li>
-            <li><a href="elements.html">Elements</a></li>
-            <li><a href="authorization" class="button special">Sign Up</a></li>
-        </ul>
-    </nav>
-</header>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/WEB-INF/jspf/taglib.jspf" %>
+<%@include file="/WEB-INF/jspf/head.jspf" %>
+<body>
+<%@include file="/WEB-INF/jsp/navbar.jsp" %>
 <!-- Banner -->
 <section id="banner">
-    <h2>Hoi! This is Guitarzzz.</h2>
-    <p>The largest online music shoppu in da world.</p>
-    <ul class="actions">
-        <li>
-            <form action="registration">
-                <div class="col">
-                    <button class="button big" type="submit">Register now</button>
-                </div>
-            </form>
-        </li>
-    </ul>
+		<c:if test="${not empty sessionScope.user}">
+            <h2>Greetings! ${sessionScope.user.name}</h2>
+			<p>Want to start shopping?</p>
+			<ul class="actions">
+				<li>
+					<form action="cabinet">
+						<div class="col">
+							<button class="button big" type="submit">Into cabinet</button>
+						</div>
+					</form>
+				</li>
+			</ul>
+        </c:if>
+        <c:if test="${empty sessionScope.user}">
+            <h2>Hoi! This is Guitarzzz.</h2>
+			<p>The largest online music shoppu in da world.</p>
+			<ul class="actions">
+				<li>
+					<form action="registration">
+						<div class="col">
+							<button class="button big" type="submit">Register now</button>
+						</div>
+					</form>
+				</li>
+			</ul>
+        </c:if>
 </section>
 
 <!-- One -->
@@ -183,4 +172,3 @@
 </footer>
 
 </body>
-</html>
