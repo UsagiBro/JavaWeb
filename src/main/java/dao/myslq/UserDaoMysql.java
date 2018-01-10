@@ -29,10 +29,10 @@ public class UserDaoMysql implements UserDao {
     public boolean createUser(User user) {
         Connection connection = ConnectionHolder.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USER)) {
-            DBUtil.fillPreparedStatement(preparedStatement, user.getName(),
+            fillPreparedStatement(preparedStatement, user.getName(),
                     user.getSurname(), user.getPassword(), user.getEmail(),
                     user.getNews(), user.getNewProducts());
-            return preparedStatement.executeUpdate() > 0;
+            return preparedStatement.executeUpdate() == 1;
         } catch (SQLException ex) {
             LOG.error(ex.getMessage());
             throw new DBException(this.getClass().getSimpleName() + "#createUser() -> DBException#" + ex);
@@ -43,17 +43,18 @@ public class UserDaoMysql implements UserDao {
     public User readUserByEmailAndPassword(String email, String password) {
         Connection connection = ConnectionHolder.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_USER_BY_EMAIL_AND_PASSWORD)) {
-            DBUtil.fillPreparedStatement(preparedStatement, email, password);
+            fillPreparedStatement(preparedStatement, email, password);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return DBUtil.getUserFromResultSet(resultSet);
+                    return getUserFromResultSet(resultSet);
+                } else {
+                    return new User();
                 }
             }
         } catch (SQLException ex) {
             LOG.error(ex.getMessage());
             throw new DBException(this.getClass().getSimpleName() + "#createUser() -> DBException#" + ex);
         }
-        return null;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class UserDaoMysql implements UserDao {
         boolean result = false;
         Connection connection = ConnectionHolder.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_USER_EXISTS)) {
-            DBUtil.fillPreparedStatement(preparedStatement, user.getEmail());
+            fillPreparedStatement(preparedStatement, user.getEmail());
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 result = resultSet.getBoolean(1);
@@ -73,5 +74,22 @@ public class UserDaoMysql implements UserDao {
         return result;
     }
 
+    private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setName(resultSet.getString("first_name"));
+        user.setSurname(resultSet.getString("surname"));
+        user.setPassword(resultSet.getString("password"));
+        user.setEmail(resultSet.getString("email"));
+        user.setNews(resultSet.getBoolean("news"));
+        user.setNewProducts(resultSet.getBoolean("new_products"));
+        return user;
+    }
+
+    private void fillPreparedStatement(PreparedStatement preparedStatement, Object... args) throws SQLException {
+        int counter = 1;
+        for (Object arg : args) {
+            preparedStatement.setObject(counter++, arg);
+        }
+    }
 
 }
