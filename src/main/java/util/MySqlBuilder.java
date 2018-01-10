@@ -9,13 +9,14 @@ public class MySqlBuilder {
             "SELECT i.ins_name, i.price, c.label, m.title FROM instruments i " +
                     "JOIN categories c ON i.category_id=c.id JOIN manufacturers m ON i.manufacturer_id=m.id ";
     private static final String SQL_LIMIT = " LIMIT ";
+    private static final String SQL_OFFSET = " OFFSET ";
     private static final String SQL_WHERE = " WHERE ";
     private static final String SQL_AND = " AND ";
     private static final String SQL_ORDER_BY = " ORDER BY ";
     private static final String SQL_ASC = " ASC ";
     private static final String SQL_DESC = " DESC ";
-    private static final String MANUFACTURER_ID = " category_id= ";
-    private static final String CATEGORY_ID = " manufacturer_id= ";
+    private static final String MANUFACTURER_ID = " manufacturer_id= ";
+    private static final String CATEGORY_ID = " category_id= ";
 
     private static final String SQL_QUOTATION_MARK = "'";
 
@@ -33,12 +34,12 @@ public class MySqlBuilder {
         String categoryFilter = filterBean.getCategoryFilter();
         String manufacturerFilter = filterBean.getManufacturerFilter();
         StringBuilder result = new StringBuilder();
-        if (!manufacturerFilter.equals("")) {
+        if (!"".equals(manufacturerFilter)) {
             result.append(addConditionWord()).append(MANUFACTURER_ID).append(SQL_QUOTATION_MARK)
                     .append(manufacturerFilter).append(SQL_QUOTATION_MARK);
             isFirst = false;
         }
-        if (!categoryFilter.equals("")) {
+        if (!"".equals(categoryFilter)) {
             result.append(addConditionWord()).append(CATEGORY_ID).append(SQL_QUOTATION_MARK)
                     .append(categoryFilter).append(SQL_QUOTATION_MARK);
             isFirst = false;
@@ -50,7 +51,7 @@ public class MySqlBuilder {
         StringBuilder result = new StringBuilder();
         String sortValue = filterBean.getSort();
         String sortDirection = filterBean.getSortDirection();
-        if (!sortValue.equals("")) {
+        if (!"".equals(sortValue)) {
             result.append(SQL_ORDER_BY).append(sortValue);
             if (sortDirection.equals(WebConstants.SORT_BACKWARD)) {
                 result.append(SQL_DESC);
@@ -71,5 +72,9 @@ public class MySqlBuilder {
 
     private String addLimit(String count) {
         return SQL_LIMIT + count;
+    }
+
+    private String addOffset(String offset) {
+        return SQL_OFFSET + offset;
     }
 }

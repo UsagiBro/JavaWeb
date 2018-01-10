@@ -28,16 +28,17 @@ public class FilterServlet extends HttpServlet {
         instrumentService = (InstrumentService) getServletContext().getAttribute(WebConstants.INSTRUMENT_SERVICE);
         manufacturerService = (ManufacturerService) getServletContext().getAttribute(WebConstants.MANUFACTURER_SERVICE);
         categoryService = (CategoryService) getServletContext().getAttribute(WebConstants.CATEGORY_SERVICE);
-        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute(WebConstants.MANUFACTURER_LIST, manufacturerService.getAllManufacturers());
-        req.setAttribute(WebConstants.CATEGORIES_LIST, categoryService.getAllCategories());
-
         FilterBean filterBean = WebUtil.getFilterBeanFromRequest(req);
         InstrumentsBean instrumentsBean = instrumentService.getInstrumentsByFilter(filterBean);
         req.setAttribute(WebConstants.INSTRUMENT_BEAN, instrumentsBean);
+        req.setAttribute("filterBean", filterBean);
+        req.setAttribute(WebConstants.MANUFACTURER_LIST, manufacturerService.getAllManufacturers());
+        req.setAttribute(WebConstants.CATEGORIES_LIST, categoryService.getAllCategories());
+
         req.getRequestDispatcher(Paths.STORE_JSP).forward(req, resp);
     }
 }

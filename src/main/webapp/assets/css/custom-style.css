@@ -151,7 +151,7 @@
 .method .list-header .header {
     font-weight: normal;
     text-transform: uppercase;
-    font-size: 0.8em;
+    font-size: 1.3em;
     color: #999;
     background-color: #eee; }
 .method [class^="row"],
@@ -161,7 +161,7 @@
 .method [class*=" row"]:hover {
     background-color: #f7f7f7; }
 .method .cell {
-    font-size: 0.85em; }
+    font-size: 1.3em; }
 .method .cell .mobile-isrequired {
     display: none;
     font-weight: normal;
@@ -620,3 +620,6 @@ ul {
     padding: 0px;
     margin: 0px;
 }
+
+/* Pagination */
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}

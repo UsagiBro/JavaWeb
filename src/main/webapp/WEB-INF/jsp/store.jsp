@@ -10,23 +10,55 @@
                     <h3>Hello, ${sessionScope.user.name} ${sessionScope.user.surname}</h3>
                     </c:if>
                     <c:if test="${empty sessionScope.user}">
-                        <h1>GO AND REGISTER!</h1>
+                        <h3>GO AND REGISTER!</h3>
                     </c:if>
                 </div>
                 <div class="inbox-body">
                     <form action="filterInstruments">
-                        <h5>Instruments on page</h5>
+                        <h5>Max instruments on page</h5>
                         <select id="selectbasic" name="instrumentsCount" class="form-control col-md-3">
-                            <option value="4">4</option>
-                            <option value="6">6</option>
+						<c:choose>
+							<c:when test="${filterBean.count ne null}">
+								<c:if test="${filterBean.count eq '6'}">
+									<option value="6" selected="selected">6</option>
+									<option value="12">12</option>
+									<option value="18">18</option>
+								</c:if>
+								<c:if test="${filterBean.count eq '12'}">
+									<option value="6">6</option>
+									<option value="12" selected="selected">12</option>
+									<option value="18">18</option>
+								</c:if>
+								<c:if test="${filterBean.count eq '18'}">
+									<option value="6">6</option>
+									<option value="12">12</option>
+									<option value="18" selected="selected">18</option>
+								</c:if>
+							</c:when>
+							<c:otherwise>								
+								<option value="6">6</option>
+								<option value="12">12</option>
+								<option value="18" selected="selected">18</option>
+							</c:otherwise>	
+						</c:choose>				
                         <select>
+						<br>
 						<div class="row">
 							<div class="col-md-6">
 								<h5>Filter by category</h5>
 								<select name="filterCategory" class="form-control">
 									<option value="">All</option>
 									<c:forEach items="${requestScope.categoriesList}" var="category">
-									<option value="${category.getId()}">${category.getLabel()}</option>
+									<c:choose>
+                                        <c:when test="${category.id eq filterBean.categoryFilter}">
+                                            <option value="${category.id}" selected="selected">
+                                                ${category.label}
+                                            </option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${category.id}">${category.label}</option>
+                                        </c:otherwise>
+                                    </c:choose>
 									</c:forEach>
 								</select>
 							</div>
@@ -35,7 +67,16 @@
 								<select name="filterManufacturer" class="form-control">
 									<option value="">All</option>
 									<c:forEach items="${requestScope.manufacturerList}" var="manufacturer">
-                                    <option value="${manufacturer.getId()}">${manufacturer.getTitle()}</option>
+                                    <c:choose>
+                                        <c:when test="${manufacturer.id eq filterBean.manufacturerFilter}">
+                                            <option value="${manufacturer.id}" selected="selected">
+                                                ${manufacturer.title}
+                                            </option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${manufacturer.getId()}">${manufacturer.title}</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                     </c:forEach>
 								</select>
 							</div>
@@ -45,8 +86,22 @@
 							<h4 class="col-md-offset-2 col-md-3">Sort by: </h4>
 							<select name="sortValue" class="col-md-7 form-control">
 							    <option value="">None</option>
-								<option value="price">Price</option>
-								<option value="ins_name">Name</option>
+								<c:choose>
+									<c:when test="${filterBean.sort ne ''}">
+										<c:if test="${filterBean.sort eq 'price'}">
+											<option value="ins_name">Name</option>
+											<option value="price" selected="selected">Price</option>											
+										</c:if>
+										<c:if test="${filterBean.sort eq 'ins_name'}">
+											<option value="ins_name" selected="selected">Name</option>
+											<option value="price">Price</option>
+										</c:if>										
+									</c:when>
+									<c:otherwise>
+										<option value="ins_name">Name</option>
+										<option value="price">Price</option>
+									</c:otherwise>
+								</c:choose>
 							</select>						
 						</div>						
 						<br>
@@ -54,7 +109,14 @@
 							<h4 class="col-md-offset-2 col-md-3">Sort direction: </h4>
 							<select name="sortDirection" class="col-md-7 form-control">
 								<option value="">Forward</option>
-								<option value="sortBackward">Backward</option>
+								<c:choose>
+									<c:when test="${'sortBackward' eq filterBean.sortDirection}">
+										<option value="sortBackward" selected="selected">Backward</option>
+									</c:when>
+									<c:otherwise>
+										<option value="sortBackward">Backward</option>
+									</c:otherwise>
+								</c:choose>
 							</select>
 						</div>
 						<button type="submit" class="btn btn-compose-info">
@@ -68,7 +130,6 @@
                         </button>
                     </form>
                 </div>
-
             </aside>
             <aside class="lg-side">
                 <div class="inbox-head">
@@ -78,7 +139,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h5>
-                                
                             </h5>
                             <table class="table table-inbox table-hover">
                                 <tbody>
@@ -137,6 +197,18 @@
                                 </div>
                                 </tbody>
                             </table>
+							<br>
+							<div class="container">
+								<ul class="pagination">
+									<li class="disabled"><a href="#">«</a></li>
+									<li class="active"><a href="#">1 <span></span></a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">»</a></li>
+								</ul>
+							</div>
                         </div>
                     </div>
                     <br>

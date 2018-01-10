@@ -7,6 +7,7 @@ public class FilterBean {
     private String manufacturerFilter;
     private String sort;
     private String sortDirection;
+    private String offset;
 
     public String getCount() {
         return count;
@@ -46,5 +47,13 @@ public class FilterBean {
 
     public void setSortDirection(String sortDirection) {
         this.sortDirection = sortDirection;
+    }
+
+    public String getOffset() {
+        return offset;
+    }
+
+    public void setOffset(String offset) {
+        this.offset = offset;
     }
 }

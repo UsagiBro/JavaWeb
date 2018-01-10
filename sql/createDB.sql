@@ -32,6 +32,10 @@ CREATE TABLE manufacturers(
 INSERT INTO manufacturers(id, title) VALUES (1, "Fender");
 INSERT INTO manufacturers(id, title) VALUES (2, "Gibson");
 INSERT INTO manufacturers(id, title) VALUES (3, "Tama");
+INSERT INTO manufacturers(id, title) VALUES (4, "ESP");
+INSERT INTO manufacturers(id, title) VALUES (5, "Ibanez");
+INSERT INTO manufacturers(id, title) VALUES (6, "Epiphone");
+INSERT INTO manufacturers(id, title) VALUES (7, "Yamaha");
 
 CREATE TABLE instruments(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -48,8 +52,17 @@ CREATE TABLE instruments(
 );
 
 INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Stratocaster", 450, 1, 1);
-INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Epiphone", 300, 2, 2);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("LesPaul", 300, 2, 2);
 INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("RhytmMate", 380, 3, 3);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("GRG170DX", 199, 1, 5);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("LTD", 171, 1, 4);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Horizon", 1965, 1, 4);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("SRC", 597, 2, 5);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Thunderbird", 329, 2, 6);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Aerodyne", 994, 2, 1);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Imperialstar", 1161, 3, 3);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Rydeen", 625, 3, 7);
+INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("StageCustom", 960, 3, 7);
 
 
 
