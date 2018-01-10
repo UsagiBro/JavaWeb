@@ -6,7 +6,6 @@ import entity.User;
 import exception.DBException;
 import org.apache.log4j.Logger;
 import service.user.UserServiceMySql;
-import util.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
