@@ -6,6 +6,7 @@ public final class WebConstants {
         throw new IllegalStateException("Can't create an instance");
     }
 
+
     public static final String USER = "user";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
@@ -25,6 +26,7 @@ public final class WebConstants {
     public static final String CATEGORIES_LIST = "categoriesList";
     public static final String CATEGORY_SERVICE = "categoryService";
     public static final String MANUFACTURER_SERVICE = "manufacturerService";
+    public static final String FILTER_BEAN = "filterBean";
 
     public static final String CAPTCHA_ID = "captchaId";
     public static final String CAPTCHA_VALUE = "captchaVal";

@@ -27,7 +27,9 @@ public class MySqlUserService implements UserService {
 
     @Override
     public User getUserByEmailAndPassword(String email, String password) throws DBException {
-        return transactionManager.processTransaction(() -> userDao.readUserByEmailAndPassword(email, password));
+        return transactionManager.processTransaction(() -> {
+            return userDao.readUserByEmailAndPassword(email, password);
+        });
     }
 
 

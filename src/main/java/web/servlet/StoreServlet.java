@@ -2,10 +2,12 @@ package web.servlet;
 
 import constants.Paths;
 import constants.WebConstants;
+import entity.dto.FilterBean;
 import entity.dto.InstrumentsBean;
 import service.category.CategoryService;
 import service.instruments.InstrumentService;
 import service.manufacturer.ManufacturerService;
+import util.WebUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +37,7 @@ public class StoreServlet extends HttpServlet {
 
         InstrumentsBean instrumentsBean = instrumentService.getAllInstruments();
         req.setAttribute(WebConstants.INSTRUMENT_BEAN, instrumentsBean);
-        req.getRequestDispatcher(Paths.STORE_JSP).forward(req,resp);
+
+        req.getRequestDispatcher(Paths.STORE_JSP).forward(req, resp);
     }
 }

@@ -35,7 +35,7 @@ public class FilterServlet extends HttpServlet {
         FilterBean filterBean = WebUtil.getFilterBeanFromRequest(req);
         InstrumentsBean instrumentsBean = instrumentService.getInstrumentsByFilter(filterBean);
         req.setAttribute(WebConstants.INSTRUMENT_BEAN, instrumentsBean);
-        req.setAttribute("filterBean", filterBean);
+        req.setAttribute(WebConstants.FILTER_BEAN, filterBean);
         req.setAttribute(WebConstants.MANUFACTURER_LIST, manufacturerService.getAllManufacturers());
         req.setAttribute(WebConstants.CATEGORIES_LIST, categoryService.getAllCategories());
 
