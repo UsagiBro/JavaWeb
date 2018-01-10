@@ -3,10 +3,6 @@ package util;
 import constants.WebConstants;
 import entity.dto.FilterBean;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 public class MySqlBuilder {
 
     private static final String SELECT_FROM_INSTRUMENTS =
@@ -21,7 +17,7 @@ public class MySqlBuilder {
     private static final String MANUFACTURER_ID = " category_id= ";
     private static final String CATEGORY_ID = " manufacturer_id= ";
 
-    private static final String SQL_QUOTATION_MARK = "`";
+    private static final String SQL_QUOTATION_MARK = "'";
 
     private boolean isFirst = true;
 

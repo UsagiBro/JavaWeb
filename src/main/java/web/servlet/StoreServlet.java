@@ -3,7 +3,6 @@ package web.servlet;
 import constants.Paths;
 import constants.WebConstants;
 import entity.dto.InstrumentsBean;
-import entity.dto.Manufacturer;
 import service.category.CategoryService;
 import service.instruments.InstrumentService;
 import service.manufacturer.ManufacturerService;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/store")
 public class StoreServlet extends HttpServlet {
@@ -38,10 +36,5 @@ public class StoreServlet extends HttpServlet {
         InstrumentsBean instrumentsBean = instrumentService.getAllInstruments();
         req.setAttribute(WebConstants.INSTRUMENT_BEAN, instrumentsBean);
         req.getRequestDispatcher(Paths.STORE_JSP).forward(req,resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 }

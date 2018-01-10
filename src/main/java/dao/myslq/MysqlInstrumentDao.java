@@ -6,7 +6,6 @@ import entity.Instrument;
 import entity.dto.FilterBean;
 import exception.DBException;
 import org.apache.log4j.Logger;
-import util.DBUtil;
 import util.MySqlBuilder;
 
 import java.sql.Connection;
@@ -31,7 +30,7 @@ public class MysqlInstrumentDao implements InstrumentDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 while (resultSet.next()) {
-                    instruments.add(DBUtil.getInstrumentFromResultSet(resultSet));
+                    instruments.add(getInstrumentFromResultSet(resultSet));
                 }
             }
         } catch (SQLException ex) {
@@ -51,7 +50,7 @@ public class MysqlInstrumentDao implements InstrumentDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 while (resultSet.next()) {
-                    instruments.add(DBUtil.getInstrumentFromResultSet(resultSet));
+                    instruments.add(getInstrumentFromResultSet(resultSet));
                 }
             }
         } catch (SQLException ex) {
@@ -59,5 +58,14 @@ public class MysqlInstrumentDao implements InstrumentDao {
             throw new DBException(this.getClass().getSimpleName() + "#getAllInstrumentsByFilter() -> DBException#" + ex);
         }
         return instruments;
+    }
+
+    private Instrument getInstrumentFromResultSet(ResultSet resultSet) throws SQLException {
+        Instrument instrument = new Instrument();
+        instrument.setName(resultSet.getString("ins_name"));
+        instrument.setPrice(resultSet.getBigDecimal("price"));
+        instrument.setCategory(resultSet.getString("label"));
+        instrument.setManufacturer(resultSet.getString("title"));
+        return instrument;
     }
 }
