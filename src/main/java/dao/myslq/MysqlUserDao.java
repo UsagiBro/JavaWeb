@@ -31,7 +31,7 @@ public class MysqlUserDao implements UserDao {
             fillPreparedStatement(preparedStatement, user.getName(),
                     user.getSurname(), user.getPassword(), user.getEmail(),
                     user.getNews(), user.getNewProducts());
-            return preparedStatement.executeUpdate() > 0;
+            return preparedStatement.executeUpdate() == 1;
         } catch (SQLException ex) {
             LOG.error(ex.getMessage());
             throw new DBException(this.getClass().getSimpleName() + "#createUser() -> DBException#" + ex);
@@ -46,13 +46,14 @@ public class MysqlUserDao implements UserDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return getUserFromResultSet(resultSet);
+                } else {
+                    return new User();
                 }
             }
         } catch (SQLException ex) {
             LOG.error(ex.getMessage());
             throw new DBException(this.getClass().getSimpleName() + "#createUser() -> DBException#" + ex);
         }
-        return null;
     }
 
     @Override
