@@ -1,7 +1,5 @@
 package entity.dto;
 
-import constants.WebConstants;
-
 public class FilterBean {
 
     private Integer instrumentCount;
@@ -10,6 +8,15 @@ public class FilterBean {
     private String sort;
     private String sortDirection;
     private Integer offset;
+    private Integer currentPage;
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
 
     public Integer getInstrumentCount() {
         return instrumentCount;

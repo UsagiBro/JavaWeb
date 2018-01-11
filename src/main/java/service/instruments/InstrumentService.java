@@ -8,4 +8,6 @@ public interface InstrumentService {
 //    InstrumentsBean getAllInstruments();
 
     InstrumentsBean getInstrumentsByFilter(FilterBean filterBean);
+
+    int getAllInsrumentsCount();
 }

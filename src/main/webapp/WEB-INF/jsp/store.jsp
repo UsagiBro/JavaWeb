@@ -3,6 +3,8 @@
 <%@include file="/WEB-INF/jspf/head.jspf" %>
 <body>
 <%@include file="navbar.jsp" %>
+
+    <form action="store">
         <div class="mail-box">
             <aside class="sm-side">
                 <div class="user-head">
@@ -14,33 +16,42 @@
                     </c:if>
                 </div>
                 <div class="inbox-body">
-                    <form action="store">
                         <h5>Max instruments on page</h5>
                         <select id="selectbasic" name="instrumentCount" class="form-control col-md-3">
 						<c:choose>
 							<c:when test="${filterBean.instrumentCount ne null}">
+							    <c:if test="${filterBean.instrumentCount eq '3'}">
+                                    <option value="3" selected="selected">3</option>
+                                    <option value="6">6</option>
+                                	<option value="12">12</option>
+                                	<option value="18">18</option>
+                                </c:if>
 								<c:if test="${filterBean.instrumentCount eq '6'}">
+									<option value="3">3</option>
 									<option value="6" selected="selected">6</option>
 									<option value="12">12</option>
 									<option value="18">18</option>
 								</c:if>
 								<c:if test="${filterBean.instrumentCount eq '12'}">
+								    <option value="3">3</option>
 									<option value="6">6</option>
 									<option value="12" selected="selected">12</option>
 									<option value="18">18</option>
 								</c:if>
 								<c:if test="${filterBean.instrumentCount eq '18'}">
+								    <option value="3">3</option>
 									<option value="6">6</option>
 									<option value="12">12</option>
 									<option value="18" selected="selected">18</option>
 								</c:if>
 							</c:when>
-							<c:otherwise>								
+							<c:otherwise>
+								<option value="3">3</option>
 								<option value="6">6</option>
 								<option value="12">12</option>
 								<option value="18" selected="selected">18</option>
 							</c:otherwise>	
-						</c:choose>				
+						</c:choose>
                         <select>
 						<br>
 						<div class="row">
@@ -121,14 +132,11 @@
 						</div>
 						<button type="submit" class="btn btn-compose-info">
                             Show instruments
-                        </button>						
-                    </form>				
-                    <form action="">
+                        </button>	
                         <input type="hidden">
                         <button data-toggle="modal" title="Compose" class="btn btn-compose">
                             Add new instrument to storage
                         </button>
-                    </form>
                 </div>
             </aside>
             <aside class="lg-side">
@@ -198,24 +206,22 @@
                                 </tbody>
                             </table>
 							<br>
-							<form action="pageServlet">
 							    <div class="container">
                                     <ul class="pagination">
-                                        <input type="hidden" name="firstrow" value="${requestScope.firstrow}">
-                                        <input type="hidden" name="rowcount" value="${requestScope.rowcount}">
+                                        <input type="hidden" name="currentPage" value="${requestScope.currentPage}">
                                         <li><input type="submit" class="btn btn-info" name="page" value="previous"></li>
-                                        <%--<c:forEach items="${requestScope.pages}" var="page">--%>
-                                            <%--<li><input type="submit" name="page" value="">--%>
-                                        <%--</c:forEach>--%>
+                                        <c:forEach begin="1" end="${requestScope.pages}" var="i">
+                                            <li><input type="submit" name="page" value="i">
+                                        </c:forEach>
                                         <li><input type="submit" name="page" value="1"></li>
                                         <li><input type="submit" class="btn btn-info" name="page" value="next"></li>
                                     </ul>
                                 </div>
-							</form>
                         </div>
                     </div>
                     <br>
                 </div>
             </aside>
         </div>
+	</form>
 </body>

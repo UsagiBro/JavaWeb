@@ -19,9 +19,6 @@ public class MySqlBuilder {
     private static final String CATEGORY_ID = " category_id= ";
     private static final String SQL_QUOTATION_MARK = "'";
 
-    private static final int DEFAULT_LIMIT = 18;
-    private static final int DEFAULT_OFFSET = 0;
-
     private boolean isFirst = true;
 
     public String buildQuery(FilterBean filterBean) {

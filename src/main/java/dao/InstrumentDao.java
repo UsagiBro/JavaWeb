@@ -10,4 +10,6 @@ public interface InstrumentDao {
 //    List<Instrument> getAllInstruments();
 
     List<Instrument> getInstrumentsByFilter(FilterBean filterBean);
+
+    int getAllInsrumentsCount();
 }

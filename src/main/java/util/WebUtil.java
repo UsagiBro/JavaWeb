@@ -63,6 +63,12 @@ public final class WebUtil {
         filterBean.setSort(request.getParameter(WebConstants.SORT_VALUE));
         filterBean.setSortDirection(request.getParameter(WebConstants.SORT_DIRECTION));
 
+        if (Objects.isNull(request.getParameter(WebConstants.CURRENT_PAGE)) ||
+                request.getParameter(WebConstants.CURRENT_PAGE).isEmpty()) {
+            filterBean.setCurrentPage(WebConstants.START_PAGE);
+        } else {
+            filterBean.setCurrentPage(Integer.valueOf(request.getParameter(WebConstants.CURRENT_PAGE)));
+        }
         if (Objects.isNull(request.getParameter(WebConstants.INSTRUMENTS_COUNT))) {
             filterBean.setInstrumentCount(WebConstants.DEFAULT_COUNT_OF_INSTRUMENTS_ON_PAGE);
         } else {
