@@ -7,6 +7,7 @@ import entity.dto.UserBean;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 public final class WebUtil {
 
@@ -56,11 +57,13 @@ public final class WebUtil {
 
     public static FilterBean getFilterBeanFromRequest(HttpServletRequest request) {
         FilterBean filterBean = new FilterBean();
-        filterBean.setCount(request.getParameter(WebConstants.INSTRUMENTS_COUNT));
         filterBean.setCategoryFilter(request.getParameter(WebConstants.FILTER_CATEGORY));
         filterBean.setManufacturerFilter(request.getParameter(WebConstants.FILTER_MANUFACTURER));
         filterBean.setSort(request.getParameter(WebConstants.SORT_VALUE));
         filterBean.setSortDirection(request.getParameter(WebConstants.SORT_DIRECTION));
+
+        filterBean.setInstrumentCount(request.getParameter(WebConstants.INSTRUMENTS_COUNT));
+        filterBean.setOffset(request.getParameter(WebConstants.LIST_OFFSET));
         return filterBean;
     }
 }

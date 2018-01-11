@@ -22,23 +22,23 @@ public class MysqlInstrumentDao implements InstrumentDao {
             "FROM instruments i JOIN categories c ON i.category_id=c.id " +
             "JOIN manufacturers m ON i.manufacturer_id=m.id";
 
-    @Override
-    public List<Instrument> getAllInstruments() {
-        List<Instrument> instruments = new ArrayList<>();
-        Connection connection = ConnectionHolder.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_INSTRUMENTS)) {
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-
-                while (resultSet.next()) {
-                    instruments.add(getInstrumentFromResultSet(resultSet));
-                }
-            }
-        } catch (SQLException ex) {
-            LOG.error(ex.getMessage());
-            throw new DBException(this.getClass().getSimpleName() + "#getAllInstruments() -> DBException#" + ex);
-        }
-        return instruments;
-    }
+//    @Override
+//    public List<Instrument> getAllInstruments() {
+//        List<Instrument> instruments = new ArrayList<>();
+//        Connection connection = ConnectionHolder.getConnection();
+//        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_INSTRUMENTS)) {
+//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//
+//                while (resultSet.next()) {
+//                    instruments.add(getInstrumentFromResultSet(resultSet));
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            LOG.error(ex.getMessage());
+//            throw new DBException(this.getClass().getSimpleName() + "#getAllInstruments() -> DBException#" + ex);
+//        }
+//        return instruments;
+//    }
 
     @Override
     public List<Instrument> getInstrumentsByFilter(FilterBean filterBean) {

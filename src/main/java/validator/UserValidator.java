@@ -15,7 +15,6 @@ import static constants.WebConstants.REGEX_FOR_PASSWORD;
 
 public class UserValidator {
 
-
     private static final Pattern PATTERN_FOR_EMAIL = Pattern.compile(REGEX_FOR_EMAIL);
     private static final Pattern PATTERN_FOR_NAME = Pattern.compile(REGEX_FOR_NAME);
     private static final Pattern PATTERN_FOR_PASSWORD = Pattern.compile(REGEX_FOR_PASSWORD);

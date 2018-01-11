@@ -17,8 +17,10 @@ public class MySqlBuilder {
     private static final String SQL_DESC = " DESC ";
     private static final String MANUFACTURER_ID = " manufacturer_id= ";
     private static final String CATEGORY_ID = " category_id= ";
-
     private static final String SQL_QUOTATION_MARK = "'";
+
+    private static final int DEFAULT_LIMIT = 18;
+    private static final int DEFAULT_OFFSET = 0;
 
     private boolean isFirst = true;
 
@@ -26,7 +28,8 @@ public class MySqlBuilder {
         StringBuilder resultQuery = new StringBuilder(SELECT_FROM_INSTRUMENTS);
         resultQuery.append(addFilters(filterBean));
         resultQuery.append(addSort(filterBean));
-        resultQuery.append(addLimit(filterBean.getCount()));
+        resultQuery.append(addLimit(filterBean.getInstrumentCount()));
+        resultQuery.append(addOffset(filterBean.getOffset()));
         return resultQuery.toString();
     }
 
@@ -34,12 +37,12 @@ public class MySqlBuilder {
         String categoryFilter = filterBean.getCategoryFilter();
         String manufacturerFilter = filterBean.getManufacturerFilter();
         StringBuilder result = new StringBuilder();
-        if (!"".equals(manufacturerFilter)) {
+        if (isValidFilterParameter(manufacturerFilter)) {
             result.append(addConditionWord()).append(MANUFACTURER_ID).append(SQL_QUOTATION_MARK)
                     .append(manufacturerFilter).append(SQL_QUOTATION_MARK);
             isFirst = false;
         }
-        if (!"".equals(categoryFilter)) {
+        if (isValidFilterParameter(categoryFilter)) {
             result.append(addConditionWord()).append(CATEGORY_ID).append(SQL_QUOTATION_MARK)
                     .append(categoryFilter).append(SQL_QUOTATION_MARK);
             isFirst = false;
@@ -51,7 +54,7 @@ public class MySqlBuilder {
         StringBuilder result = new StringBuilder();
         String sortValue = filterBean.getSort();
         String sortDirection = filterBean.getSortDirection();
-        if (!"".equals(sortValue)) {
+        if (isValidFilterParameter(sortValue)) {
             result.append(SQL_ORDER_BY).append(sortValue);
             if (sortDirection.equals(WebConstants.SORT_BACKWARD)) {
                 result.append(SQL_DESC);
@@ -63,18 +66,26 @@ public class MySqlBuilder {
     }
 
     private String addConditionWord() {
-        if (isFirst) {
-            return SQL_WHERE;
-        } else {
-            return SQL_AND;
-        }
+        return isFirst ? SQL_WHERE : SQL_AND;
     }
 
     private String addLimit(String count) {
-        return SQL_LIMIT + count;
+        if (isValidFilterParameter(count)) {
+            return SQL_LIMIT + count;
+        } else {
+            return SQL_LIMIT + DEFAULT_LIMIT;
+        }
     }
 
     private String addOffset(String offset) {
-        return SQL_OFFSET + offset;
+        if (isValidFilterParameter(offset)) {
+            return SQL_OFFSET + offset;
+        } else {
+            return SQL_OFFSET + DEFAULT_OFFSET;
+        }
+    }
+
+    private boolean isValidFilterParameter(String parameter) {
+        return parameter != null && !parameter.isEmpty();
     }
 }

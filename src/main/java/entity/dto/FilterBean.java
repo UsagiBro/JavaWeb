@@ -2,19 +2,19 @@ package entity.dto;
 
 public class FilterBean {
 
-    private String count;
+    private String instrumentCount;
     private String categoryFilter;
     private String manufacturerFilter;
     private String sort;
     private String sortDirection;
     private String offset;
 
-    public String getCount() {
-        return count;
+    public String getInstrumentCount() {
+        return instrumentCount;
     }
 
-    public void setCount(String count) {
-        this.count = count;
+    public void setInstrumentCount(String count) {
+        this.instrumentCount = count;
     }
 
     public String getCategoryFilter() {

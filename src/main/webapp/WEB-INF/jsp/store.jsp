@@ -14,22 +14,22 @@
                     </c:if>
                 </div>
                 <div class="inbox-body">
-                    <form action="filterInstruments">
+                    <form action="store">
                         <h5>Max instruments on page</h5>
-                        <select id="selectbasic" name="instrumentsCount" class="form-control col-md-3">
+                        <select id="selectbasic" name="instrumentCount" class="form-control col-md-3">
 						<c:choose>
-							<c:when test="${filterBean.count ne null}">
-								<c:if test="${filterBean.count eq '6'}">
+							<c:when test="${filterBean.instrumentCount ne null}">
+								<c:if test="${filterBean.instrumentCount eq '6'}">
 									<option value="6" selected="selected">6</option>
 									<option value="12">12</option>
 									<option value="18">18</option>
 								</c:if>
-								<c:if test="${filterBean.count eq '12'}">
+								<c:if test="${filterBean.instrumentCount eq '12'}">
 									<option value="6">6</option>
 									<option value="12" selected="selected">12</option>
 									<option value="18">18</option>
 								</c:if>
-								<c:if test="${filterBean.count eq '18'}">
+								<c:if test="${filterBean.instrumentCount eq '18'}">
 									<option value="6">6</option>
 									<option value="12">12</option>
 									<option value="18" selected="selected">18</option>
@@ -198,17 +198,16 @@
                                 </tbody>
                             </table>
 							<br>
-							<div class="container">
-								<ul class="pagination">
-									<li class="disabled"><a href="#">«</a></li>
-									<li class="active"><a href="#">1 <span></span></a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">»</a></li>
-								</ul>
-							</div>
+							<form action="pageServlet">
+							    <div class="container">
+                                    <ul class="pagination">
+                                        <input type="hidden" name="firstrow" value="${requestScope.firstrow}">
+                                        <input type="hidden" name="rowcount" value="${requestScope.rowcount}">
+                                        <li><input type="submit" name="page" value="previous">«</li>
+                                        <li><input type="submit" name="page" value="next">»</li>
+                                    </ul>
+                                </div>
+							</form>
                         </div>
                     </div>
                     <br>

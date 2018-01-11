@@ -19,12 +19,12 @@ public class MySqlInstrumentService implements InstrumentService {
         this.mySqlTransactionManager = mySqlTransactionManager;
     }
 
-    @Override
-    public InstrumentsBean getAllInstruments() {
-        List<Instrument> instruments = mySqlTransactionManager.processTransaction(
-                () -> instrumentDao.getAllInstruments());
-        return new InstrumentsBean(instruments);
-    }
+//    @Override
+//    public InstrumentsBean getAllInstruments() {
+//        List<Instrument> instruments = mySqlTransactionManager.processTransaction(
+//                () -> instrumentDao.getAllInstruments());
+//        return new InstrumentsBean(instruments);
+//    }
 
     @Override
     public InstrumentsBean getInstrumentsByFilter(FilterBean filterBean) {
