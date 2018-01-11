@@ -1,19 +1,21 @@
 package entity.dto;
 
+import constants.WebConstants;
+
 public class FilterBean {
 
-    private String instrumentCount;
+    private Integer instrumentCount;
     private String categoryFilter;
     private String manufacturerFilter;
     private String sort;
     private String sortDirection;
-    private String offset;
+    private Integer offset;
 
-    public String getInstrumentCount() {
+    public Integer getInstrumentCount() {
         return instrumentCount;
     }
 
-    public void setInstrumentCount(String count) {
+    public void setInstrumentCount(Integer count) {
         this.instrumentCount = count;
     }
 
@@ -49,11 +51,11 @@ public class FilterBean {
         this.sortDirection = sortDirection;
     }
 
-    public String getOffset() {
+    public Integer getOffset() {
         return offset;
     }
 
-    public void setOffset(String offset) {
+    public void setOffset(Integer offset) {
         this.offset = offset;
     }
 }

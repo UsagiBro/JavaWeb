@@ -55,6 +55,7 @@ public final class WebUtil {
         session.removeAttribute(WebConstants.CAPTCHA_VALUE);
     }
 
+
     public static FilterBean getFilterBeanFromRequest(HttpServletRequest request) {
         FilterBean filterBean = new FilterBean();
         filterBean.setCategoryFilter(request.getParameter(WebConstants.FILTER_CATEGORY));
@@ -62,8 +63,16 @@ public final class WebUtil {
         filterBean.setSort(request.getParameter(WebConstants.SORT_VALUE));
         filterBean.setSortDirection(request.getParameter(WebConstants.SORT_DIRECTION));
 
-        filterBean.setInstrumentCount(request.getParameter(WebConstants.INSTRUMENTS_COUNT));
-        filterBean.setOffset(request.getParameter(WebConstants.LIST_OFFSET));
+        if (Objects.isNull(request.getParameter(WebConstants.INSTRUMENTS_COUNT))) {
+            filterBean.setInstrumentCount(WebConstants.DEFAULT_COUNT_OF_INSTRUMENTS_ON_PAGE);
+        } else {
+            filterBean.setInstrumentCount(Integer.valueOf(request.getParameter(WebConstants.INSTRUMENTS_COUNT)));
+        }
+        if (Objects.isNull(request.getParameter(WebConstants.LIST_OFFSET))) {
+            filterBean.setOffset(WebConstants.DEFAULT_OFFSET);
+        } else {
+            filterBean.setOffset(Integer.valueOf(request.getParameter(WebConstants.LIST_OFFSET)));
+        }
         return filterBean;
     }
 }

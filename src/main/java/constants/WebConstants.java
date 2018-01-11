@@ -7,6 +7,8 @@ public final class WebConstants {
     }
 
 
+    public static final Integer DEFAULT_COUNT_OF_INSTRUMENTS_ON_PAGE = 18;
+    public static final Integer DEFAULT_OFFSET = 0;
     public static final String REGEX_FOR_DIGIT = "\\d+";
     public static final String REGEX_FOR_NAME = "([a-zA-Zа-яА-Яё]){2,64}";
     public static final String REGEX_FOR_EMAIL = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";

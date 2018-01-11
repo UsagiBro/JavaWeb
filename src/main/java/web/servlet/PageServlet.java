@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet("/pageServlet")
 public class PageServlet extends HttpServlet {
@@ -59,14 +60,14 @@ public class PageServlet extends HttpServlet {
     private void processPage(HttpServletRequest request, FilterBean filterBean) {
         String page = request.getParameter(WebConstants.PAGE);
         int offset;
-        int filterInstrumentCount = Integer.valueOf(filterBean.getInstrumentCount());
         if (page.equals("next")) {
-            offset =  Integer.valueOf(filterBean.getOffset()) + filterInstrumentCount;
+            offset =  filterBean.getOffset() + filterBean.getInstrumentCount();
         } else if (page.equals("previous")){
-            offset = (Integer.valueOf(page) - 1) - filterInstrumentCount;
+            offset = (Integer.valueOf(page) - 1) - filterBean.getInstrumentCount();
         } else {
-            offset = (Integer.valueOf(page) - 1) * filterInstrumentCount;
+            offset = (Integer.valueOf(page) - 1) * filterBean.getInstrumentCount();
         }
-        filterBean.setOffset(String.valueOf(offset));
+        filterBean.setOffset(offset);
     }
+
 }

@@ -69,20 +69,20 @@ public class MySqlBuilder {
         return isFirst ? SQL_WHERE : SQL_AND;
     }
 
-    private String addLimit(String count) {
-        if (isValidFilterParameter(count)) {
+    private String addLimit(Integer count) {
+//        if (isValidFilterParameter(count)) {
             return SQL_LIMIT + count;
-        } else {
-            return SQL_LIMIT + DEFAULT_LIMIT;
-        }
+//        } else {
+//            return SQL_LIMIT + DEFAULT_LIMIT;
+//        }
     }
 
-    private String addOffset(String offset) {
-        if (isValidFilterParameter(offset)) {
+    private String addOffset(Integer offset) {
+//        if (isValidFilterParameter(offset)) {
             return SQL_OFFSET + offset;
-        } else {
-            return SQL_OFFSET + DEFAULT_OFFSET;
-        }
+//        } else {
+//            return SQL_OFFSET + DEFAULT_OFFSET;
+//        }
     }
 
     private boolean isValidFilterParameter(String parameter) {

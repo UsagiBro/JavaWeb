@@ -203,8 +203,12 @@
                                     <ul class="pagination">
                                         <input type="hidden" name="firstrow" value="${requestScope.firstrow}">
                                         <input type="hidden" name="rowcount" value="${requestScope.rowcount}">
-                                        <li><input type="submit" name="page" value="previous">«</li>
-                                        <li><input type="submit" name="page" value="next">»</li>
+                                        <li><input type="submit" class="btn btn-info" name="page" value="previous"></li>
+                                        <%--<c:forEach items="${requestScope.pages}" var="page">--%>
+                                            <%--<li><input type="submit" name="page" value="">--%>
+                                        <%--</c:forEach>--%>
+                                        <li><input type="submit" name="page" value="1"></li>
+                                        <li><input type="submit" class="btn btn-info" name="page" value="next"></li>
                                     </ul>
                                 </div>
 							</form>
