@@ -214,14 +214,19 @@
                                         <input type="hidden" name="currentPage"
                                          value="${requestScope.filterBean.currentPage}">
                                         <li><input type="submit" class="btn btn-info"
-                                         <c:if test="${requestScope.filterBean.offset eq 0}"> disabled="disabled"</c:if>
+                                         <c:if test="${requestScope.filterBean.currentPage <= 1}">
+                                         disabled="disabled"</c:if>
                                          name="page" value="previous"></li>
                                         <c:forEach begin="1" end="${requestScope.pagesCount}" var="i">
                                             <li><input type="submit" name="page" value="${i}"></li>
                                         </c:forEach>
-                                        <li><input type="submit" class="btn btn-info" 
-										<c:if test="${requestScope.filterBean.currentPage >= requestScope.pagesCount}"> disabled </c:if>
-										name="page" value="next"></li>
+                                        <li>
+                                           <input type="submit" class="btn btn-info"
+										<c:if test="${requestScope.filterBean.currentPage >= requestScope.pagesCount}">
+										    disabled
+										</c:if>
+										name="page" value="next">
+										</li>
                                     </ul>
                                 </div>
                         </div>

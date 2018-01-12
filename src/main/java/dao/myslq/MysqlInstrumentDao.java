@@ -18,7 +18,6 @@ import java.util.List;
 public class MysqlInstrumentDao implements InstrumentDao {
 
     private static final Logger LOG = Logger.getLogger(MysqlInstrumentDao.class);
-    private static final String SQL_ALL_INSTRUMENTS_COUNT = "SELECT count(*) FROM instruments";
 
     @Override
     public List<Instrument> getInstrumentsByFilter(FilterBean filterBean) {
