@@ -5,7 +5,6 @@ import dao.transaction.mysql.MySqlTransactionManager;
 import entity.Instrument;
 import entity.dto.FilterBean;
 import entity.dto.InstrumentsBean;
-import util.MySqlBuilder;
 
 import java.util.List;
 
@@ -27,8 +26,8 @@ public class MySqlInstrumentService implements InstrumentService {
     }
 
     @Override
-    public int getAllInsrumentsCount() {
+    public int getAllInstrumentsCount(FilterBean filterBean) {
         return mySqlTransactionManager.processTransaction(
-                () -> instrumentDao.getAllInsrumentsCount());
+                () -> instrumentDao.getAllInstrumentsCount(filterBean));
     }
 }

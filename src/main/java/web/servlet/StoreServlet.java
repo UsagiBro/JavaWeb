@@ -79,7 +79,7 @@ public class StoreServlet extends HttpServlet {
     }
 
     private void calculatePagesCount(HttpServletRequest req, FilterBean filterBean) {
-        int instrumentsCount = instrumentService.getAllInsrumentsCount();
+        int instrumentsCount = instrumentService.getAllInstrumentsCount(filterBean);
         int pagesCount = (int) Math.ceil(instrumentsCount * 1.0 / filterBean.getInstrumentCount());
         req.setAttribute(WebConstants.PAGE_COUNT, pagesCount);
     }

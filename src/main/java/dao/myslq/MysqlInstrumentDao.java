@@ -18,9 +18,6 @@ import java.util.List;
 public class MysqlInstrumentDao implements InstrumentDao {
 
     private static final Logger LOG = Logger.getLogger(MysqlInstrumentDao.class);
-    private static final String SQL_SELECT_ALL_INSTRUMENTS = "SELECT i.ins_name, i.price, c.label, m.title " +
-            "FROM instruments i JOIN categories c ON i.category_id=c.id " +
-            "JOIN manufacturers m ON i.manufacturer_id=m.id";
     private static final String SQL_ALL_INSTRUMENTS_COUNT = "SELECT count(*) FROM instruments";
 
     @Override
@@ -28,7 +25,7 @@ public class MysqlInstrumentDao implements InstrumentDao {
         List<Instrument> instruments = new ArrayList<>();
         MySqlBuilder mySqlBuilder = new MySqlBuilder();
         Connection connection = ConnectionHolder.getConnection();
-        String query = mySqlBuilder.buildQuery(filterBean);
+        String query = mySqlBuilder.buildSelectAllQuery(filterBean);
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
@@ -43,10 +40,12 @@ public class MysqlInstrumentDao implements InstrumentDao {
     }
 
     @Override
-    public int getAllInsrumentsCount() {
+    public int getAllInstrumentsCount(FilterBean filterBean) {
         int result = 0;
+        MySqlBuilder mySqlBuilder = new MySqlBuilder();
         Connection connection = ConnectionHolder.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_ALL_INSTRUMENTS_COUNT)) {
+        String query = mySqlBuilder.buildSelectCountCountQuery(filterBean);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     result = resultSet.getInt(1);

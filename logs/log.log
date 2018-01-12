@@ -1,2 +1,2 @@
-2018-01-10 09:58 [ERROR]        MysqlInstrumentDao:    58 - Unknown column '1' in 'where clause'
-2018-01-10 10:05 [ERROR]        MysqlInstrumentDao:    58 - Unknown column '1' in 'where clause'
+2018-01-12 10:55 [ERROR]        MysqlInstrumentDao:    55 - Query was empty
+2018-01-12 10:57 [ERROR]        MysqlInstrumentDao:    55 - Query was empty

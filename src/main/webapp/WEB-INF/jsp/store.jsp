@@ -132,7 +132,8 @@
 						</div>
 						<button type="submit" class="btn btn-compose-info">
                             Show instruments
-                        </button>	
+                        </button>
+                        <br>
                         <input type="hidden">
                         <button data-toggle="modal" title="Compose" class="btn btn-compose">
                             Add new instrument to storage
@@ -208,12 +209,12 @@
 							<br>
 							    <div class="container">
                                     <ul class="pagination">
-                                        <input type="hidden" name="currentPage" value="${requestScope.currentPage}">
+                                        <input type="hidden" name="currentPage"
+                                         value="${requestScope.filterBean.currentPage}">
                                         <li><input type="submit" class="btn btn-info" name="page" value="previous"></li>
-                                        <c:forEach begin="1" end="${requestScope.pages}" var="i">
-                                            <li><input type="submit" name="page" value="i">
+                                        <c:forEach begin="1" end="${requestScope.pageCount}" var="i">
+                                            <li><input type="submit" name="page" value="${i}">
                                         </c:forEach>
-                                        <li><input type="submit" name="page" value="1"></li>
                                         <li><input type="submit" class="btn btn-info" name="page" value="next"></li>
                                     </ul>
                                 </div>

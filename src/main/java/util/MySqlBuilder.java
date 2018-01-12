@@ -18,15 +18,23 @@ public class MySqlBuilder {
     private static final String MANUFACTURER_ID = " manufacturer_id= ";
     private static final String CATEGORY_ID = " category_id= ";
     private static final String SQL_QUOTATION_MARK = "'";
+    private static final String SELECT_COUNT_FROM_INSTRUMENTS = "Select COUNT(*) FROM instruments i " +
+            "JOIN categories c ON i.category_id=c.id JOIN manufacturers m ON i.manufacturer_id=m.id ";
 
     private boolean isFirst = true;
 
-    public String buildQuery(FilterBean filterBean) {
+    public String buildSelectAllQuery(FilterBean filterBean) {
         StringBuilder resultQuery = new StringBuilder(SELECT_FROM_INSTRUMENTS);
         resultQuery.append(addFilters(filterBean));
         resultQuery.append(addSort(filterBean));
         resultQuery.append(addLimit(filterBean.getInstrumentCount()));
         resultQuery.append(addOffset(filterBean.getOffset()));
+        return resultQuery.toString();
+    }
+
+    public String buildSelectCountCountQuery(FilterBean filterBean) {
+        StringBuilder resultQuery = new StringBuilder(SELECT_COUNT_FROM_INSTRUMENTS);
+        resultQuery.append(addFilters(filterBean));
         return resultQuery.toString();
     }
 

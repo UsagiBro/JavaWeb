@@ -11,5 +11,5 @@ public interface InstrumentDao {
 
     List<Instrument> getInstrumentsByFilter(FilterBean filterBean);
 
-    int getAllInsrumentsCount();
+    int getAllInstrumentsCount(FilterBean filterBean);
 }

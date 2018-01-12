@@ -5,9 +5,7 @@ import entity.dto.InstrumentsBean;
 
 public interface InstrumentService {
 
-//    InstrumentsBean getAllInstruments();
-
     InstrumentsBean getInstrumentsByFilter(FilterBean filterBean);
 
-    int getAllInsrumentsCount();
+    int getAllInstrumentsCount(FilterBean filterBean);
 }
