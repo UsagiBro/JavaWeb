@@ -7,6 +7,7 @@ public final class WebConstants {
     }
 
 
+
     public static final Integer START_PAGE = 1;
     public static final Integer DEFAULT_COUNT_OF_INSTRUMENTS_ON_PAGE = 18;
     public static final Integer DEFAULT_OFFSET = 0;
@@ -43,7 +44,7 @@ public final class WebConstants {
     public static final String LIST_OFFSET = "offset";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String PAGE = "page";
-    public static final String PAGE_COUNT = "pageCount";
+    public static final String PAGE_COUNT = "pagesCount";
 
 
     public static final String MANUFACTURER_SERVICE = "manufacturerService";

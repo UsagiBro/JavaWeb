@@ -125,7 +125,9 @@
 										<option value="sortBackward" selected="selected">Backward</option>
 									</c:when>
 									<c:otherwise>
-										<option value="sortBackward">Backward</option>
+										<option value="sortBackward">
+										Backward
+										</option>
 									</c:otherwise>
 								</c:choose>
 							</select>
@@ -134,7 +136,7 @@
                             Show instruments
                         </button>
                         <br>
-                        <input type="hidden">
+                        <br>
                         <button data-toggle="modal" title="Compose" class="btn btn-compose">
                             Add new instrument to storage
                         </button>
@@ -211,11 +213,15 @@
                                     <ul class="pagination">
                                         <input type="hidden" name="currentPage"
                                          value="${requestScope.filterBean.currentPage}">
-                                        <li><input type="submit" class="btn btn-info" name="page" value="previous"></li>
-                                        <c:forEach begin="1" end="${requestScope.pageCount}" var="i">
-                                            <li><input type="submit" name="page" value="${i}">
+                                        <li><input type="submit" class="btn btn-info"
+                                         <c:if test="${requestScope.filterBean.offset eq 0}"> disabled="disabled"</c:if>
+                                         name="page" value="previous"></li>
+                                        <c:forEach begin="1" end="${requestScope.pagesCount}" var="i">
+                                            <li><input type="submit" name="page" value="${i}"></li>
                                         </c:forEach>
-                                        <li><input type="submit" class="btn btn-info" name="page" value="next"></li>
+                                        <li><input type="submit" class="btn btn-info" 
+										<c:if test="${requestScope.filterBean.currentPage >= requestScope.pagesCount}"> disabled </c:if>
+										name="page" value="next"></li>
                                     </ul>
                                 </div>
                         </div>
