@@ -18,11 +18,15 @@ import java.util.List;
 public class MysqlInstrumentDao implements InstrumentDao {
 
     private static final Logger LOG = Logger.getLogger(MysqlInstrumentDao.class);
+    private MySqlBuilder mySqlBuilder;
+
+    public MysqlInstrumentDao() {
+        mySqlBuilder = new MySqlBuilder();
+    }
 
     @Override
     public List<Instrument> getInstrumentsByFilter(FilterBean filterBean) {
         List<Instrument> instruments = new ArrayList<>();
-        MySqlBuilder mySqlBuilder = new MySqlBuilder();
         Connection connection = ConnectionHolder.getConnection();
         String query = mySqlBuilder.buildSelectAllQuery(filterBean);
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -41,7 +45,6 @@ public class MysqlInstrumentDao implements InstrumentDao {
     @Override
     public int getAllInstrumentsCount(FilterBean filterBean) {
         int result = 0;
-        MySqlBuilder mySqlBuilder = new MySqlBuilder();
         Connection connection = ConnectionHolder.getConnection();
         String query = mySqlBuilder.buildSelectCountCountQuery(filterBean);
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {

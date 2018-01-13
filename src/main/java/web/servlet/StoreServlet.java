@@ -57,16 +57,10 @@ public class StoreServlet extends HttpServlet {
     }
 
     private void processPage(HttpServletRequest request, FilterBean filterBean) {
-        String page = request.getParameter(WebConstants.PAGE);
+        String currentPage = request.getParameter(WebConstants.CURRENT_PAGE);
 
-        if (Objects.nonNull(page)) {
-            if (page.equals("next")) {
-                filterBean.setCurrentPage(filterBean.getCurrentPage() + 1);
-            } else if (page.equals("previous")){
-                filterBean.setCurrentPage(filterBean.getCurrentPage() - 1);
-            } else {
-                filterBean.setCurrentPage(Integer.valueOf(request.getParameter("page")));
-            }
+        if (Objects.nonNull(currentPage)) {
+            filterBean.setCurrentPage(Integer.valueOf(currentPage));
             int offset = (filterBean.getCurrentPage() - 1) * filterBean.getInstrumentCount();
             if (offset < 0) {
                 offset = 0;

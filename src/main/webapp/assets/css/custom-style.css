@@ -623,3 +623,9 @@ ul {
 
 /* Pagination */
 .pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
+
+/*For disabled links*/
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}

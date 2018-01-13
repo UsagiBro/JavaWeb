@@ -69,16 +69,13 @@ public final class WebUtil {
         } else {
             filterBean.setCurrentPage(Integer.valueOf(request.getParameter(WebConstants.CURRENT_PAGE)));
         }
-        if (Objects.isNull(request.getParameter(WebConstants.INSTRUMENTS_COUNT))) {
+        if (Objects.isNull(request.getParameter(WebConstants.INSTRUMENTS_COUNT)) ||
+                request.getParameter(WebConstants.INSTRUMENTS_COUNT).isEmpty()) {
             filterBean.setInstrumentCount(WebConstants.DEFAULT_COUNT_OF_INSTRUMENTS_ON_PAGE);
         } else {
             filterBean.setInstrumentCount(Integer.valueOf(request.getParameter(WebConstants.INSTRUMENTS_COUNT)));
         }
-        if (Objects.isNull(request.getParameter(WebConstants.LIST_OFFSET))) {
-            filterBean.setOffset(WebConstants.DEFAULT_OFFSET);
-        } else {
-            filterBean.setOffset(Integer.valueOf(request.getParameter(WebConstants.LIST_OFFSET)));
-        }
+        filterBean.setOffset(WebConstants.DEFAULT_OFFSET);
         return filterBean;
     }
 }

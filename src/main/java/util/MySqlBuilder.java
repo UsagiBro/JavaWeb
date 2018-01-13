@@ -42,16 +42,8 @@ public class MySqlBuilder {
         String categoryFilter = filterBean.getCategoryFilter();
         String manufacturerFilter = filterBean.getManufacturerFilter();
         StringBuilder result = new StringBuilder();
-        if (isValidFilterParameter(manufacturerFilter)) {
-            result.append(addConditionWord()).append(MANUFACTURER_ID).append(SQL_QUOTATION_MARK)
-                    .append(manufacturerFilter).append(SQL_QUOTATION_MARK);
-            isFirst = false;
-        }
-        if (isValidFilterParameter(categoryFilter)) {
-            result.append(addConditionWord()).append(CATEGORY_ID).append(SQL_QUOTATION_MARK)
-                    .append(categoryFilter).append(SQL_QUOTATION_MARK);
-            isFirst = false;
-        }
+        buildFilterFromParameter(result, manufacturerFilter, MANUFACTURER_ID);
+        buildFilterFromParameter(result, categoryFilter, CATEGORY_ID);
         return result.toString();
     }
 
@@ -68,6 +60,14 @@ public class MySqlBuilder {
             }
         }
         return result.toString();
+    }
+
+    private void buildFilterFromParameter(StringBuilder result, String filterParameter, String filterName) {
+        if (isValidFilterParameter(filterParameter)) {
+            result.append(addConditionWord()).append(filterName).append(SQL_QUOTATION_MARK)
+                    .append(filterParameter).append(SQL_QUOTATION_MARK);
+            isFirst = false;
+        }
     }
 
     private String addConditionWord() {
