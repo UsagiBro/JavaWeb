@@ -1,11 +1,8 @@
 package service.user;
 
 import dao.UserDao;
-import exception.SuchUserExistsException;
-import constants.WebConstants;
 import entity.User;
-
-import java.util.List;
+import exception.SuchUserExistsException;
 
 public class UserServiceImpl implements UserService {
 

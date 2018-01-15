@@ -75,11 +75,11 @@ public class MySqlBuilder {
     }
 
     private String addLimit(Integer count) {
-            return SQL_LIMIT + count;
+        return SQL_LIMIT + count;
     }
 
     private String addOffset(Integer offset) {
-            return SQL_OFFSET + offset;
+        return SQL_OFFSET + offset;
     }
 
     private boolean isValidFilterParameter(String parameter) {

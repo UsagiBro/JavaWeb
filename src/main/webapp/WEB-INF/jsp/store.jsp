@@ -212,12 +212,6 @@
                         <div class="container">
                             <ul class="pagination">
                                 <li>
-                                    <%--<input type="submit" class="btn btn-info" value="previous"--%>
-                                    <%--<c:if test="${requestScope.filterBean.currentPage <= 1}">--%>
-                                    <%--disabled="disabled"--%>
-                                    <%--</c:if>--%>
-                                    <%--href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${filterBean.currentPage - 1}">--%>
-
                                     <a type="submit" class="btn btn-info
                                     <c:if test="${requestScope.filterBean.currentPage <= 1}">
                                                 disabled
@@ -229,9 +223,6 @@
                                 </li>
                                 <c:forEach begin="1" end="${requestScope.pagesCount}" var="i">
                                     <li>
-                                            <%--<input type="submit" class="btn btn-info" value="${i}"--%>
-                                            <%--href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${i}">--%>
-
                                         <a type="submit" name="page" class="btn btn-info"
                                            href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${i}">
                                                 ${i}
@@ -239,12 +230,7 @@
                                     </li>
                                 </c:forEach>
                                 <li>
-                                    <%--<input type="submit" class="btn btn-info" value="next"--%>
-                                    <%--<c:if test="${requestScope.filterBean.currentPage >= requestScope.pagesCount}">--%>
-                                    <%--disabled="disabled"--%>
-                                    <%--</c:if>--%>
-                                    <%--href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${filterBean.currentPage + 1}">--%>
-                                    <a type="submit" class="btn btn-info
+									<a type="submit" class="btn btn-info
                                     <c:if test="${requestScope.filterBean.currentPage >= requestScope.pagesCount}">
                                     disabled
                                     </c:if>

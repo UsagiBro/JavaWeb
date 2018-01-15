@@ -1,7 +1,7 @@
 package dao.myslq;
 
-import dao.transaction.mysql.ConnectionHolder;
 import dao.UserDao;
+import dao.transaction.mysql.ConnectionHolder;
 import entity.User;
 import exception.DBException;
 import org.apache.log4j.Logger;
