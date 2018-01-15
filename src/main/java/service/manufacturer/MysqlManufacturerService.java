@@ -1,6 +1,6 @@
 package service.manufacturer;
 
-import dao.ManufacturerDao;
+import dao.manufacturer.ManufacturerDao;
 import dao.transaction.TransactionManager;
 import entity.dto.Manufacturer;
 

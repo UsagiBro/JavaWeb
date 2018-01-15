@@ -2,6 +2,7 @@ DROP TABLE users;
 DROP TABLE instruments;
 DROP TABLE categories;
 DROP TABLE manufacturers;
+DROP TABLE orders;
 
 CREATE TABLE users(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -63,6 +64,26 @@ INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES (
 INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Imperialstar", 1161, 3, 3);
 INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("Rydeen", 625, 3, 7);
 INSERT INTO instruments (ins_name, price, category_id, manufacturer_id) VALUES ("StageCustom", 960, 3, 7);
+
+CREATE TABLE orders(
+    id INT PRIMARY KEY NOT NULL,
+    status VARCHAR(32) NOT NULL,
+    details VARCHAR(32) NOT NULL,
+    date DATETIME NOT NULL,
+    user_id NOT NULL,
+    CONSTRAINT orders_users_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+CREATE TABLE instruments_in_order(
+    id INT PRIMARY KEY,
+    ins_id INT NOT NULL,
+    CONSTRAINT instruments_int_id_fk FOREIGN KEY (ins_id) REFERENCES instruments(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+
+);
 
 
 

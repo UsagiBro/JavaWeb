@@ -1,10 +1,8 @@
-package dao.local_storage;
+package dao.user.local_storage;
 
-import dao.UserDao;
+import dao.user.mysql.UserDao;
 import entity.User;
-import dao.local_storage.storage.UserStorage;
-
-import java.util.List;
+import dao.user.local_storage.storage.UserStorage;
 
 public class UserDaoLocalImpl implements UserDao {
 

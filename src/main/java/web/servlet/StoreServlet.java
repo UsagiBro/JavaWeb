@@ -51,8 +51,8 @@ public class StoreServlet extends HttpServlet {
         FilterBean filterBean = WebUtil.getFilterBeanFromRequest(req);
         filterBeanValidator.validate(filterBean);
 
-        processPage(req, filterBean);
         calculatePagesCount(req, filterBean);
+        processPage(req, filterBean);
         req.setAttribute(WebConstants.FILTER_BEAN, filterBean);
     }
 

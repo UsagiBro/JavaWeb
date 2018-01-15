@@ -1,4 +1,4 @@
-package dao;
+package dao.instrument;
 
 import entity.Instrument;
 import entity.dto.FilterBean;

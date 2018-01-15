@@ -1,4 +1,4 @@
-package dao.local_storage.storage;
+package dao.user.local_storage.storage;
 
 import entity.User;
 

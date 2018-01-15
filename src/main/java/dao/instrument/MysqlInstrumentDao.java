@@ -1,6 +1,5 @@
-package dao.myslq;
+package dao.instrument;
 
-import dao.InstrumentDao;
 import dao.transaction.mysql.ConnectionHolder;
 import entity.Instrument;
 import entity.dto.FilterBean;

@@ -1,12 +1,11 @@
 package util;
 
-import dao.UserDao;
-import dao.local_storage.UserDaoLocalImpl;
-import dao.myslq.MysqlUserDao;
+import dao.user.mysql.UserDao;
+import dao.user.local_storage.UserDaoLocalImpl;
+import dao.user.mysql.MysqlUserDao;
 import dao.transaction.mysql.MySqlTransactionManager;
 import entity.User;
-import dao.local_storage.storage.UserStorage;
-import service.instruments.InstrumentService;
+import dao.user.local_storage.storage.UserStorage;
 import service.user.UserService;
 import service.user.UserServiceImpl;
 import service.user.MySqlUserService;

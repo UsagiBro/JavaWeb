@@ -8,6 +8,7 @@ public final class WebConstants {
 
 
 
+
     public static final Integer START_PAGE = 1;
     public static final Integer DEFAULT_COUNT_OF_INSTRUMENTS_ON_PAGE = 18;
     public static final Integer DEFAULT_OFFSET = 0;
@@ -54,5 +55,6 @@ public final class WebConstants {
     public static final String USER_SERVICE = "userService";
     public static final String INSTRUMENT_SERVICE = "instrumentService";
     public static final String INSTRUMENT_BEAN = "instrumentBean";
+    public static final String ORDER_SERVICE = "orderService";
 
 }

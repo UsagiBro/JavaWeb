@@ -1,4 +1,4 @@
-package dao;
+package dao.manufacturer;
 
 import entity.dto.Manufacturer;
 

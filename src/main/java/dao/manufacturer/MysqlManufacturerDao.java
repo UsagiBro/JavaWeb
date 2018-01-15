@@ -1,6 +1,5 @@
-package dao.myslq;
+package dao.manufacturer;
 
-import dao.ManufacturerDao;
 import dao.transaction.mysql.ConnectionHolder;
 import entity.dto.Manufacturer;
 import exception.DBException;

@@ -1,7 +1,7 @@
 package service.user;
 
 import constants.ErrorMessages;
-import dao.UserDao;
+import dao.user.mysql.UserDao;
 import dao.transaction.TransactionManager;
 import entity.User;
 import exception.DBException;

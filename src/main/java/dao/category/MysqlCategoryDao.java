@@ -1,6 +1,5 @@
-package dao.myslq;
+package dao.category;
 
-import dao.CategoryDao;
 import dao.transaction.mysql.ConnectionHolder;
 import entity.dto.Category;
 import exception.DBException;

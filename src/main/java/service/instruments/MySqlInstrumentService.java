@@ -1,6 +1,6 @@
 package service.instruments;
 
-import dao.InstrumentDao;
+import dao.instrument.InstrumentDao;
 import dao.transaction.mysql.MySqlTransactionManager;
 import entity.Instrument;
 import entity.dto.FilterBean;

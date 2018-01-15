@@ -1,6 +1,6 @@
 package service.category;
 
-import dao.CategoryDao;
+import dao.category.CategoryDao;
 import dao.transaction.TransactionManager;
 import entity.dto.Category;
 
