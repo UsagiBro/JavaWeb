@@ -24,14 +24,12 @@ public class StoreServlet extends HttpServlet {
     private InstrumentService instrumentService;
     private ManufacturerService manufacturerService;
     private CategoryService categoryService;
-    private FilterBeanValidator filterBeanValidator;
 
     @Override
     public void init() throws ServletException {
         instrumentService = (InstrumentService) getServletContext().getAttribute(WebConstants.INSTRUMENT_SERVICE);
         manufacturerService = (ManufacturerService) getServletContext().getAttribute(WebConstants.MANUFACTURER_SERVICE);
         categoryService = (CategoryService) getServletContext().getAttribute(WebConstants.CATEGORY_SERVICE);
-        filterBeanValidator = new FilterBeanValidator();
     }
 
     @Override
@@ -49,27 +47,11 @@ public class StoreServlet extends HttpServlet {
 
     private void loadInstrumentsListInRequest(HttpServletRequest req) {
         FilterBean filterBean = WebUtil.getFilterBeanFromRequest(req);
-        filterBeanValidator.validate(filterBean);
+        InstrumentsBean instrumentsBean = instrumentService.getInstrumentsByFilter(filterBean);
+        req.setAttribute(WebConstants.INSTRUMENT_BEAN, instrumentsBean);
 
-        processPage(req, filterBean);
         calculatePagesCount(req, filterBean);
         req.setAttribute(WebConstants.FILTER_BEAN, filterBean);
-    }
-
-    private void processPage(HttpServletRequest request, FilterBean filterBean) {
-        String currentPage = request.getParameter(WebConstants.CURRENT_PAGE);
-
-        if (Objects.nonNull(currentPage)) {
-            filterBean.setCurrentPage(Integer.valueOf(currentPage));
-            int offset = (filterBean.getCurrentPage() - 1) * filterBean.getInstrumentCount();
-            if (offset < 0) {
-                offset = 0;
-            }
-            filterBean.setOffset(offset);
-        }
-
-        InstrumentsBean instrumentsBean = instrumentService.getInstrumentsByFilter(filterBean);
-        request.setAttribute(WebConstants.INSTRUMENT_BEAN, instrumentsBean);
     }
 
     private void calculatePagesCount(HttpServletRequest req, FilterBean filterBean) {
