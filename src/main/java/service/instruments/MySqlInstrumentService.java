@@ -30,4 +30,11 @@ public class MySqlInstrumentService implements InstrumentService {
         return mySqlTransactionManager.processTransaction(
                 () -> instrumentDao.getAllInstrumentsCount(filterBean));
     }
+
+    @Override
+    public Instrument getInstrumentByName(String instrumentName) {
+        return mySqlTransactionManager.processTransaction(
+                () -> instrumentDao.getInstrumentByName(instrumentName)
+        );
+    }
 }

@@ -4,6 +4,7 @@ import constants.WebConstants;
 import entity.User;
 import entity.dto.FilterBean;
 import entity.dto.UserBean;
+import validator.FilterBeanValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -58,24 +59,36 @@ public final class WebUtil {
 
     public static FilterBean getFilterBeanFromRequest(HttpServletRequest request) {
         FilterBean filterBean = new FilterBean();
+        FilterBeanValidator filterBeanValidator = new FilterBeanValidator();
         filterBean.setCategoryFilter(request.getParameter(WebConstants.FILTER_CATEGORY));
         filterBean.setManufacturerFilter(request.getParameter(WebConstants.FILTER_MANUFACTURER));
         filterBean.setSort(request.getParameter(WebConstants.SORT_VALUE));
         filterBean.setSortDirection(request.getParameter(WebConstants.SORT_DIRECTION));
 
-        if (Objects.isNull(request.getParameter(WebConstants.CURRENT_PAGE)) ||
-                request.getParameter(WebConstants.CURRENT_PAGE).isEmpty()) {
+        String currentPage = request.getParameter(WebConstants.CURRENT_PAGE);
+        String instrumentsCount = request.getParameter(WebConstants.INSTRUMENTS_COUNT);
+
+        if (Objects.isNull(currentPage) || currentPage.isEmpty()) {
             filterBean.setCurrentPage(WebConstants.START_PAGE);
         } else {
-            filterBean.setCurrentPage(Integer.valueOf(request.getParameter(WebConstants.CURRENT_PAGE)));
+            filterBeanValidator.validateParameterForFilterBean(currentPage);
+            filterBean.setCurrentPage(Integer.valueOf(currentPage));
         }
-        if (Objects.isNull(request.getParameter(WebConstants.INSTRUMENTS_COUNT)) ||
-                request.getParameter(WebConstants.INSTRUMENTS_COUNT).isEmpty()) {
+
+        if (Objects.isNull(instrumentsCount) || instrumentsCount.isEmpty()) {
             filterBean.setInstrumentCount(WebConstants.DEFAULT_COUNT_OF_INSTRUMENTS_ON_PAGE);
         } else {
-            filterBean.setInstrumentCount(Integer.valueOf(request.getParameter(WebConstants.INSTRUMENTS_COUNT)));
+            filterBeanValidator.validateParameterForFilterBean(instrumentsCount);
+            filterBean.setInstrumentCount(Integer.valueOf(instrumentsCount));
         }
-        filterBean.setOffset(WebConstants.DEFAULT_OFFSET);
+
+
+        int offset = (filterBean.getCurrentPage() - 1) * filterBean.getInstrumentCount();
+        if (offset < 0) {
+            offset = 0;
+        }
+        filterBean.setOffset(offset);
+
         return filterBean;
     }
 }

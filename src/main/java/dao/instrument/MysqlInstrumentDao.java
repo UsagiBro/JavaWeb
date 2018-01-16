@@ -17,6 +17,10 @@ import java.util.List;
 public class MysqlInstrumentDao implements InstrumentDao {
 
     private static final Logger LOG = Logger.getLogger(MysqlInstrumentDao.class);
+    private static final String SQL_GET_INSTRUMENT_BY_NAME =
+            "SELECT i.ins_name, i.price, c.label, m.title FROM instruments i " +
+                    "JOIN categories c ON i.category_id=c.id JOIN manufacturers m ON i.manufacturer_id=m.id" +
+                    " WHERE ins_name=?";
     private MySqlBuilder mySqlBuilder;
 
     public MysqlInstrumentDao() {
@@ -57,6 +61,24 @@ public class MysqlInstrumentDao implements InstrumentDao {
             throw new DBException(this.getClass().getSimpleName() + "#getAllInstrumentsCount() -> DBException#" + ex);
         }
         return result;
+    }
+
+    @Override
+    public Instrument getInstrumentByName(String instrumentName) {
+        Connection connection = ConnectionHolder.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_INSTRUMENT_BY_NAME)) {
+            preparedStatement.setString(1, instrumentName);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return getInstrumentFromResultSet(resultSet);
+                } else {
+                    return new Instrument();
+                }
+            }
+        } catch (SQLException ex) {
+            LOG.error(ex.getMessage());
+            throw new DBException(this.getClass().getSimpleName() + "#getInstrumentByName() -> DBException#" + ex);
+        }
     }
 
     private Instrument getInstrumentFromResultSet(ResultSet resultSet) throws SQLException {

@@ -3,6 +3,7 @@ DROP TABLE instruments;
 DROP TABLE categories;
 DROP TABLE manufacturers;
 DROP TABLE orders;
+DROP TABLE instruments_in_order;
 
 CREATE TABLE users(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -70,7 +71,7 @@ CREATE TABLE orders(
     status VARCHAR(32) NOT NULL,
     details VARCHAR(32) NOT NULL,
     date DATETIME NOT NULL,
-    user_id NOT NULL,
+    user_id INT NOT NULL,
     CONSTRAINT orders_users_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id)
     ON UPDATE CASCADE
     ON DELETE CASCADE
@@ -78,11 +79,15 @@ CREATE TABLE orders(
 
 CREATE TABLE instruments_in_order(
     id INT PRIMARY KEY,
+    ins_count INT NOT NULL,
     ins_id INT NOT NULL,
-    CONSTRAINT instruments_int_id_fk FOREIGN KEY (ins_id) REFERENCES instruments(id)
+    CONSTRAINT instruments_ins_id_fk FOREIGN KEY (ins_id) REFERENCES instruments(id)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-
+    order_id INT NOT NULL,
+    CONSTRAINT orders_order_id_fk FOREIGN KEY (order_id) REFERENCES orders(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface InstrumentDao {
 
-//    List<Instrument> getAllInstruments();
-
     List<Instrument> getInstrumentsByFilter(FilterBean filterBean);
 
     int getAllInstrumentsCount(FilterBean filterBean);
+
+    Instrument getInstrumentByName(String instrumentName);
 }

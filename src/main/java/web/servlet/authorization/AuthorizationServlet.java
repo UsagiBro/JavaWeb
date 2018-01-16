@@ -3,6 +3,7 @@ package web.servlet.authorization;
 import constants.ErrorMessages;
 import constants.Paths;
 import constants.WebConstants;
+import entity.Cart;
 import entity.User;
 import service.user.UserService;
 
@@ -39,6 +40,8 @@ public class AuthorizationServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute(WebConstants.USER, user);
             session.removeAttribute(ErrorMessages.WRONG_AUTHORIZATION);
+
+            req.getSession().setAttribute(WebConstants.CART, new Cart());
             resp.sendRedirect(Paths.CABINET_SERVLET);
         } else {
             req.getSession().setAttribute(ErrorMessages.WRONG_AUTHORIZATION, ErrorMessages.AUTHORIZATION_ERROR);

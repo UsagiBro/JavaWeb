@@ -16,43 +16,63 @@
                 </c:if>
             </div>
             <div class="inbox-body">
-                <h5>Max instruments on page</h5>
-                <select id="selectbasic" name="instrumentCount" class="form-control col-md-3">
-                    <c:choose>
-                        <c:when test="${filterBean.instrumentCount ne null}">
-                            <c:if test="${filterBean.instrumentCount eq '3'}">
-                                <option value="3" selected="selected">3</option>
-                                <option value="6">6</option>
-                                <option value="12">12</option>
-                                <option value="18">18</option>
-                            </c:if>
-                            <c:if test="${filterBean.instrumentCount eq '6'}">
-                                <option value="3">3</option>
-                                <option value="6" selected="selected">6</option>
-                                <option value="12">12</option>
-                                <option value="18">18</option>
-                            </c:if>
-                            <c:if test="${filterBean.instrumentCount eq '12'}">
-                                <option value="3">3</option>
-                                <option value="6">6</option>
-                                <option value="12" selected="selected">12</option>
-                                <option value="18">18</option>
-                            </c:if>
-                            <c:if test="${filterBean.instrumentCount eq '18'}">
-                                <option value="3">3</option>
-                                <option value="6">6</option>
-                                <option value="12">12</option>
-                                <option value="18" selected="selected">18</option>
-                            </c:if>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="3">3</option>
-                            <option value="6">6</option>
-                            <option value="12">12</option>
-                            <option value="18" selected="selected">18</option>
-                        </c:otherwise>
-                    </c:choose>
-                </select>
+                    <h5>Max instruments on page</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <select id="selectbasic" name="instrumentCount" class="form-control">
+                            <c:choose>
+                                <c:when test="${filterBean.instrumentCount ne null}">
+                                    <c:if test="${filterBean.instrumentCount eq '3'}">
+                                        <option value="3" selected="selected">3</option>
+                                        <option value="6">6</option>
+                                        <option value="12">12</option>
+                                        <option value="18">18</option>
+                                    </c:if>
+                                    <c:if test="${filterBean.instrumentCount eq '6'}">
+                                        <option value="3">3</option>
+                                        <option value="6" selected="selected">6</option>
+                                        <option value="12">12</option>
+                                        <option value="18">18</option>
+                                    </c:if>
+                                    <c:if test="${filterBean.instrumentCount eq '12'}">
+                                        <option value="3">3</option>
+                                        <option value="6">6</option>
+                                        <option value="12" selected="selected">12</option>
+                                        <option value="18">18</option>
+                                    </c:if>
+                                    <c:if test="${filterBean.instrumentCount eq '18'}">
+                                        <option value="3">3</option>
+                                        <option value="6">6</option>
+                                        <option value="12">12</option>
+                                        <option value="18" selected="selected">18</option>
+                                    </c:if>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="3">3</option>
+                                    <option value="6">6</option>
+                                    <option value="12">12</option>
+                                    <option value="18" selected="selected">18</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </select>
+                    </div>
+                    <div>
+                        
+                            
+                            <c:choose>
+                                <c:when test="${sessionScope.cart.getSize() != 0}">
+                                    <div id="cart" class="btn btn-success">
+                                    My cart: items - ${sesionScope.cart.getSize()}
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div id="cart" class="btn btn-success">
+                                    My cart: items - 0                                        
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                    </div>
+                </div>
                 <br>
                 <div class="row">
                     <div class="col-md-6">
@@ -160,7 +180,7 @@
                                             Name
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="header">
                                             Price
                                         </div>
@@ -175,6 +195,11 @@
                                             Manufacturer
                                         </div>
                                     </div>
+                                    <div class="col-md-1">
+                                        <div class="header">
+                                            To cart
+                                        </div>
+                                    </div>
                                 </div>
                                 <c:if test="${not empty requestScope.instrumentBean.getInstruments()}">
                                     <c:forEach items="${requestScope.instrumentBean.getInstruments()}" var="instrument">
@@ -184,7 +209,7 @@
                                                     <code>${instrument.getName()}</code>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="cell">
                                                         ${instrument.getPrice()}
                                                 </div>
@@ -197,6 +222,13 @@
                                             <div class="col-md-3">
                                                 <div class="cell">
                                                         ${instrument.getManufacturer()}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="cell">
+                                                    <button class="btn btn-danger addToCartButton" id="${instrument.getName()}" type="submit">
+                                                        Add
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,16 +244,8 @@
                         <div class="container">
                             <ul class="pagination">
                                 <li>
-                                    <%--<input type="submit" class="btn btn-info" value="previous"--%>
-                                    <%--<c:if test="${requestScope.filterBean.currentPage <= 1}">--%>
-                                    <%--disabled="disabled"--%>
-                                    <%--</c:if>--%>
-                                    <%--href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${filterBean.currentPage - 1}">--%>
-
                                     <a type="submit" class="btn btn-info
-                                    <c:if test="${requestScope.filterBean.currentPage <= 1}">
-                                                disabled
-                                    </c:if>
+                                    <c:if test="${requestScope.filterBean.currentPage <= 1}"> disabled </c:if>
                                     "
                                        href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${filterBean.currentPage - 1}">
                                         previous
@@ -229,9 +253,6 @@
                                 </li>
                                 <c:forEach begin="1" end="${requestScope.pagesCount}" var="i">
                                     <li>
-                                            <%--<input type="submit" class="btn btn-info" value="${i}"--%>
-                                            <%--href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${i}">--%>
-
                                         <a type="submit" name="page" class="btn btn-info"
                                            href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${i}">
                                                 ${i}
@@ -239,12 +260,7 @@
                                     </li>
                                 </c:forEach>
                                 <li>
-                                    <%--<input type="submit" class="btn btn-info" value="next"--%>
-                                    <%--<c:if test="${requestScope.filterBean.currentPage >= requestScope.pagesCount}">--%>
-                                    <%--disabled="disabled"--%>
-                                    <%--</c:if>--%>
-                                    <%--href="store?instrumentCount=${param["instrumentCount"]}&filterCategory=${param["filterCategory"]}&filterManufacturer=${param["filterManufacturer"]}&sortValue=${param["sortValue"]}&sortDirection=${param["sortDirection"]}&currentPage=${filterBean.currentPage + 1}">--%>
-                                    <a type="submit" class="btn btn-info
+									<a type="submit" class="btn btn-info
                                     <c:if test="${requestScope.filterBean.currentPage >= requestScope.pagesCount}">
                                     disabled
                                     </c:if>

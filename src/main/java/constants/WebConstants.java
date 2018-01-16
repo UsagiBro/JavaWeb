@@ -7,11 +7,8 @@ public final class WebConstants {
     }
 
 
-
-
     public static final Integer START_PAGE = 1;
     public static final Integer DEFAULT_COUNT_OF_INSTRUMENTS_ON_PAGE = 18;
-    public static final Integer DEFAULT_OFFSET = 0;
     public static final String REGEX_FOR_DIGIT = "\\d+";
     public static final String REGEX_FOR_NAME = "([a-zA-Zа-яА-Яё]){2,64}";
     public static final String REGEX_FOR_EMAIL = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
@@ -42,11 +39,11 @@ public final class WebConstants {
     public static final String CATEGORIES_LIST = "categoriesList";
     public static final String CATEGORY_SERVICE = "categoryService";
     public static final String FILTER_BEAN = "filterBean";
-    public static final String LIST_OFFSET = "offset";
     public static final String CURRENT_PAGE = "currentPage";
-    public static final String PAGE = "page";
     public static final String PAGE_COUNT = "pagesCount";
 
+    public static final String CART = "cart";
+    public static final String INSTRUMENT_NAME = "insName";
 
     public static final String MANUFACTURER_SERVICE = "manufacturerService";
     public static final String CAPTCHA_TIME = "captcha-time";
