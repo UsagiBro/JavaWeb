@@ -30,6 +30,5 @@ public class AddToCartServlet extends HttpServlet {
         String instrumentName = req.getParameter(WebConstants.INSTRUMENT_NAME);
         Instrument instrument = instrumentService.getInstrumentByName(instrumentName);
         cart.addToCart(instrument);
-        System.out.println();
     }
 }

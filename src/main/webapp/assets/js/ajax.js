@@ -5,7 +5,7 @@ $(document).ready(function(){
         url: '/addToCart?insName='+insName,
         method: "PUT",
         success: function(data) {
-            $("#cart").load(location.href+" #cart>*","");
+            $("#cart").load(location.href+" #cart");
         }
     });
        return false;

@@ -57,20 +57,18 @@
                         </select>
                     </div>
                     <div>
-                        
-                            
-                            <c:choose>
-                                <c:when test="${sessionScope.cart.getSize() != 0}">
-                                    <div id="cart" class="btn btn-success">
-                                    My cart: items - ${sesionScope.cart.getSize()}
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div id="cart" class="btn btn-success">
+                        <c:choose>
+                            <c:when test="${sessionScope.cart.getSize() != 0}">
+                                <button id="cart" class="btn btn-success">
+                                    My cart: items - ${sessionScope.cart.getSize()}
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button class="btn btn-success">
                                     My cart: items - 0                                        
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <br>
