@@ -4,7 +4,7 @@ import entity.Instrument;
 
 import java.math.BigDecimal;
 
-public final class OrderInfo {
+public final class InstrumentInOrderInfo {
 
     private Instrument instrument;
 
@@ -12,7 +12,7 @@ public final class OrderInfo {
 
     private BigDecimal instrumentPrice;
 
-    public OrderInfo(Instrument instrument, int instrumentCount, BigDecimal instrumentPrice) {
+    public InstrumentInOrderInfo(Instrument instrument, int instrumentCount, BigDecimal instrumentPrice) {
         this.instrument = instrument;
         this.instrumentCount = instrumentCount;
         this.instrumentPrice = instrumentPrice;

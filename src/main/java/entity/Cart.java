@@ -49,4 +49,8 @@ public class Cart {
         }
         return totalCost;
     }
+
+    public void clear() {
+        cart.clear();
+    }
 }

@@ -57,18 +57,20 @@
                         </select>
                     </div>
                     <div>
-                        <c:choose>
-                            <c:when test="${sessionScope.cart.getSize() != 0}">
-                                <button id="cart" class="btn btn-success">
-                                    My cart: items - ${sessionScope.cart.getSize()}
-                                </button>
-                            </c:when>
-                            <c:otherwise>
-                                <button class="btn btn-success">
-                                    My cart: items - 0                                        
-                                </button>
-                            </c:otherwise>
-                        </c:choose>
+                        <c:if test="${not empty sessionScope.user}">
+                            <c:choose>
+                                <c:when test="${sessionScope.cart.getSize() != 0}">
+                                    <a id="cart" class="btn btn-success" href="cart">
+                                        My cart: items - ${sessionScope.cart.getSize()}
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="btn btn-success" href="cart">
+                                        My cart: items - 0                                        
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                     </div>
                 </div>
                 <br>
@@ -224,9 +226,18 @@
                                             </div>
                                             <div class="col-md-1">
                                                 <div class="cell">
-                                                    <button class="btn btn-danger addToCartButton" id="${instrument.getName()}" type="submit">
-                                                        Add
-                                                    </button>
+                                                    <c:choose>
+                                                        <c:when test="${not empty sessionScope.user}">
+                                                            <button class="btn btn-danger addToCartButton" id="${instrument.getName()}" type="submit">
+                                                                Add
+                                                            </button>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a href="authorization" class="btn btn-danger">
+                                                                Add
+                                                            </a>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </div>
                                             </div>
                                         </div>

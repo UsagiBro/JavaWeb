@@ -16,7 +16,7 @@ public class Order {
 
     private User user;
 
-    private OrderInfo orderInfo;
+    private InstrumentInOrderInfo instrumentInOrderInfo;
 
     public int getOrderId() {
         return orderId;
@@ -58,11 +58,11 @@ public class Order {
         this.user = user;
     }
 
-    public OrderInfo getOrderInfo() {
-        return orderInfo;
+    public InstrumentInOrderInfo getInstrumentInOrderInfo() {
+        return instrumentInOrderInfo;
     }
 
-    public void setOrderInfo(OrderInfo orderInfo) {
-        this.orderInfo = orderInfo;
+    public void setInstrumentInOrderInfo(InstrumentInOrderInfo instrumentInOrderInfo) {
+        this.instrumentInOrderInfo = instrumentInOrderInfo;
     }
 }
